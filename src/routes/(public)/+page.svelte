@@ -52,10 +52,10 @@
       in:fly={{ duration: 1000, y: 100, opacity: 0.3, easing: cubicOut }}
     >
       <h1 class="font-bold xl:text-5xl xs:text-3xl text-2xl">
-        Continue Scrolling Down!
+        Work in Progress!
       </h1>
       <p class="px-5 max-w-lg text-center text-sm lg:text-base">
-        lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        This website is currently a work in progress, and will be fully functional by the end of the year. In the meantime, feel free to check out the github repo and explore the codebase! <br /> https://github.com/EM-CodeReever/Calderra
       </p>
       <span
         class="flex space-x-3"
@@ -95,7 +95,7 @@
       in:fly={{ duration: 1000, y: 500, opacity: 0.3, easing: cubicOut }}
       class="lg:text-4xl text-2xl px-5 font-bold text-center text-gray-900"
     >
-      Caldera Project Showcase
+      Calderra Project Showcase
     </p>
     <Splide options={ {
       rewind  : true,

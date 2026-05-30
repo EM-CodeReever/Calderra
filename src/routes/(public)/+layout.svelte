@@ -6,8 +6,8 @@
   <nav class=" fixed w-full top-0 bg-[#001220] px-3 flex justify-center h-20 z-50" >
     <div class="w-full max-w-6xl h-full flex justify-between">
         <div class="flex space-x-2 items-center pl-2 lg:p-0">
-            <img src="/favicon.ico" alt="Caldera logo" class="w-9 h-9">
-            <a href="/" class=" font-extrabold text-2xl lg:text-2xl text-gray-200">Caldera</a>
+            <img src="/calderra_logo_rounded.png" alt="Calderra logo" class="w-9 h-9">
+            <a href="/" class=" font-extrabold text-2xl lg:text-2xl text-gray-200 -mb-2">Calderra</a>
         </div>
         <ul class="hidden lg:flex text-gray-200">
             <li class="h-full flex items-center px-5 duration-300 hover:text-secondary">
@@ -58,7 +58,7 @@
 <footer class="h-fit w-full bg-gunMetal-400 text-sm flex p-4 justify-between">
     
     <span>
-        Caldera &copy; 2026. All rights reserved.
+        Calderra &copy; 2026. All rights reserved.
     </span>
     <!-- <span class="space-x-3">
         <a href="/about" class="link">About</a>
