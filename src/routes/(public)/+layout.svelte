@@ -1,6 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
-  import { AppWindow, Menu, House, Info, Mailbox } from "@lucide/svelte";
+  import { AppWindow, Menu, House, CircleQuestionMark, ClipboardPen} from "@lucide/svelte";
   </script>
   
   <nav class=" fixed w-full top-0 bg-[#001220] px-3 flex justify-center h-20 z-50" >
@@ -26,30 +26,33 @@
                 Open Application</button>
         </div>
         <div class="flex justify-center items-center lg:hidden">
-            
-            <div class="dropdown morningGreen">
-                <button class="btn">
-                    <Menu size="20" />                
-                </button>
-                <div class="menu bottom-left !mt-5" style="width: max-content; z-index: 999;">
-                    <a href="/" class="item text flex space-x-5 justify-start items-center" tabindex="-1">
+            <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn btn-soft m-1 btn-secondary"><Menu size="20" /></div>
+            <ul tabindex="-1" class="dropdown-content menu bg-black rounded-box z-1 w-52 p-2 shadow-sm flex flex-col space-y-1">
+                <li>
+                    <a href="/" class="item text flex space-x-5 justify-center items-center" tabindex="-1">
                         <House size="20" />
                         Home
                     </a>
-                    <a href="/about" class="item text flex space-x-5 justify-start items-center" tabindex="-1">     
-                        <Info size="20" />              
+                </li>
+                <li>
+                    <a href="/about" class="item text flex space-x-5 justify-center items-center" tabindex="-1">
+                        <CircleQuestionMark size="20" />
                         About
                     </a>
-                    <a href="/contact" class="item flex space-x-5 justify-start items-center" tabindex="-1">
-                        <Mailbox size="20" />
-                        Contact
+                </li>
+                <li>
+                    <a href="/register" class="item flex space-x-5 justify-center items-center" tabindex="-1">
+                        <ClipboardPen size="20" />
+                        Register
                     </a>
-                    <!-- for mobile... i repeat FOR MOBILE.... ELLIOT THIS BUTTON IS ONLY SEEN ON MOBILE -->
-                    <button class="btn light morningGreen text-black" onclick={()=>{goto('dashboard')}}>
+                </li>
+                <!-- for mobile... i repeat FOR MOBILE.... ELLIOT THIS BUTTON IS ONLY SEEN ON MOBILE -->
+                    <button class="btn btn-soft bg-white hover:bg-secondary text-black mt-1" onclick={()=>{goto('dashboard')}}>
                         <AppWindow size="20" />
                         Open Application</button>
-                  </div>
-                </div>
+            </ul>
+            </div>
         </div>
     </div>
 </nav>
