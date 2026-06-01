@@ -1,0 +1,373 @@
+<script lang="ts">
+    import MemoryCardBack from '$components/MemoryCardBack.svelte';
+    import { fade, fly, slide } from 'svelte/transition';
+    import type { PageData, PageProps } from './$types';
+    import {fruitEmojiObject, animalEmojiObject, stuffEmojiObject, getRandomRevealTextOption} from './util'
+    import { ChevronDown, EyeOff, Play, Timer, View } from '@lucide/svelte';
+    import { Sound } from "svelte-sound";
+    import S_start from "../../../lib/sound/start.mp3";
+    import S_end from "../../../lib/sound/end.mp3";
+    import S_pop from "../../../lib/sound/pop.mp3";
+    import S_pop_match from "../../../lib/sound/pop_match.mp3";
+    import S_error from "../../../lib/sound/error.mp3";
+    import S_reveal_in from "../../../lib/sound/reveal_in.mp3"; 
+    // const start_sound = new Sound(S_start);
+    // const end_sound = new Sound(S_end);
+    const pop_sound = new Sound(S_pop);
+    const error_sound = new Sound(S_error);
+    const pop_match_sound = new Sound(S_pop_match);
+    import { cubicIn } from 'svelte/easing';
+    let { data }: PageProps = $props();
+    // let {userProfile, session} = data
+    let clickHistory = <any>[];
+    let hidden = true;
+    let display = $state(false);
+    let start = $state(false);
+    let moveCounter = $state(0);
+    let matchedCounter = $state(0);
+    let showEndModal = $state(false);
+    let revealAvailable = $state(false);
+    let endLoading = $state(false);
+    let highScoreChecker = $state(false);
+    const emojiSets = [fruitEmojiObject, animalEmojiObject, stuffEmojiObject]
+    let chosenEmojiSet = $state(0);
+    let time = $state({
+        minutes: 0,
+        seconds: 0
+    
+    });
+    let timerId: any;
+    let revealID: any;
+
+    function timer(){
+        timerId = setInterval(()=>{
+            time.seconds++
+            if(time.seconds === 60){
+                time.minutes++
+                time.seconds = 0
+            }
+        }, 1000)
+    }
+
+    function shuffleArray<T>(array: T[]) {
+        const shuffledArray = array.slice(); // Create a copy of the original array
+
+        // Fisher-Yates shuffle algorithm
+        for (let i = shuffledArray.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+        }
+
+        return shuffledArray;
+    }
+    
+    let randomizedEmojiArray = $state(shuffleArray(emojiSets[chosenEmojiSet]));
+    () => {
+        randomizedEmojiArray.forEach((item)=>{
+            item.hidden = true
+            item.matched = false
+        })
+    }
+
+    function changeChosenEmojiSet(x:number){
+        randomizedEmojiArray = shuffleArray(emojiSets[x])
+        randomizedEmojiArray.forEach((item)=>{
+            item.hidden = true
+            item.matched = false
+        })
+    }
+
+    function displayCardsForThreeSeconds(){
+        display = true
+        setTimeout(()=>{
+            display = false
+        }, 3000)
+        revealAvailable = false
+        clearInterval(revealID)
+        revealID = setInterval(()=>{
+            revealAvailable = true
+        }, 20000)
+    }
+
+    function endGame(){
+        start = false
+        display = false
+        moveCounter = 0
+        matchedCounter = 0
+        time = {
+            minutes: 0,
+            seconds: 0
+        }
+        randomizedEmojiArray = shuffleArray(emojiSets[chosenEmojiSet])
+        randomizedEmojiArray.forEach((item)=>{
+            item.hidden = true
+            item.matched = false
+        })
+    }
+
+    function scoreCalculation(){
+        let score = 0
+
+        //completing the game means the player has at least made all 18 correct matches
+        const completionGaruntee = 1800 
+
+        // for every move made (excluding the 18 moves for correct matches) 12 points are deducted
+        let base = completionGaruntee - (12 * (moveCounter - 18)) 
+        
+        // mps - matches per second measures how fast matches are made and serves as a bonus multiplier
+        let mpsbonus = base * calculateMPS() 
+
+        // Im sure that the board can be completed in under a minute,
+        // any time exceeding that 60 second threshold draws a penalty of 4 points per second
+        let overtime = ((((time.minutes * 60) + time.seconds) - 60) * 4) 
+
+        //Final Score, based on all the above factors
+        score = base + mpsbonus - overtime
+        return score
+    }
+
+    function calculateMPS(): number{
+        let mps = 0
+        if(time.minutes > 0){
+            mps = matchedCounter / (time.minutes * 60 + time.seconds)
+        }else{
+            mps = matchedCounter / time.seconds
+        }
+        return mps
+    }
+
+</script>
+
+<svelte:head>
+  <title>Memory Cards</title>
+  {#each emojiSets as set}
+    {#each set as item}
+        <link rel="preload" href={item.emoji} as="image" />
+    {/each}
+  {/each}
+</svelte:head>
+<section class="w-full h-fit flex select-none">
+        {#if start && !showEndModal}
+        <div class="flex flex-col w-full h-full space-y-3 items-center">
+            <!-- game inofrmation -->
+            <div class="w-full sm:w-[30rem] grid grid-cols-3">
+                <div class="col-span-1 rounded-md flex flex-col items-start w-full p-2 justify-start font-extralight text-xl">
+                    <span class="flex space-x-1">
+                        <p>{matchedCounter} Matches</p>
+                    </span>
+                    <span>
+                        <p>{moveCounter} Moves</p>
+                    </span>
+                    
+                </div>
+                <span class="col-span-1 flex justify-center items-center space-x-3">
+                    <span class="text-sm text-center flex flex-col items-center">
+                         <Timer size="30" />
+                        <p class="text-xl">{time.minutes < 10 ? '0' + time.minutes : time.minutes}:{time.seconds < 10 ? '0' + time.seconds : time.seconds}</p>
+                    </span>
+                </span>
+                <span class="col-span-1 flex justify-end items-center">
+                    <button disabled={!revealAvailable} class="btn rounded-md morningGreen solid" onclick={()=>{displayCardsForThreeSeconds()}}> 
+                        {#if revealAvailable}
+                        <View size="20" /> Reveal
+                        {:else}
+                        <EyeOff size="20" /> Reveal
+                        {/if}
+                    </button>
+                </span>
+            </div>
+            <!-- memory card grid box -->
+            <div class="aspect-square w-full sm:w-[30rem] ground-glass rounded-md grid grid-cols-6 grid-rows-6 gap-1 lg:gap-3 p-3 relative">
+                {#if endLoading}
+                <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                <lord-icon
+                    src="https://cdn.lordicon.com/jxhgzthg.json"
+                    trigger="loop"
+                    stroke="bold"
+                    state="loop-cycle"
+                    colors="primary:#ffffff,secondary:#ffffff"
+                    style="width:50px;height:50px"
+                    class="absolute right-[calc(50%-25px)] bottom-[calc(50%-25px)]">
+                </lord-icon>
+                {:else if display}
+                    {#each randomizedEmojiArray as item}
+                    <div class="w-full text-3xl h-full bg-gray-900 rounded-md cursor-pointer hover:bg-gray-700 hover:border-gray-200 hover:border-2 flex justify-center items-center" in:fade|global={{duration:300}}>
+                        <img src={item.emoji} alt="">
+                    </div>
+                    {/each}
+                {:else}
+                {#each randomizedEmojiArray as item}
+                <!-- svelte-ignore a11y_click_events_have_key_events -->
+                <!-- svelte-ignore a11y_no_static_element_interactions -->
+                <div in:fade|global={{duration:1000}} class="w-full text-3xl h-full bg-gray-900 rounded-md cursor-pointer hover:bg-gray-700 hover:border-gray-200 hover:border-2 flex justify-center items-center" onclick={async()=>{
+                    if(item.matched === false){
+                        item.hidden = !item.hidden
+                        clickHistory.push(item)
+                        if(clickHistory.length === 1){
+                            pop_sound.play();
+                        }
+                        if(clickHistory.length === 2){
+                            if(clickHistory[0].emoji === clickHistory[1].emoji && clickHistory[0].id !== clickHistory[1].id){
+                                pop_match_sound.play();
+                                matchedCounter++
+                                randomizedEmojiArray.forEach((item)=>{
+                                    if(item.emoji === clickHistory[0].emoji){
+                                        item.matched = true
+                                    }
+                                })
+                                clickHistory = []
+                            }else{
+                                error_sound.play();
+                                clickHistory = []
+                            }
+                            randomizedEmojiArray.forEach((item)=>{
+                                if(item.hidden === false && item.matched === false){
+                                    item.hidden = true
+                                }
+                            })
+                            moveCounter++
+                            if (matchedCounter === 18){
+                                endLoading = true
+                                clearInterval(timerId)
+                                clearInterval(revealID)
+                                // let request = await fetch("/memory-card",{
+                                //     method: "POST",
+                                //     headers:{
+                                //         'Content-Type': 'application/json',
+                                //         Authorization: `Bearer ${session?.access_token}`
+                                //     },
+                                //     body: JSON.stringify({
+                                //         player: Number(userProfile?.id),
+                                //         time: (time.minutes < 10 ? '0' + time.minutes : time.minutes) + ":" + (time.seconds < 10 ? '0' + time.seconds : time.seconds),
+                                //         score: scoreCalculation().toFixed(2),
+                                //         mps: calculateMPS().toFixed(2),
+                                //     })
+                                // })
+                                // let res = await request.json();
+                                // if(res.isHighScore == true){
+                                //     highScoreChecker = true;
+                                // }else{
+                                //     highScoreChecker = false;
+                                // }
+                                endLoading = false
+                                showEndModal = true
+                            }
+                        }
+                    }
+                }}>
+                    {#if item.hidden === false}
+                     <img src={item.emoji} alt="">
+                    {:else}
+                    <MemoryCardBack />
+                    {/if}
+                </div>
+                {/each}
+            {/if}
+            </div>
+            {#if display}
+            <p transition:slide={{duration:300,easing:cubicIn,axis:"y"}}>{getRandomRevealTextOption()}</p>
+            {/if}
+        </div>
+        {:else if !showEndModal && !start}
+        <div class="flex flex-col space-y-6 items-center justify-center mx-8 lg:mx-0 w-full h-[32rem]">
+            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+            <lord-icon
+                src="https://cdn.lordicon.com/jsmqucas.json"
+                trigger="in"
+                stroke="regular"
+                state="pinch"
+                colors="primary:#ffffff,secondary:#ffffff"
+                style="width:250px;height:250px">
+            </lord-icon>
+            <h1 class="text-3xl font-bold text-center">Memory Cards</h1>
+            <p class="text-center text-sm max-w-md">How good is your memory? Let's find out! <br> Click on the cards to reveal the emoji, if two identical emojis are clicked in a row then you've found a match!. Match all the cards to win the game.</p>
+            <div class="flex space-x-2 items-center">
+                <button class="btn btn-secondary btn-soft rounded-xl h-12! "
+                 onclick={()=>{ 
+                    //potentailly add a start sound here
+                    start = true;
+                    displayCardsForThreeSeconds()
+                    setTimeout(()=>{
+                        timer()
+                    }, 3000)
+                    }}>Start Game
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" />
+                      </svg>
+                      
+                </button>
+                <div class="dropdown">
+                    <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+                    <!-- svelte-ignore a11y_label_has_associated_control -->
+                    <label class="btn btn-neutral rounded-xl h-12!" tabindex="0">
+                        {#each emojiSets as set,index}
+                            {#if chosenEmojiSet == index}
+                                <img class="-ml-1 h-6 w-6" src={randomizedEmojiArray[0].emoji} alt=""> 
+                            {/if}
+                        {/each}
+                        |
+                        <ChevronDown class="mt-1 -mr-1"/>
+                    </label>
+                    <div class="dropdown-content menu bg-black rounded-lg mt-2 w-fit">
+                     {#each emojiSets as set,index}
+                        <button class="flex cursor-pointer justify-center hover:bg-secondary/30 rounded-lg space-x-3 items-center w-36 py-2 px-4" onclick={()=>{
+                            changeChosenEmojiSet(index)
+                        }}>
+                            {#snippet setname(nameofemojiset:string)}
+                                <p>{nameofemojiset}</p>
+                            {/snippet}
+                            {@render setname(index === 0 ? "Fruits" : index === 1 ? "Food & Drinks" : "Random Stuff")}
+                        </button>
+                     {/each}
+                     
+                    </div>
+                  </div>
+            </div>
+            
+        </div>
+        {:else if showEndModal}
+        <!-- {end_sound.play() } -->
+        <div class="flex h-[32rem] w-full justify-center items-center">
+            <div class="flex flex-col h-full space-y-8 items-center justify-center rounded-sm w-full max-w-md" in:fly={{duration:300, y:150,opacity:0}}>
+                <h2 class="text-5xl text-center font-semibold">Board Complete</h2>
+                {#if highScoreChecker}
+                <div class="flex max-w-xs text-center">
+                    <p>Check the
+                    <span class="animate-pulse w-fit font-bold from-[#6366F1] via-[#D946EF] to-[#FB7185] bg-gradient-to-r bg-clip-text text-transparent">LeaderBoard</span>
+                    your name might be up there! 🎉</p>
+                </div>
+                {/if}
+                <div class=" w-full h-[16rem] aspect-square grid grid-cols-2 gap-3 text-white">
+                <div class="col-span-1   rounded-md shadow-sm flex flex-col justify-center items-center">
+                    <Timer size="40" />
+                    <p class="text-3xl">{time.minutes < 10 ? '0' + time.minutes : time.minutes}:{time.seconds < 10 ? '0' + time.seconds : time.seconds}</p>
+                </div>
+                <div class="col-span-1  rounded-md flex flex-col justify-center items-center">
+                    <p class="text-2xl font-semibold">Moves</p>
+                    <p class="text-4xl">{moveCounter}</p>
+                </div>
+                <div class="col-span-1  rounded-md flex flex-col justify-center items-center">
+                    <div class="text-3xl flex flex-col font-semibold text-center [&>*]:m-0"><p>MPS</p> <p class="text-xs">[matches per second]</p></div>
+                    <p class="text-4xl">{calculateMPS().toFixed(2)}</p>
+                </div>
+                <div class="col-span-1  rounded-md flex flex-col justify-center items-center">
+                    <p class="text-3xl font-semibold text-center">Score</p>
+                    <p class="text-4xl">{scoreCalculation().toFixed(2)}</p>
+                </div>
+                </div>
+                <div class="flex w-full justify-center">
+                <button class="btn light morningGreen w-full max-w-xs" onclick={()=>{
+                    showEndModal = false
+                    endGame()
+                    start = false
+                    }}>Play Again
+                    <Play size="20" />
+                    </button>
+                </div>
+            </div>
+        </div>
+        {/if}
+        <!-- <button class="btn light morningGreen" use:start_sound={{src: start_sound, events: ["click"]}}>
+            Click Me!!
+        </button> -->
+</section>

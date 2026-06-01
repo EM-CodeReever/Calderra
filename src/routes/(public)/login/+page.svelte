@@ -1,6 +1,8 @@
 <script lang="ts">
     import type { PageProps } from './$types';
     import Github from '$components/svg/Github.svelte';
+  import { PUBLIC_SUPABASE_ANON_KEY, PUBLIC_SUPABASE_URL } from '$env/static/public';
+  import { goto } from '$app/navigation';
     let { data }: PageProps = $props();
     let password: string = $state(''); 
     let email: string = $state('');
@@ -10,8 +12,26 @@
     function githubSignIn() {
         console.log('github sign in');
     }
-    function emailSignIn() {
-        console.log('email sign in');
+
+    let supabase = $derived(data.supabase);
+    // ---cut---
+    async function signInWithEmail() {
+        loginProcessing = true;
+        console.log('email: ', email);
+        console.log('password: ', password);
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+        })
+        if (error) {
+            errorText = error.message;
+            console.error('Error signing in:', error);
+            loginProcessing = false;
+        } else {
+            console.log('Successfully signed in');
+            goto("/dashboard");
+            loginProcessing = false;
+        }
     }
 </script>
 
@@ -19,7 +39,7 @@
 	<title>Login</title>
 </svelte:head>
 <section
-	class="misty-waves h-fit min-h-screen flex items-center justify-center w-full"
+	class="cal-layered-waves-above h-fit min-h-screen flex items-center justify-center w-full"
 >
 	<div
 		class="w-full min-w-fit max-w-xl h-fit flex items-center flex-col space-y-5 my-32 mx-5 pt-10 pb-5 rounded-xl"
@@ -45,7 +65,7 @@
             
 			onsubmit={(e) => {
                 e.preventDefault();
-				emailSignIn();
+				signInWithEmail();
 			}}
 		>
 			<label class="input validator w-full bg-black">
@@ -61,11 +81,11 @@
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
             </svg>
-            <input class="focus:ring-0 bg-black" type="email" placeholder="mail@site.com" required />
+            <input class="focus:ring-0 bg-black" type="email" placeholder="mail@site.com" bind:value={email} required />
             </label>
             <div class="validator-hint hidden">Enter valid email address</div>
 
-            <label class="input bg-black w-full validator">
+            <label class="input bg-black w-full">
             <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                 stroke-linejoin="round"
@@ -86,22 +106,26 @@
                 required
                 placeholder="Password"
                 minlength="8"
-                title="Must be more than 8 characters, including number(s) and uppercase letter"
+                bind:value={password}
             />
             </label>
-            <p class="validator-hint hidden">
-            Must be more than 8 characters, including
-            <br />At least one number <br />At least one uppercase letter
-            </p>
 
 			<div class="flex justify-between items-center">
 				<p class="text-red-600 text-sm">{errorText}</p>
-				<button
-					class="btn morningGreen solid ml-auto {loginProcessing
-						? 'is-loading'
-						: ''}">Login</button
-				>
+                <button class="btn btn-neutral ml-auto">
+                    {#if loginProcessing}
+                    <span class="loading loading-spinner"></span>
+                    {/if}
+                    {loginProcessing ? 'Logging in...' : 'Log In'}
+                </button>
 			</div>
+           
 		</form>
+         <button class="btn btn-lg btn-soft btn-accent" onclick={() => {
+                supabase.auth.signOut();
+            }}>logout</button>
+            <button class="btn btn-soft btn-accent" onclick={async() => {
+                console.log(await supabase.auth.getSession());
+            }}> get current session info </button>
 	</div>
 </section>

@@ -10,6 +10,7 @@ const config = {
 		alias: {
 			'$components': './src/components',
 			'$svg': './src/components/svg',
+			'$prisma': './generated/prisma/client',
 			// '$stores': './src/stores',
 			// '$types': './src/lib/types',
 			'$lib': './src/lib',

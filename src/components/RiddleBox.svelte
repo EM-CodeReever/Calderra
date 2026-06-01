@@ -1,14 +1,12 @@
 <script lang="ts">
-  import { RefreshCcw } from "lucide-svelte";
+  import { RefreshCcw } from "@lucide/svelte";
 import { onMount } from "svelte";
   import { fade } from "svelte/transition";
 
-    let riddlePromise: Promise<any>;
-    let showAnswer = false;
-    let riddleObjet = {
-        riddle: "",
-        answer: ""
-    }
+    let riddlePromise = $state<Promise<any>>(Promise.resolve());
+    let showAnswer = $state(false);
+    let riddleObjet = $state({riddle:"Loading...", answer:"Loading..."});
+
     onMount(()=>{
         refreshRiddle();
     });
@@ -22,7 +20,7 @@ import { onMount } from "svelte";
 </script>
 
 <div class="h-fit max-h-72 relative rounded-xl  w-full mr-5 lg:mr-0 p-5 flex flex-col justify-between text-gray-200" >
-    <button class="btn rounded-full p-2 light morningGreen absolute top-4 right-4" on:click={()=>{
+    <button class="btn rounded-full p-2 light morningGreen absolute top-4 right-4" onclick={()=>{
         refreshRiddle()
     }}>
     <RefreshCcw size="20" />
@@ -42,7 +40,7 @@ import { onMount } from "svelte";
         {/await}
     </span>
     <div class="flex space-x-5 items-center">
-        <button class="btn light morningGreen" on:click={()=>{showAnswer = true}}>Answer</button>
+        <button class="btn btn-soft btn-secondary" onclick={()=>{showAnswer = true}}>Answer</button>
         {#if showAnswer}
         <p class="text-sm">
             <b>{riddleObjet.answer}</b>

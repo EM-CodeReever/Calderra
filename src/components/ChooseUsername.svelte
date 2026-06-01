@@ -1,7 +1,7 @@
 <script lang="ts">
-    import { User } from "lucide-svelte";
-    export let name:string;
-    export let extraClasses:string = "";
+    import { User } from "@lucide/svelte";
+
+    let {name = "", extraClasses = ""} = $props();
 </script>
 
 

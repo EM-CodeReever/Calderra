@@ -1,6 +1,7 @@
 <script>
     import { goto } from "$app/navigation";
-  import { AppWindow, Menu, House, CircleQuestionMark, ClipboardPen} from "@lucide/svelte";
+    import { AppWindow, Menu, House, CircleQuestionMark, ClipboardPen} from "@lucide/svelte";
+    let { children } = $props();
   </script>
   
   <nav class=" fixed w-full top-0 bg-[#001220] px-3 flex justify-center h-20 z-50" >
@@ -21,13 +22,13 @@
             </li>
         </ul>
         <div class="hidden lg:flex items-center">
-            <button class="btn btn-soft bg-white hover:bg-secondary text-black" onclick={()=>{goto('dashboard')}}>
+            <button class="btn btn-soft btn-accent" onclick={()=>{goto('dashboard')}}>
                 <AppWindow size="20" />
                 Open Application</button>
         </div>
         <div class="flex justify-center items-center lg:hidden">
             <div class="dropdown dropdown-end">
-            <div tabindex="0" role="button" class="btn btn-soft m-1 btn-secondary"><Menu size="20" /></div>
+            <div tabindex="0" role="button" class="btn btn-soft m-1 btn-accent"><Menu size="20" /></div>
             <ul tabindex="-1" class="dropdown-content menu bg-black rounded-box z-1 w-52 p-2 shadow-sm flex flex-col space-y-1">
                 <li>
                     <a href="/" class="item text flex space-x-5 justify-center items-center" tabindex="-1">
@@ -48,7 +49,7 @@
                     </a>
                 </li>
                 <!-- for mobile... i repeat FOR MOBILE.... ELLIOT THIS BUTTON IS ONLY SEEN ON MOBILE -->
-                    <button class="btn btn-soft bg-white hover:bg-secondary text-black mt-1" onclick={()=>{goto('dashboard')}}>
+                    <button class="btn btn-soft btn-accent" onclick={()=>{goto('dashboard')}}>
                         <AppWindow size="20" />
                         Open Application</button>
             </ul>
@@ -56,7 +57,7 @@
         </div>
     </div>
 </nav>
-  <slot />
+    {@render children()}
 
 <footer class="h-fit w-full bg-gunMetal-400 text-sm flex p-4 justify-between">
     

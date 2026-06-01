@@ -62,7 +62,7 @@
         in:fade={{ duration: 800, easing: cubicOut, delay: 500 }}
       >
         <button
-          class="btn btn-soft bg-gray-800 hover:bg-secondary hover:text-black rounded-lg"
+          class="btn bg-white text-black btn-lg hover:bg-gray-200  rounded-lg"
           onclick={() => {
             goto("register");
           }}>Create an account
@@ -70,7 +70,7 @@
           </button
         >
         <button
-          class="btn btn-soft bg-gray-800 hover:bg-secondary hover:text-black rounded-lg"
+          class="btn btn-lg btn-soft btn-accent rounded-lg"
           onclick={() => {
             goto("login");
           }}>

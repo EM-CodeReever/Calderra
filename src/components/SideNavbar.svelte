@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { Club, DiamondPercent, House, ListOrdered, MessageSquareMore, Sticker } from "lucide-svelte";
+  import { Club, DiamondPercent, House, ListOrdered, MessageSquareMore, Sticker } from "@lucide/svelte";
 
 
   import SideNavItem from "./SideNavItem.svelte";
   import Project from "./svg/Project.svelte";
 
-  export let currentPath: string | null;
-
-  let staticPath = "/(auth)";
+  let { currentPath } = $props();
+  console.log(currentPath);
+  let staticPath = "/(protected)";
 
 </script>
 
 
-<div class="w-full h-fit flex flex-col space-y-5 mt-4 lg:space-x-5 ping-pong-breakpoint:space-y-0 ping-pong-breakpoint:flex-row">
+<div class="w-full h-fit flex flex-col space-y-5 mt-4 lg:space-x-5 lg:space-y-0 lg:flex-row">
     <div class="w-full max-w-[14rem] text-gray-200 p-3 h-fit rounded-xl justify-start items-center space-y-3 flex-col hidden lg:flex">
 
         <SideNavItem title="Dashboard" isActive={(currentPath === staticPath + "/dashboard")} linkTo="/dashboard">
