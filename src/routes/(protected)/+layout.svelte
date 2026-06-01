@@ -3,10 +3,9 @@
     import { page } from "$app/state";
     import MainNavbar from "$components/MainNavbar.svelte";
     import SideNavbar from "$components/SideNavbar.svelte";
-    let { children } = $props()
-    // export let data;
-    // let { session, supabase,userProfile } = data;
-    // $: ({ session, supabase,userProfile } = data);
+    import type { LayoutData } from './$types';
+    let { data, children }: { data: LayoutData; children: any } = $props();
+    let userProfile = $derived(data.userProfile);
     let currentPath = $derived(page.route.id);
   
 
@@ -28,7 +27,7 @@
   </script>
 
   <section class="flex flex-col misty-waves w-full h-fit min-h-screen p-5 screen-400:p-4">
-    <MainNavbar/>
+    <MainNavbar {userProfile} supabase={data.supabase}/>
       <SideNavbar {currentPath}>
         {@render children()}
       </SideNavbar>

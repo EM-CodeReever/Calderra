@@ -17,8 +17,6 @@
     // ---cut---
     async function signInWithEmail() {
         loginProcessing = true;
-        console.log('email: ', email);
-        console.log('password: ', password);
         const { data, error } = await supabase.auth.signInWithPassword({
             email,
             password,
@@ -30,7 +28,6 @@
         } else {
             console.log('Successfully signed in');
             goto("/dashboard");
-            loginProcessing = false;
         }
     }
 </script>

@@ -18,7 +18,13 @@
     const pop_match_sound = new Sound(S_pop_match);
     import { cubicIn } from 'svelte/easing';
     let { data }: PageProps = $props();
-    // let {userProfile, session} = data
+    let session: any;
+
+    async () => {
+        let { data: { session } } = await data.supabase.auth.getSession();
+        session = session;
+    }
+
     let clickHistory = <any>[];
     let hidden = true;
     let display = $state(false);
@@ -230,25 +236,25 @@
                                 endLoading = true
                                 clearInterval(timerId)
                                 clearInterval(revealID)
-                                // let request = await fetch("/memory-card",{
-                                //     method: "POST",
-                                //     headers:{
-                                //         'Content-Type': 'application/json',
-                                //         Authorization: `Bearer ${session?.access_token}`
-                                //     },
-                                //     body: JSON.stringify({
-                                //         player: Number(userProfile?.id),
-                                //         time: (time.minutes < 10 ? '0' + time.minutes : time.minutes) + ":" + (time.seconds < 10 ? '0' + time.seconds : time.seconds),
-                                //         score: scoreCalculation().toFixed(2),
-                                //         mps: calculateMPS().toFixed(2),
-                                //     })
-                                // })
-                                // let res = await request.json();
-                                // if(res.isHighScore == true){
-                                //     highScoreChecker = true;
-                                // }else{
-                                //     highScoreChecker = false;
-                                // }
+                                let request = await fetch("/memory-card",{
+                                    method: "POST",
+                                    headers:{
+                                        'Content-Type': 'application/json',
+                                        Authorization: `Bearer ${session.data.session?.access_token}`
+                                    },
+                                    body: JSON.stringify({
+                                        player: Number(data.userProfile?.id),
+                                        time: (time.minutes < 10 ? '0' + time.minutes : time.minutes) + ":" + (time.seconds < 10 ? '0' + time.seconds : time.seconds),
+                                        score: scoreCalculation().toFixed(2),
+                                        mps: calculateMPS().toFixed(2),
+                                    })
+                                })
+                                let res = await request.json();
+                                if(res.isHighScore == true){
+                                    highScoreChecker = true;
+                                }else{
+                                    highScoreChecker = false;
+                                }
                                 endLoading = false
                                 showEndModal = true
                             }

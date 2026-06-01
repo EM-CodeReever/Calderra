@@ -4,9 +4,7 @@
   import SideNavbar from "./SideNavbar.svelte";
   import SideNavItem from "./SideNavItem.svelte";
   import Project from "./svg/Project.svelte";
-  // export let userProfile;
-  // export let supabase;
-
+  let { userProfile, supabase } = $props();
   function toggleDrawer(name:string) {
       let element = document.getElementById(`drawer-${name}`);
       if (element?.classList.contains('show')) {
@@ -15,7 +13,10 @@
           element?.classList.add('show');
       }
     }
-
+    function logOut(){
+      supabase.auth.signOut();
+      goto("/");
+    }
 </script>
 
 
@@ -42,21 +43,35 @@
             >Calderra</a
           >
       </div>
-      <div class="flex-none ">
+      <div class="flex-none dropdown dropdown-hover dropdown-end">
+        <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+        <!-- svelte-ignore a11y_label_has_associated_control -->
         <label
           class="flex space-x-3 p-3 rounded-2xl cursor-pointer hover:bg-secondary/50 duration-200"
           tabindex="0"
         >
           <div class="flex flex-col">
-            <p class="font-semibold">testuser</p>
-            <p class="text-xs font-thin">test@example.com</p>
+            <p class="font-semibold">{userProfile?.first_name} {userProfile?.last_name}</p>
+            <p class="text-xs font-thin">{userProfile?.auth_email}</p>
           </div>
           <div class="avatar">
             <div class="w-10 rounded-xl ring-secondary ring-2">
-              <img src="https://robohash.org/random" />
+              <!-- svelte-ignore a11y_missing_attribute -->
+              <img src="https://robohash.org/{userProfile?.username}" />
             </div>
         </div>
         </label>
+        <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
+        <div
+        tabindex="0"
+        class="dropdown-content card card-sm bg-base-100 z-1 w-64 shadow-md">
+        <div class="card-body p-1">
+          <button class="btn btn-soft btn-secondary" onclick={()=>{logOut()}}>
+            <LogOut class="w-5 h-5 mr-2" />
+            Log out
+          </button>
+        </div>
+      </div>
       </div>
     </div>
   </div>

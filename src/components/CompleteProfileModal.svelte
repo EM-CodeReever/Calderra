@@ -31,7 +31,7 @@
       <div class="grid grid-cols-2 gap-4">
         <!-- I dont know if this is the best way to do this, but I'm passing the session data to the form as hidden inputs -->
         <input type="text" name="sessionUserId" value={userProfile?.id} class="hidden">
-        <input type="text" name="sessionUserEmail" value={userProfile?.email} class="hidden">
+        <input type="text" name="sessionUserEmail" value={userProfile?.auth_email} class="hidden">
         <LabelledInput extraClasses="col-span-1" placeholder="Enter first name" name="firstName" label=""  />
         <LabelledInput  extraClasses="col-span-1" placeholder="Enter last name" name="lastName" label="" />
         <ChooseUsername  extraClasses="col-span-full" name="username" />

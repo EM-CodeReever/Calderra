@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
 	import { fly, fade } from 'svelte/transition';
-	let { userProfile } = $props();
+	let { data }: { data: LayoutData; children: any } = $props();
  
 	// ── Types ────────────────────────────────────────────────────────────────
  
@@ -349,7 +349,7 @@
 		if (bx > cw() + 20) {
 			p1Score++;
 			if (p1Score >= pointsToWin) {
-				endGame(userProfile?.username ?? 'Player');
+				endGame(data.userProfile?.username ?? 'Player');
 			} else {
 				beginScoreDisplay(-1);
 			}
@@ -492,7 +492,7 @@
 			const nameSize = ch() * 0.052;
 			ctx.font = `400 ${nameSize}px sans-serif`;
 			ctx.fillStyle = scorerColor + Math.round(t * 200).toString(16).padStart(2, '0');
-			const scorerLabel = pendingLaunchDir === -1 ? (userProfile?.username ?? 'Player') : 'CPU';
+			const scorerLabel = pendingLaunchDir === -1 ? (data.userProfile?.username ?? 'Player') : 'CPU';
 			ctx.fillText(scorerLabel.toUpperCase(), 0, labelY + labelSize * 1.6);
  
 			// Big scores with chromatic split on the scorer's number
@@ -574,6 +574,7 @@
 	}
  
 	import { onDestroy } from 'svelte';
+  import type { LayoutData } from '../$types';
 	onDestroy(destroy);
 </script>
  
@@ -602,7 +603,7 @@
 	<div class="w-full max-w-175 flex items-center justify-between
 		px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white">
 		<div class="flex flex-col items-center min-w-22.5">
-			<span class="text-[10px] uppercase tracking-widest text-white/40">{userProfile?.username ?? 'You'}</span>
+			<span class="text-[10px] uppercase tracking-widest text-white/40">{data.userProfile?.username ?? 'You'}</span>
 			<span class="text-3xl font-medium tabular-nums">{p1Score}</span>
 		</div>
  
@@ -685,7 +686,7 @@
 				in:fly={{ y: 30, duration: 400 }}
 				class="absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-xl bg-black/80">
 				<h2 class="text-4xl font-medium text-white">{winner} Wins!</h2>
-				<p class="text-xl text-white/50 tabular-nums">{p1Score} — {p2Score}</p>
+				<p class="text-6xl text-white/50 font-bold tabular-nums">{p1Score} — {p2Score}</p>
 				<div class="flex gap-3 mt-2">
 					<button
 						onclick={startGame}
