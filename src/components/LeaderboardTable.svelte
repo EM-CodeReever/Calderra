@@ -1,13 +1,13 @@
 <script lang="ts">
-  import type { LB_MemoryCards, Profile } from "@prisma/client";
+  import type { LB_MemoryCards, Profile } from "$prisma";
 
-export let records: (LB_MemoryCards & { Profile : Profile }) []
+let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $props();
 
 </script>
 
 <div class="w-full">
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
-	<table class="table richBlack bordered">
+	<table class="table bg-black/30 bordered">
 		<thead>
 			<tr>
 				<th class="w-20"><p class="w-full text-center">Rank</p></th>
@@ -17,7 +17,7 @@ export let records: (LB_MemoryCards & { Profile : Profile }) []
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="sunGold [&>*]:!text-xl">
+			<tr class="text-amber-400 [&>*]:!text-xl">
                 <td class="!p-0">
                     <lord-icon
                         src="https://cdn.lordicon.com/vttzorhw.json"
@@ -25,7 +25,7 @@ export let records: (LB_MemoryCards & { Profile : Profile }) []
                         delay="1000"
                         stroke="bold"
                         state="in-reveal"
-                        colors="primary:#facc15,secondary:#facc15"
+                        colors="primary:#ffb900,secondary:#ffb900"
                         style="width:75px;height:75px"
                         class="ml-1">
                     </lord-icon>
@@ -34,7 +34,7 @@ export let records: (LB_MemoryCards & { Profile : Profile }) []
 				<td>{(records[0] == undefined) ? '--' : records[0].score}</td>
 				<td class="hidden md:table-cell">{(records[0] == undefined) ? '--' : records[0].time}</td>
 			</tr>
-			<tr class="indigo [&>*]:!text-xl">
+			<tr class="text-[#ab38ff] [&>*]:!text-xl">
                 <th class="!p-0">
                     <lord-icon
                         src="https://cdn.lordicon.com/aqpxuwsk.json"
@@ -51,7 +51,7 @@ export let records: (LB_MemoryCards & { Profile : Profile }) []
                     <td>{(records[1] == undefined) ? '--' : records[1].score}</td>
                     <td class="hidden md:flex">{(records[1] == undefined) ? '--' : records[1].time}</td>
 			</tr>
-			<tr class="morningGreen [&>*]:!text-lg">
+			<tr class="text-[#55e2da] [&>*]:!text-lg">
 				<th class="!p-0">
                     <lord-icon
                         src="https://cdn.lordicon.com/dmjnplby.json"

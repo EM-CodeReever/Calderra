@@ -18,12 +18,15 @@
     const pop_match_sound = new Sound(S_pop_match);
     import { cubicIn } from 'svelte/easing';
     let { data }: PageProps = $props();
-    let session: any;
+    // svelte-ignore state_referenced_locally
+    let session_access_token = $state("") 
+    
+    data.supabase.auth.getSession().then((res)=>{
+        session_access_token = res.data.session?.access_token || "";
+    })
+    
 
-    async () => {
-        let { data: { session } } = await data.supabase.auth.getSession();
-        session = session;
-    }
+
 
     let clickHistory = <any>[];
     let hidden = true;
@@ -240,7 +243,7 @@
                                     method: "POST",
                                     headers:{
                                         'Content-Type': 'application/json',
-                                        Authorization: `Bearer ${session.data.session?.access_token}`
+                                        Authorization: `Bearer ${session_access_token}`
                                     },
                                     body: JSON.stringify({
                                         player: Number(data.userProfile?.id),
