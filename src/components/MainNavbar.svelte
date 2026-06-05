@@ -1,6 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
-  import { Club, DiamondPercent, House, ListOrdered, LogOut, Menu, MessageSquareMore, Settings, Sticker, SquareMenu } from "@lucide/svelte";
+  import { Palette, DiamondPercent, House, ListOrdered, LogOut, Menu, MessageSquareMore, Settings, Sticker, SquareMenu, X } from "@lucide/svelte";
   import SideNavbar from "./SideNavbar.svelte";
   import SideNavItem from "./SideNavItem.svelte";
   import Project from "./svg/Project.svelte";
@@ -39,23 +39,23 @@
           />
           <a
             href="/dashboard"
-            class="px-2 py-0.5 rounded-md font-extrabold text-2xl lg:text-3xl text-gray-200"
+            class="px-2 py-0.5 rounded-md font-extrabold text-2xl lg:text-3xl text-base-content"
             >Calderra</a
           >
       </div>
-      <div class="flex-none dropdown dropdown-hover dropdown-end">
+      <div class="flex-none dropdown dropdown-end">
         <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
         <!-- svelte-ignore a11y_label_has_associated_control -->
         <label
-          class="flex space-x-3 p-3 rounded-2xl cursor-pointer hover:bg-secondary/50 duration-200"
+          class="flex space-x-3 p-3 rounded-2xl cursor-pointer hover:bg-secondary/50 group duration-200"
           tabindex="0"
         >
-          <div class="flex flex-col">
+          <div class="flex flex-col text-base-content group-hover:text-base-content">
             <p class="font-semibold">{userProfile?.first_name} {userProfile?.last_name}</p>
             <p class="text-xs font-thin">{userProfile?.auth_email}</p>
           </div>
           <div class="avatar">
-            <div class="w-10 rounded-xl ring-secondary ring-2">
+            <div class="w-10 rounded-xl ring-base-content  ring-2">
               <!-- svelte-ignore a11y_missing_attribute -->
               <img src="https://robohash.org/{userProfile?.username}" />
             </div>
@@ -64,9 +64,17 @@
         <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
         <div
         tabindex="0"
-        class="dropdown-content card card-sm bg-base-100 z-1 w-64 shadow-md">
-        <div class="card-body p-1">
-          <button class="btn btn-soft btn-secondary" onclick={()=>{logOut()}}>
+        class="dropdown-content card rounded-xl mt-2 card-sm bg-secondary/50 backdrop-blur-sm z-1 w-44 shadow-md">
+        <div class="card-body p-2">
+          <a href="/account-settings" class="flex items-center justify-between pl-3 p-2 space-x-3 rounded-lg hover:bg-secondary/50 hover:text-secondary-content duration-200 w-full">
+            <Settings class="w-4 h-4" />
+            <p class="text-sm">Account Settings</p>
+          </a>
+          <a href="/preferences" class="flex items-center justify-between pl-3 p-2 space-x-3 rounded-lg hover:bg-secondary/50 hover:text-secondary-content duration-200 w-full">
+            <Palette class="w-4 h-4" />
+            <p class="text-sm">Preferences</p>
+          </a>
+          <button class="btn btn-sm btn-primary" onclick={()=>{logOut()}}>
             <LogOut class="w-5 h-5 mr-2" />
             Log out
           </button>
@@ -82,9 +90,11 @@
             <!-- svelte-ignore a11y_click_events_have_key_events -->
             <!-- svelte-ignore a11y_label_has_associated_control -->
             <!-- svelte-ignore a11y_no_noninteractive_element_interactions -->
-            <label class="btn btn-neutral absolute right-3 top-3" onclick={()=>{toggleDrawer('left')}}>✕</label>
+             <label for="my-drawer-2" aria-label="open sidebar" class="btn btn-ghost btn-secondary absolute right-3 top-3">
+              <X size="26" />
+            </label>
       <div class="flex items-center justify-center">
-        <a href="/dashboard" class="bg-oxfordBlue-600 px-2 py-0.5 rounded-md font-extrabold text-2xl lg:text-2xl text-gray-200">Calderra</a>
+        <a href="/dashboard" class="bg-oxfordBlue-600 px-2 py-0.5 rounded-md font-extrabold text-2xl lg:text-2xl text-base-content">Calderra</a>
       </div>
       <SideNavItem title="Dashboard" linkTo="/dashboard">
         <Project/>

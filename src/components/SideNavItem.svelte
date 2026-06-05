@@ -5,7 +5,7 @@
 
 </script>
 
-<button class="cursor-pointer flex justify-start items-center font-semibold space-x-3 {isActive ? 'bg-secondary text-gray-800' : 'hover:bg-accent hover:text-gray-800'} w-full p-3 rounded-lg relative"
+<button class="cursor-pointer flex justify-start items-center font-semibold text-base-content space-x-3 {isActive ? 'bg-primary text-primary-content' : 'hover:bg-secondary hover:text-secondary-content'} w-full p-3 rounded-lg relative"
 onclick={()=>{
     goto(linkTo);
     let element = document.getElementById('drawer-left');
@@ -14,6 +14,6 @@ onclick={()=>{
     <slot />
     <p>{title}</p>
     {#if isActive}
-    <span class="absolute w-1 h-9 rounded-tr-lg rounded-br-lg -left-3 top-1.5 bg-secondary"></span>
+    <span class="absolute w-1 h-9 rounded-tr-lg rounded-br-lg -left-3 top-1.5 bg-primary"></span>
     {/if}
   </button>

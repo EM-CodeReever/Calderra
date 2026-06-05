@@ -19,8 +19,8 @@ import { onMount } from "svelte";
     }
 </script>
 
-<div class="h-fit max-h-72 relative rounded-xl  w-full mr-5 lg:mr-0 p-5 flex flex-col justify-between text-gray-200" >
-    <button class="btn rounded-full p-2 light morningGreen absolute top-4 right-4" onclick={()=>{
+<div class="h-fit max-h-72 relative rounded-xl  w-full mr-5 lg:mr-0 p-5 flex flex-col justify-between text-base-content" >
+    <button class="btn rounded-full p-2 btn-primary btn-soft absolute top-4 right-4" onclick={()=>{
         refreshRiddle()
     }}>
     <RefreshCcw size="20" />
@@ -29,7 +29,7 @@ import { onMount } from "svelte";
         <p class="text-2xl font-semibold">Guess a riddle</p>
         {#await riddlePromise}
         <div class="w-full h-fit flex justify-center items-center" style="max-height: 8rem;">
-            <div class="loader richBlack light">
+            <div class="">
                 <div class="spin w-6 h-6" />
             </div>
         </div>
@@ -40,7 +40,7 @@ import { onMount } from "svelte";
         {/await}
     </span>
     <div class="flex space-x-5 items-center">
-        <button class="btn btn-soft btn-secondary" onclick={()=>{showAnswer = true}}>Answer</button>
+        <button class="btn btn-soft btn-primary" onclick={()=>{showAnswer = true}}>Answer</button>
         {#if showAnswer}
         <p class="text-sm">
             <b>{riddleObjet.answer}</b>

@@ -17,7 +17,7 @@
             <div>
                 Memory Cards
             </div>
-            <button class="btn btn-neutral"><ArrowBigRight/></button>
+            <button class="btn btn-neutral btn-sm"><ArrowBigRight/></button>
         </div>
     </div>
 <LeaderboardTable records={data.lb_memory_cards}/>

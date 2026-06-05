@@ -45,16 +45,16 @@
 <svelte:head>
   <title>Home</title>
 </svelte:head>
-<section class="w-full cal-layered-waves-above text-gray-200 h-screen">
+<section class="w-full bg-base-300 text-base-content h-screen">
   {#if show}
     <div
       class="flex space-y-8 justify-center items-center flex-col h-screen"
       in:fly={{ duration: 1000, y: 100, opacity: 0.3, easing: cubicOut }}
     >
-      <h1 class="font-bold xl:text-5xl xs:text-3xl text-2xl">
+      <h1 class="font-bold text-base-content xl:text-5xl xs:text-3xl text-2xl">
         Work in Progress!
       </h1>
-      <p class="px-5 max-w-lg text-center text-sm lg:text-base">
+      <p class="px-5 max-w-lg text-center text-base-content text-sm lg:text-base">
         This website is currently a work in progress, and will be fully functional by the end of the year. In the meantime, feel free to check out the github repo and explore the codebase! <br /> https://github.com/EM-CodeReever/Calderra
       </p>
       <span
@@ -62,7 +62,7 @@
         in:fade={{ duration: 800, easing: cubicOut, delay: 500 }}
       >
         <button
-          class="btn bg-white text-black btn-lg hover:bg-gray-200  rounded-lg"
+          class="btn btn-neutral btn-lg  rounded-lg"
           onclick={() => {
             goto("register");
           }}>Create an account
@@ -86,14 +86,14 @@
 <section
   use:inview={options}
   oninview_change={handleSectionOneInviewChange}
-  class="w-full flex flex-col space-y-5 justify-center items-center bg-[#f471b5] text-gray-900"
+  class="w-full flex flex-col space-y-5 justify-center items-center bg-secondary text-secondary-content"
   style="height: 30rem;"
   data-theme="custom"
 >
   {#if sectionOneINVIEW}
     <p
       in:fly={{ duration: 1000, y: 500, opacity: 0.3, easing: cubicOut }}
-      class="lg:text-4xl text-2xl px-5 font-bold text-center text-gray-900"
+      class="lg:text-4xl text-2xl px-5 font-bold text-center text-secondary-content"
     >
       Calderra Project Showcase
     </p>
@@ -108,7 +108,7 @@
 
       // width   : '100%',
 
-    } } hasTrack={ false } class="bg-oxfordBlue-200 text-gray-800 md:rounded-lg p-1 w-full md:max-w-2xl lg:max-w-4xl">
+    } } hasTrack={ false } class="text-secondary-content md:rounded-lg p-1 w-full md:max-w-2xl lg:max-w-4xl">
       <div style="position: relative">
         <SplideTrack >
             <SplideSlide class="flex justify-center items-center space-x-5 p-3">
@@ -118,10 +118,10 @@
                   <button class="btn sm morningGreen light ml-auto sm:m-0" onclick={()=>{goto("/ping-pong")}} >Check it out</button>
                 </span>
                 <div class="rounded-lg w-96 h-72 bg-gray-900 aspect-video lg:flex hidden relative justify-center">
-                  <span class="text-3xl mt-3 font-bold text-[#f471b5]">0 - 0</span>
-                  <span class="w-4 rounded-md h-24 bg-[#f471b5] absolute left-3 bottom-5"></span>
-                  <div class="w-4 h-4 bg-[#f471b5] rounded-full absolute top-1/2 right-1/2"></div>
-                  <span class="w-4 rounded-md h-24 bg-[#f471b5] absolute right-3 top-5"></span>
+                  <span class="text-3xl mt-3 font-bold text-primary">0 - 0</span>
+                  <span class="w-4 rounded-md h-24 bg-primary absolute left-3 bottom-5"></span>
+                  <div class="w-4 h-4 bg-primary rounded-full absolute top-1/2 right-1/2"></div>
+                  <span class="w-4 rounded-md h-24 bg-primary absolute right-3 top-5"></span>
                 </div>
             </SplideSlide>
             <SplideSlide class="flex justify-center items-center space-x-5 p-3">
@@ -131,7 +131,7 @@
                 <button class="btn sm morningGreen light ml-auto sm:m-0" onclick={()=>{goto("/memory-card")}} >Check it out</button>
               </span>
               <div class="rounded-lg w-96 h-72 aspect-video lg:flex justify-center hidden p-3">
-                <div class="aspect-square w-72  max-w-sm bg-[#f471b5] rounded-md grid grid-cols-5 grid-rows-5 gap-3 p-3">
+                <div class="aspect-square w-72  max-w-sm bg-primary rounded-md grid grid-cols-5 grid-rows-5 gap-3 p-3">
                   {#each Array(25) as _, i}
                   <div class="w-full h-full bg-gray-900 rounded-md cursor-pointer hover:bg-gray-700 hover:border-gray-200 hover:border-2 flex justify-center items-center">
                       <p>{fruitEmojiArray[Math.floor(Math.random()*fruitEmojiArray.length)]}</p>
@@ -147,21 +147,21 @@
                 <br>
                 <span class="text-xs">Note: This is a work in progress, so it's not functional yet.</span>
               </p>
-              <button class="btn sm morningGreen light ml-auto sm:m-0" onclick={()=>{goto("/chat-room")}}>Check it out</button>
+              <button class="btn ml-auto sm:m-0" onclick={()=>{goto("/chat-room")}}>Check it out</button>
             </span>
             <div class="rounded-lg w-96 h-72 bg-gray-900 aspect-video lg:flex flex-col hidden">
               <div class="flex justify-between items-center px-4 w-full p-3">
                 <div>
-                  <Menu color="#f471b5"/>
+                  <Menu color="#fff"/>
                </div>
-                <div class="avatar bg-[#f471b5]"></div>
+                <div class="avatar bg-primary"></div>
               </div>
-              <div class="w-full h-full bg-[#f471b5] border-2 border-gray-900 rounded-b-lg relative">
+              <div class="w-full h-full bg-primary border-2 border-gray-900 rounded-b-lg relative">
                 <div class="w-36 h-6 rounded-xl absolute right-4 top-5 bg-gray-900"></div>
                 <div class="w-20 h-6 rounded-xl absolute left-4 top-11 bg-gray-900"></div>
                 <div class="w-40 h-6 rounded-xl absolute left-4 top-20 bg-gray-900"></div>
                 <div class="flex justify-center items-center w-24 h-24 rounded-xl absolute right-4 top-24 bg-gray-900">
-                  <Image color="#f471b5" size="24" />                  
+                  <Image color="#fff" size="24" />                  
                 </div>
               </div>
             </div>
@@ -184,7 +184,7 @@
 <section
   use:inview={options}
   oninview_change={handleSectionTwoInviewChange}
-  class="w-full cal-layered-waves-below flex flex-col space-y-10 justify-center items-center relative"
+  class="w-full flex flex-col space-y-10 justify-center items-center relative"
   style="height: 60rem;"
   data-theme="custom"
 >
@@ -197,7 +197,7 @@
     </p>
     <p
       in:fly={{ duration: 2000, y: 100, opacity: 0.3, easing: cubicOut }}
-      class="text-gray-200 max-w-3xl text-center mx-3"
+      class="text-base-content max-w-3xl text-center mx-3"
     >
      Svelte is cool, Tailwind is super-cool, Typescript is cool, Supabase is cool, but I will always say Haikei is a slept on frontend design tool. Sira UI is cool too, a bit weird to use but cool.
 

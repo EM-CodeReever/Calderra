@@ -291,7 +291,7 @@
             <h1 class="text-3xl font-bold text-center">Memory Cards</h1>
             <p class="text-center text-sm max-w-md">How good is your memory? Let's find out! <br> Click on the cards to reveal the emoji, if two identical emojis are clicked in a row then you've found a match!. Match all the cards to win the game.</p>
             <div class="flex space-x-2 items-center">
-                <button class="btn btn-secondary btn-soft rounded-xl h-12! "
+                <button class="btn btn-secondary rounded-xl h-12! "
                  onclick={()=>{ 
                     //potentailly add a start sound here
                     start = true;
@@ -308,7 +308,7 @@
                 <div class="dropdown">
                     <!-- svelte-ignore a11y_no_noninteractive_tabindex -->
                     <!-- svelte-ignore a11y_label_has_associated_control -->
-                    <label class="btn btn-neutral rounded-xl h-12!" tabindex="0">
+                    <label class="btn btn-primary rounded-xl h-12!" tabindex="0">
                         {#each emojiSets as set,index}
                             {#if chosenEmojiSet == index}
                                 <img class="-ml-1 h-6 w-6" src={randomizedEmojiArray[0].emoji} alt=""> 
@@ -317,9 +317,9 @@
                         |
                         <ChevronDown class="mt-1 -mr-1"/>
                     </label>
-                    <div class="dropdown-content menu bg-black rounded-lg mt-2 w-fit">
+                    <div class="dropdown-content menu bg-base-content/10 rounded-lg mt-2 w-fit">
                      {#each emojiSets as set,index}
-                        <button class="flex cursor-pointer justify-center hover:bg-secondary/30 rounded-lg space-x-3 items-center w-36 py-2 px-4" onclick={()=>{
+                        <button class="flex cursor-pointer justify-center text-base-content font-bold hover:bg-base-content/20 hover:text-base-300 rounded-lg space-x-3 items-center w-36 py-2 px-4" onclick={()=>{
                             changeChosenEmojiSet(index)
                         }}>
                             {#snippet setname(nameofemojiset:string)}
@@ -340,13 +340,13 @@
             <div class="flex flex-col h-full space-y-8 items-center justify-center rounded-sm w-full max-w-md" in:fly={{duration:300, y:150,opacity:0}}>
                 <h2 class="text-5xl text-center font-semibold">Board Complete</h2>
                 {#if highScoreChecker}
-                <div class="flex max-w-xs text-center">
+                <div class="flex max-w-xs text-center text-base-content">
                     <p>Check the
                     <span class="animate-pulse w-fit font-bold from-[#6366F1] via-[#D946EF] to-[#FB7185] bg-gradient-to-r bg-clip-text text-transparent">LeaderBoard</span>
                     your name might be up there! 🎉</p>
                 </div>
                 {/if}
-                <div class=" w-full h-[16rem] aspect-square grid grid-cols-2 gap-3 text-white">
+                <div class=" w-full h-[16rem] aspect-square grid grid-cols-2 gap-3 text-base-content">
                 <div class="col-span-1   rounded-md shadow-sm flex flex-col justify-center items-center">
                     <Timer size="40" />
                     <p class="text-3xl">{time.minutes < 10 ? '0' + time.minutes : time.minutes}:{time.seconds < 10 ? '0' + time.seconds : time.seconds}</p>

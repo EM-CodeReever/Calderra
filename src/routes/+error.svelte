@@ -5,7 +5,7 @@
   <title>Error {page.status}</title>
 </svelte:head>
 
-<section class="w-full cal-layered-waves-above text-gray-200 h-screen">
+<section class="w-full bg-base-300 text-base-content h-screen">
     <div class="w-full h-full flex items-center justify-center">
         <div class="text-center">
             <h1 class="text-5xl font-bold mb-5">{page.status}</h1>

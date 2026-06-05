@@ -4,13 +4,13 @@
     let { children } = $props();
   </script>
   
-  <nav class=" fixed w-full top-0 bg-[#001220] px-3 flex justify-center h-20 z-50" >
+  <nav class=" fixed w-full top-0 bg-base-300 px-3 flex justify-center h-20 z-50" >
     <div class="w-full max-w-6xl h-full flex justify-between">
         <div class="flex space-x-2 items-center pl-2 lg:p-0">
             <img src="/calderra_logo_rounded.png" alt="Calderra logo" class="w-9 h-9">
-            <a href="/" class=" font-extrabold text-2xl lg:text-2xl text-gray-200 -mb-2">Calderra</a>
+            <a href="/" class=" font-extrabold text-2xl lg:text-2xl text-base-content -mb-2">Calderra</a>
         </div>
-        <ul class="hidden lg:flex text-gray-200">
+        <ul class="hidden lg:flex text-base-content">
             <li class="h-full flex items-center px-5 duration-300 hover:text-secondary">
                 <a href="/" class="font-bold">Home</a>
             </li>
@@ -59,7 +59,7 @@
 </nav>
     {@render children()}
 
-<footer class="h-fit w-full bg-gunMetal-400 text-sm flex p-4 justify-between">
+<footer class="h-fit w-full text-sm flex p-4 justify-between">
     
     <span>
         Calderra &copy; 2026. All rights reserved.

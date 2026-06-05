@@ -7,7 +7,7 @@ let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $prop
 
 <div class="w-full">
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
-	<table class="table bg-black/30 bordered">
+	<table class="table bg-black bordered">
 		<thead>
 			<tr>
 				<th class="w-20"><p class="w-full text-center">Rank</p></th>
@@ -17,8 +17,8 @@ let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $prop
 			</tr>
 		</thead>
 		<tbody>
-			<tr class="text-amber-400 [&>*]:!text-xl">
-                <td class="!p-0">
+			<tr class="text-amber-400 *:text-xl!">
+                <td class="p-0!">
                     <lord-icon
                         src="https://cdn.lordicon.com/vttzorhw.json"
                         trigger="in"
@@ -34,8 +34,8 @@ let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $prop
 				<td>{(records[0] == undefined) ? '--' : records[0].score}</td>
 				<td class="hidden md:table-cell">{(records[0] == undefined) ? '--' : records[0].time}</td>
 			</tr>
-			<tr class="text-[#ab38ff] [&>*]:!text-xl">
-                <th class="!p-0">
+			<tr class="text-[#ab38ff] *:text-xl!">
+                <th class="p-0!">
                     <lord-icon
                         src="https://cdn.lordicon.com/aqpxuwsk.json"
                         trigger="in"
@@ -44,15 +44,15 @@ let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $prop
                         state="in-reveal"
                         colors="primary:#ab38ff,secondary:#ab38ff"
                         style="width:45px;height:45px"
-                        class="ml-[18px]">
+                        class="ml-4.5">
                         
                     </lord-icon></th>
                     <td>{(records[1] == undefined) ? '--' : records[1].Profile.username}</td>
                     <td>{(records[1] == undefined) ? '--' : records[1].score}</td>
                     <td class="hidden md:flex">{(records[1] == undefined) ? '--' : records[1].time}</td>
 			</tr>
-			<tr class="text-[#55e2da] [&>*]:!text-lg">
-				<th class="!p-0">
+			<tr class="text-[#55e2da] *:text-lg!">
+				<th class="p-0!">
                     <lord-icon
                         src="https://cdn.lordicon.com/dmjnplby.json"
                         trigger="in"
@@ -70,7 +70,7 @@ let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $prop
 			</tr>
             
             {#each {length: 7} as _, i}
-            <tr class="platinum">
+            <tr class="text-white">
 				<th><p class="w-full text-center">{i + 4}</p></th>
 				<td>{(records[i + 3] == undefined) ? '--' : records[i + 3].Profile.username}</td>
 				<td>{(records[i + 3] == undefined) ? '--' : records[i + 3].score}</td>

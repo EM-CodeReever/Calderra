@@ -4,7 +4,42 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { env } from "prisma/config";
 
 const adapter = new PrismaPg({
-  connectionString: env("DATABASE_URL"),
+  connectionString: "postgres://postgres.gotbilveqwwsuztpmpio:PB6wzl8%M28X@aws-0-us-east-1.pooler.supabase.com:5432/postgres",
 });
 
 export const prisma = new PrismaClient({ adapter });
+
+export type Theme = {
+  current:
+    | "forest"
+    | "abyss"
+    | "aqua"
+    | "emerald"
+    | "light"
+    | "dark"
+    | "cupcake"
+    | "bumblebee"
+    | "halloween"
+    | "garden"
+    | "synthwave"
+    | "retro"
+    | "cyberpunk"
+    | "valentine"
+    | "wireframe"
+    | "black"
+    | "luxury"
+    | "dracula"
+    | "cmyk"
+    | "autumn"
+    | "business"
+    | "acid"
+    | "lemonade"
+    | "night";
+  extra?: {
+    landingPageTop: string;
+    landingPageBelow: string;
+    navbar: string;
+    footer: string;
+    MainBG: string;
+  };
+};

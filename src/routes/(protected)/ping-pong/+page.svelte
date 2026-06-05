@@ -603,16 +603,16 @@
 	<div class="w-full max-w-175 flex items-center justify-between
 		px-4 py-2 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm text-white">
 		<div class="flex flex-col items-center min-w-22.5">
-			<span class="text-[10px] uppercase tracking-widest text-white/40">{data.userProfile?.username ?? 'You'}</span>
-			<span class="text-3xl font-medium tabular-nums">{p1Score}</span>
+			<span class="text-[10px] uppercase tracking-widest text-base-content/60 font-bold">{data.userProfile?.username ?? 'You'}</span>
+			<span class="text-3xl font-medium tabular-nums text-base-content">{p1Score}</span>
 		</div>
  
 		<div class="flex flex-col items-center gap-1">
 			<button
 				onclick={togglePause}
 				disabled={gameState === 'menu' || gameState === 'end' || gameState === 'scoring'}
-				class="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg border border-white/20
-					hover:bg-white/10 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+				class="flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-lg border border-base-content/20 text-base-content/80
+					hover:bg-base-content/20 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
 				{#if gameState === 'paused'}
 					<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
 						<path d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"/>
@@ -623,12 +623,12 @@
 					</svg> Pause
 				{/if}
 			</button>
-			<span class="text-[10px] tracking-widest text-white/30 capitalize">{difficulty}</span>
+			<span class="text-[10px] tracking-widest text-base-content/60 capitalize">{difficulty}</span>
 		</div>
  
 		<div class="flex flex-col items-center min-w-22.5">
-			<span class="text-[10px] uppercase tracking-widest text-white/40">CPU</span>
-			<span class="text-3xl font-medium tabular-nums">{p2Score}</span>
+			<span class="text-[10px] uppercase tracking-widest text-base-content/60 font-bold">CPU</span>
+			<span class="text-3xl font-medium tabular-nums text-base-content">{p2Score}</span>
 		</div>
 	</div>
  

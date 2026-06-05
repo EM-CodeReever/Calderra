@@ -36,7 +36,7 @@
 	<title>Login</title>
 </svelte:head>
 <section
-	class="cal-layered-waves-above h-fit min-h-screen flex items-center justify-center w-full"
+	class="bg-base-300 h-fit min-h-screen flex items-center justify-center w-full"
 >
 	<div
 		class="w-full min-w-fit max-w-xl h-fit flex items-center flex-col space-y-5 my-32 mx-5 pt-10 pb-5 rounded-xl"
@@ -65,7 +65,7 @@
 				signInWithEmail();
 			}}
 		>
-			<label class="input validator w-full bg-black">
+			<label class="input input-primary validator w-full ">
             <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                 stroke-linejoin="round"
@@ -78,11 +78,11 @@
                 <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
                 </g>
             </svg>
-            <input class="focus:ring-0 bg-black" type="email" placeholder="mail@site.com" bind:value={email} required />
+            <input class="focus:ring-0 " type="email" placeholder="mail@site.com" bind:value={email} required />
             </label>
             <div class="validator-hint hidden">Enter valid email address</div>
 
-            <label class="input bg-black w-full">
+            <label class="input input-primary w-full">
             <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                 <g
                 stroke-linejoin="round"
@@ -98,7 +98,7 @@
                 </g>
             </svg>
             <input
-                class="focus:ring-0 bg-black"
+                class="focus:ring-0 "
                 type="password"
                 required
                 placeholder="Password"
