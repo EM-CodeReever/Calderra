@@ -4,7 +4,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { env } from "prisma/config";
 
 const adapter = new PrismaPg({
-  connectionString: "postgres://postgres.gotbilveqwwsuztpmpio:PB6wzl8%M28X@aws-0-us-east-1.pooler.supabase.com:5432/postgres",
+  connectionString: env("DATABASE_URL")!,
 });
 
 export const prisma = new PrismaClient({ adapter });
