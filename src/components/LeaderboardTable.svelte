@@ -9,7 +9,7 @@ let { records } : { records: (LB_MemoryCards & { Profile: Profile })[] } = $prop
     <script src="https://cdn.lordicon.com/lordicon.js"></script>
 	<table class="table bg-black bordered">
 		<thead>
-			<tr>
+			<tr class="text-white">
 				<th class="w-20"><p class="w-full text-center">Rank</p></th>
 				<th>Name</th>
 				<th>Score</th>
