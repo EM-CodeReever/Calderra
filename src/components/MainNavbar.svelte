@@ -39,7 +39,7 @@
           />
           <a
             href="/dashboard"
-            class="px-2 py-0.5 rounded-md font-extrabold text-2xl lg:text-3xl text-base-content"
+            class="px-2 py-0.5 rounded-md font-extrabold hidden sm:flex text-2xl lg:text-3xl text-base-content"
             >Calderra</a
           >
       </div>
@@ -50,7 +50,7 @@
           class="flex space-x-3 p-3 rounded-2xl cursor-pointer hover:bg-secondary/50 group duration-200"
           tabindex="0"
         >
-          <div class="flex flex-col text-base-content group-hover:text-base-content">
+          <div class="flex-col text-base-content group-hover:text-base-content hidden sm:flex">
             <p class="font-semibold">{userProfile?.first_name} {userProfile?.last_name}</p>
             <p class="text-xs font-thin">{userProfile?.auth_email}</p>
           </div>
