@@ -1,6 +1,5 @@
 <script lang="ts">
-    export let bgColor = "bg-white";
-    export let type: "initial-ping-pong" | "new-user" | "all-caught-up" | "ping-pong-master";
+    let { bgColor = "bg-gray-300", type }: {bgColor: string, type : "initial-ping-pong" | "new-user" | "all-caught-up" | "ping-pong-master"} = $props();
 </script>
 
 <div class="w-10 h-10 p-2 aspect-square rounded-lg {bgColor} flex justify-center items-center ">

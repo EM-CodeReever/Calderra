@@ -39,6 +39,7 @@
 		"pg": "^8.21.0",
 		"svelte-5-french-toast": "^2.0.6",
 		"svelte-inview": "^4.0.4",
-		"svelte-sound": "^0.6.0"
+		"svelte-sound": "^0.6.0",
+		"zod": "^4.4.3"
 	}
 }

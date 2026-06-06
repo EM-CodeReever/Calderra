@@ -45,7 +45,7 @@
 <svelte:head>
   <title>Home</title>
 </svelte:head>
-<section class="w-full bg-base-300 text-base-content h-screen">
+<section class="w-full bg-base-300text-base-content h-screen">
   {#if show}
     <div
       class="flex space-y-8 justify-center items-center flex-col h-screen"
@@ -62,7 +62,7 @@
         in:fade={{ duration: 800, easing: cubicOut, delay: 500 }}
       >
         <button
-          class="btn btn-neutral btn-lg  rounded-lg"
+          class="btn btn-primary btn-lg  rounded-lg"
           onclick={() => {
             goto("register");
           }}>Create an account
@@ -118,10 +118,10 @@
                   <button class="btn sm morningGreen light ml-auto sm:m-0" onclick={()=>{goto("/ping-pong")}} >Check it out</button>
                 </span>
                 <div class="rounded-lg w-96 h-72 bg-gray-900 aspect-video lg:flex hidden relative justify-center">
-                  <span class="text-3xl mt-3 font-bold text-primary">0 - 0</span>
-                  <span class="w-4 rounded-md h-24 bg-primary absolute left-3 bottom-5"></span>
-                  <div class="w-4 h-4 bg-primary rounded-full absolute top-1/2 right-1/2"></div>
-                  <span class="w-4 rounded-md h-24 bg-primary absolute right-3 top-5"></span>
+                  <span class="text-3xl mt-3 font-bold text-secondary-content">0 - 0</span>
+                  <span class="w-4 rounded-md h-24 bg-secondary-content absolute left-3 bottom-5"></span>
+                  <div class="w-4 h-4 bg-secondary-content rounded-full absolute top-1/2 right-1/2"></div>
+                  <span class="w-4 rounded-md h-24 bg-secondary-content absolute right-3 top-5"></span>
                 </div>
             </SplideSlide>
             <SplideSlide class="flex justify-center items-center space-x-5 p-3">
@@ -131,7 +131,7 @@
                 <button class="btn sm morningGreen light ml-auto sm:m-0" onclick={()=>{goto("/memory-card")}} >Check it out</button>
               </span>
               <div class="rounded-lg w-96 h-72 aspect-video lg:flex justify-center hidden p-3">
-                <div class="aspect-square w-72  max-w-sm bg-primary rounded-md grid grid-cols-5 grid-rows-5 gap-3 p-3">
+                <div class="aspect-square w-72  max-w-sm bg-secondary-content rounded-md grid grid-cols-5 grid-rows-5 gap-3 p-3">
                   {#each Array(25) as _, i}
                   <div class="w-full h-full bg-gray-900 rounded-md cursor-pointer hover:bg-gray-700 hover:border-gray-200 hover:border-2 flex justify-center items-center">
                       <p>{fruitEmojiArray[Math.floor(Math.random()*fruitEmojiArray.length)]}</p>
@@ -154,9 +154,9 @@
                 <div>
                   <Menu color="#fff"/>
                </div>
-                <div class="avatar bg-primary"></div>
+                <div class="avatar bg-secondary-content"></div>
               </div>
-              <div class="w-full h-full bg-primary border-2 border-gray-900 rounded-b-lg relative">
+              <div class="w-full h-full bg-secondary-content border-2 border-gray-900 rounded-b-lg relative">
                 <div class="w-36 h-6 rounded-xl absolute right-4 top-5 bg-gray-900"></div>
                 <div class="w-20 h-6 rounded-xl absolute left-4 top-11 bg-gray-900"></div>
                 <div class="w-40 h-6 rounded-xl absolute left-4 top-20 bg-gray-900"></div>
@@ -229,6 +229,7 @@
       </div>
     </div>
   {/if}
+
 </section>
 
 <style>
