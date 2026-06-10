@@ -41,10 +41,10 @@
 	<div
 		class="w-full min-w-fit max-w-xl h-fit flex items-center flex-col space-y-5 my-32 mx-5 pt-10 pb-5 rounded-xl"
 	>
-		<h1 class="text-center text-3xl font-bold text-gray-200 mb-5">Log in to your account</h1>
+		<h1 class="text-center text-3xl font-bold text-base-content mb-5">Log in to your account</h1>
 		<div class="w-full px-5">
 			<button
-				class="btn bg-white hover:bg-accent rounded-lg text-gray-900 w-full"
+				class="btn bg-base-content hover:bg-base-content/70 rounded-lg text-base-300 w-full"
 				onclick={() => {
 					githubSignIn();
 				}}>Continue with Github
@@ -53,7 +53,7 @@
 			>
 		</div>
 		<div class="divider px-5 info">or</div>
-		<p class="text-center font-semibold text-gray-200">
+		<p class="text-center font-semibold text-base-content">
 			Enter your email and password to log in to your account
 		</p>
 		<form

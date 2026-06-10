@@ -45,13 +45,13 @@
 <svelte:head>
   <title>Home</title>
 </svelte:head>
-<section class="w-full bg-base-300text-base-content h-screen">
+<section class="w-full bg-base-300 text-base-content h-screen">
   {#if show}
     <div
       class="flex space-y-8 justify-center items-center flex-col h-screen"
       in:fly={{ duration: 1000, y: 100, opacity: 0.3, easing: cubicOut }}
     >
-      <h1 class="font-bold text-base-content xl:text-5xl xs:text-3xl text-2xl">
+      <h1 class="font-bold text-base-content lg:text-4xl xl:text-5xl text-3xl">
         Work in Progress!
       </h1>
       <p class="px-5 max-w-lg text-center text-base-content text-sm lg:text-base">
@@ -142,7 +142,7 @@
           </SplideSlide>
           <SplideSlide class="flex justify-center items-center space-x-5 p-3">
             <span class="flex flex-col space-y-2">
-              <p class="text-2xl font-bold">Caddle</p>
+              <p class="text-2xl font-bold">Chat Room</p>
               <p class="text-sm max-w-sm">A basic chatroom for communicating with other users. 
                 <br>
                 <span class="text-xs">Note: This is a work in progress, so it's not functional yet.</span>
@@ -184,7 +184,7 @@
 <section
   use:inview={options}
   oninview_change={handleSectionTwoInviewChange}
-  class="w-full flex flex-col space-y-10 justify-center items-center relative"
+  class="w-full bg-linear-to-b from-secondary to-base-300 flex flex-col space-y-10 justify-center items-center relative"
   style="height: 60rem;"
   data-theme="custom"
 >

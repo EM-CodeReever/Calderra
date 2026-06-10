@@ -105,7 +105,7 @@
     <SideNavItem title="Memory Cards"  linkTo="/memory-card">
         <Sticker/>
     </SideNavItem>
-    <SideNavItem title="Regalore" linkTo="/chat-room">
+    <SideNavItem title="Chat Room" linkTo="/chat-room">
       <MessageSquareMore/>
     </SideNavItem>
     <SideNavItem title="Leaderboard" linkTo="/leaderboard">
