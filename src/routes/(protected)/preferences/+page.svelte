@@ -27,6 +27,9 @@
         "acid",
         "lemonade",
         "night",
+        "coffee",
+        "silk",
+        "lunis"
     ] as const;
 
     function setTheme(theme: typeof themes[number]) {

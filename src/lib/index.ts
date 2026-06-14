@@ -34,7 +34,10 @@ export type Theme = {
     | "business"
     | "acid"
     | "lemonade"
-    | "night";
+    | "night"
+    | "coffee"
+    | "silk"
+    | "lunis"
   extra?: {
     landingPageTop: string;
     landingPageBelow: string;

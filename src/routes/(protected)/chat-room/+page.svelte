@@ -18,11 +18,11 @@
         <lord-icon
             src="https://cdn.lordicon.com/jdgfsfzr.json"
             trigger="loop"
-            colors="primary:#ffffff,secondary:#107c91"
+            colors="primary:#107c91,secondary:#107c91"
             style="width:200px;height:200px">
         </lord-icon>
-        <h1 class="text-5xl font-semibold">Chat Room</h1>
-        <p class="max-w-sm text-center">Join a Chat Room and talk to other users! Global chat is open to all but other rooms require a code</p>
+        <h1 class="text-5xl font-semibold">Skaros Rock</h1>
+        <p class="max-w-sm text-center">Skaros Rock is a social chat platform where you can connect and talk to other users! Global chat is open to all but other rooms require a code</p>
     </span>
     <div class="flex flex-col justify-center items-center space-y-3 w-full max-w-md">
         <span class="flex flex-col justify-center items-center space-y-4 w-full max-w-md">

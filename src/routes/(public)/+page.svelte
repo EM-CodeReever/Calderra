@@ -45,7 +45,7 @@
 <svelte:head>
   <title>Home</title>
 </svelte:head>
-<section class="w-full bg-base-300 text-base-content h-screen">
+<section class="w-full bg-base-100 text-base-content h-screen">
   {#if show}
     <div
       class="flex space-y-8 justify-center items-center flex-col h-screen"
@@ -62,7 +62,7 @@
         in:fade={{ duration: 800, easing: cubicOut, delay: 500 }}
       >
         <button
-          class="btn btn-primary btn-lg  rounded-lg"
+          class="btn btn-base-100 btn-lg  rounded-lg"
           onclick={() => {
             goto("register");
           }}>Create an account
@@ -70,7 +70,7 @@
           </button
         >
         <button
-          class="btn btn-lg btn-soft btn-accent rounded-lg"
+          class="btn btn-lg btn-primary rounded-lg"
           onclick={() => {
             goto("login");
           }}>
@@ -199,7 +199,9 @@
       in:fly={{ duration: 2000, y: 100, opacity: 0.3, easing: cubicOut }}
       class="text-base-content max-w-3xl text-center mx-3"
     >
-     Svelte is cool, Tailwind is super-cool, Typescript is cool, Supabase is cool, but I will always say Haikei is a slept on frontend design tool. Sira UI is cool too, a bit weird to use but cool.
+     Svelte is cool, Tailwind is super-cool, Typescript is cool, Supabase is cool, but I will always say Haikei is a slept on frontend design tool. 
+     Daisy UI is the best CSS framework for rapid development, all the themes are gorgeous and it's so easy to customize and extend. 
+     I used all of these tools to build this website, and I highly recommend checking them out if you're interested in web development!
 
     </p>
     <div class="md:flex md:justify-between gap-y-5 xs:gap-y-10 grid grid-rows-2 grid-cols-3 w-full max-w-3xl">

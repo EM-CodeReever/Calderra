@@ -4,6 +4,40 @@
 @plugin "daisyui" {
   themes: all;
 }
+@plugin "daisyui/theme" {
+  name: "lunis";
+  default: false;
+  prefersdark: false;
+  color-scheme: "light";
+  --color-base-100: oklch(98% 0.003 247.858);
+  --color-base-200: oklch(96% 0.007 247.896);
+  --color-base-300: oklch(92% 0.013 255.508);
+  --color-base-content: oklch(20% 0.042 265.755);
+  --color-primary: oklch(43% 0.095 166.913);
+  --color-primary-content: oklch(94% 0.03 12.58);
+  --color-secondary: oklch(71% 0.194 13.428);
+  --color-secondary-content: oklch(20% 0.042 265.755);
+  --color-accent: oklch(89% 0.058 10.001);
+  --color-accent-content: oklch(0% 0 0);
+  --color-neutral: oklch(0% 0 0);
+  --color-neutral-content: oklch(89% 0.058 10.001);
+  --color-info: oklch(52% 0.105 223.128);
+  --color-info-content: oklch(97% 0.013 236.62);
+  --color-success: oklch(59% 0.145 163.225);
+  --color-success-content: oklch(98% 0.018 155.826);
+  --color-warning: #eeaf00;
+  --color-warning-content: oklch(98% 0.026 102.212);
+  --color-error: oklch(57% 0.245 27.325);
+  --color-error-content: oklch(96% 0.015 12.422);
+  --radius-selector: 1rem;
+  --radius-field: 0.5rem;
+  --radius-box: 1rem;
+  --size-selector: 0.25rem;
+  --size-field: 0.25rem;
+  --border: 1.5px;
+  --depth: 0;
+  --noise: 0;
+}
 
 .blur-bg {
     -webkit-backdrop-filter: blur(7px);

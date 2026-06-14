@@ -118,10 +118,10 @@
 			</div>
            
 		</form>
-         <button class="btn btn-lg btn-soft btn-accent" onclick={() => {
+         <button class="btn btn-lg btn-neutral" onclick={() => {
                 supabase.auth.signOut();
             }}>logout</button>
-            <button class="btn btn-soft btn-accent" onclick={async() => {
+            <button class="btn btn-neutral" onclick={async() => {
                 console.log(await supabase.auth.getSession());
             }}> get current session info </button>
 	</div>

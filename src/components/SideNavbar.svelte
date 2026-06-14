@@ -24,7 +24,7 @@
         <SideNavItem title="Memory Cards" isActive={(currentPath === staticPath + "/memory-card")} linkTo="/memory-card">
             <Sticker/>
         </SideNavItem>
-        <SideNavItem title="Chat Room" isActive={(currentPath === staticPath + "/chat-room")} linkTo="/chat-room">
+        <SideNavItem title="Skaros Rock" isActive={(currentPath === staticPath + "/chat-room")} linkTo="/chat-room">
           <MessageSquareMore/>
         </SideNavItem>
         <SideNavItem title="Leaderboard" isActive={(currentPath === staticPath + "/leaderboard")} linkTo="/leaderboard">

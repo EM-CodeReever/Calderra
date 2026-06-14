@@ -21,8 +21,8 @@
 
 // connect to our server
 const partySocket = new PartySocket({
+//   host: import.meta.env.VITE_PARTYKIT_HOST ?? "http://localhost:1999",
   host: "https://calderra-party.em-codereever.partykit.dev",
-//   host: "http://localhost:1999",
   room: "global",
   id: data.userProfile?.username as string, 
 });
