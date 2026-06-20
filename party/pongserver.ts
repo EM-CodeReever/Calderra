@@ -40,12 +40,13 @@ type RoomPhase =
   | "ended";
 
 interface PlayerState {
-  id:       string;
-  role:     "player1" | "player2";
-  ready:    boolean;
-  paddleY:  number;
-  score:    number;
-  username: string;
+  id:           string;
+  role:         "player1" | "player2";
+  ready:        boolean;
+  wantsRematch: boolean;
+  paddleY:      number;
+  score:        number;
+  username:     string;
 }
 
 interface BallState {
@@ -57,17 +58,18 @@ interface BallState {
 
 // Messages  client → server
 interface CMsgReady     { type: "ready" }
+interface CMsgRematch   { type: "rematch" }
 interface CMsgPaddle    { type: "paddle"; y: number }
 interface CMsgUsername  { type: "username"; username: string }
-type ClientMsg = CMsgReady | CMsgPaddle | CMsgUsername;
+type ClientMsg = CMsgReady | CMsgRematch | CMsgPaddle | CMsgUsername;
 
 // Messages  server → client
 export interface SMsgState {
   type:      "state";
   phase:     RoomPhase;
   countdown: number;       // 3/2/1/0
-  p1:        { paddleY: number; score: number; ready: boolean; username: string } | null;
-  p2:        { paddleY: number; score: number; ready: boolean; username: string } | null;
+  p1:        { paddleY: number; score: number; ready: boolean; wantsRematch: boolean; username: string } | null;
+  p2:        { paddleY: number; score: number; ready: boolean; wantsRematch: boolean; username: string } | null;
   ball:      BallState;
   yourRole:  "player1" | "player2" | "spectator";
 }
@@ -126,12 +128,13 @@ export default class PongServer implements Party.Server {
 
     if (role !== "spectator") {
       this.players.set(conn.id, {
-        id:       conn.id,
+        id:           conn.id,
         role,
-        ready:    false,
-        paddleY:  CH / 2 - PAD_H / 2,
-        score:    0,
-        username: role === "player1" ? "Player 1" : "Player 2",
+        ready:        false,
+        wantsRematch: false,
+        paddleY:      CH / 2 - PAD_H / 2,
+        score:        0,
+        username:     role === "player1" ? "Player 1" : "Player 2",
       });
     }
 
@@ -167,6 +170,23 @@ export default class PongServer implements Party.Server {
     if (msg.type === "username" && player) {
       player.username = (msg as CMsgUsername).username.slice(0, 20);
       this.broadcastState();
+      return;
+    }
+
+    // Rematch handshake: each player signals intent independently while the
+    // "ended" screen is showing. Only once BOTH have requested it does the
+    // room actually move to ready_check — neither player is surprised by a
+    // sudden phase change from a single click.
+    if (msg.type === "rematch" && player && this.phase === "ended") {
+      player.wantsRematch = true;
+      const both = [...this.players.values()].every(p => p.wantsRematch);
+      if (both && this.players.size === 2) {
+        this.resetScores();
+        for (const p of this.players.values()) p.wantsRematch = false;
+        this.setPhase("ready_check");
+      } else {
+        this.broadcastState();
+      }
       return;
     }
 
@@ -343,6 +363,7 @@ export default class PongServer implements Party.Server {
     for (const p of this.players.values()) {
       p.score = 0;
       p.ready = false;
+      p.wantsRematch = false;
     }
   }
 
@@ -354,8 +375,8 @@ export default class PongServer implements Party.Server {
       phase:     this.phase,
       countdown: this.countdown,
       yourRole,
-      p1: p1 ? { paddleY: p1.paddleY, score: p1.score, ready: p1.ready, username: p1.username } : null,
-      p2: p2 ? { paddleY: p2.paddleY, score: p2.score, ready: p2.ready, username: p2.username } : null,
+      p1: p1 ? { paddleY: p1.paddleY, score: p1.score, ready: p1.ready, wantsRematch: p1.wantsRematch, username: p1.username } : null,
+      p2: p2 ? { paddleY: p2.paddleY, score: p2.score, ready: p2.ready, wantsRematch: p2.wantsRematch, username: p2.username } : null,
       ball: { ...this.ball },
     };
   }

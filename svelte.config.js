@@ -11,6 +11,7 @@ const config = {
 			'$components': './src/components',
 			'$svg': './src/components/svg',
 			'$prisma': './generated/prisma/client',
+			'$party': './party',
 			// '$stores': './src/stores',
 			// '$types': './src/lib/types',
 			'$lib': './src/lib',

@@ -2,9 +2,10 @@
 	import { browser } from '$app/environment';
 	import { fly, fade } from 'svelte/transition';
 	import type { LayoutData } from '../$types';
-	import type { SMsgState, SMsgGoal, SMsgEnd } from '../../../../party/pongserver';
+	import type { SMsgState, SMsgGoal, SMsgEnd } from '$party/pongserver';
 
 	let { data }: { data: LayoutData } = $props();
+
 
 	// ── Types ────────────────────────────────────────────────────────────────
 
@@ -65,10 +66,11 @@
 	let myRole        = $state<PlayerRole>('spectator');
 	let roomCode      = $state('');
 	let roomCodeInput = $state('');
-	let multiReady    = $state(false);
+	// (multiReady removed — derived live from server's multiP1/multiP2.ready instead,
+	// so it can never go stale across leave/rejoin or rematch cycles)
 	let multiCountdown = $state(0);
-	let multiP1 = $state<{ paddleY: number; score: number; ready: boolean; username: string } | null>(null);
-	let multiP2 = $state<{ paddleY: number; score: number; ready: boolean; username: string } | null>(null);
+	let multiP1 = $state<{ paddleY: number; score: number; ready: boolean; wantsRematch: boolean; username: string } | null>(null);
+	let multiP2 = $state<{ paddleY: number; score: number; ready: boolean; wantsRematch: boolean; username: string } | null>(null);
 	let multiBall = $state({ x: CW_LOGIC / 2, y: CH_LOGIC / 2, vx: 0, vy: 0 });
 	let renderBall  = { x: CW_LOGIC / 2, y: CH_LOGIC / 2 };
 	let copyFeedback = $state(false);
@@ -91,7 +93,6 @@
 	let particles: Particle[]   = [];
 	let trailPts:  TrailPoint[] = [];
 	let mouseY = -1;
-	let lastTouchY: number | null = null;
 
 	// ── Helpers ───────────────────────────────────────────────────────────────
 
@@ -132,11 +133,18 @@
 		ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
 		updateCanvasSize();
 		window.addEventListener('resize', updateCanvasSize);
+		window.addEventListener('orientationchange', onOrientationChange);
 		canvas.addEventListener('mousemove',  onMouseMove);
 		canvas.addEventListener('touchstart', onTouchStart, { passive: false });
 		canvas.addEventListener('touchmove',  onTouchMove,  { passive: false });
-		canvas.addEventListener('touchend',   onTouchEnd);
+		canvas.addEventListener('touchend',   onTouchEnd,   { passive: false });
 		rafId = requestAnimationFrame(loop);
+	}
+
+	function onOrientationChange(): void {
+		// Some mobile browsers report stale layout dimensions immediately
+		// after rotation, so re-measure shortly after the event fires.
+		setTimeout(updateCanvasSize, 150);
 	}
 
 	function destroy(): void {
@@ -144,6 +152,7 @@
 		cancelAnimationFrame(rafId);
 		if (scoringTimer) clearTimeout(scoringTimer);
 		window.removeEventListener('resize', updateCanvasSize);
+		window.removeEventListener('orientationchange', onOrientationChange);
 		canvas?.removeEventListener('mousemove',  onMouseMove);
 		canvas?.removeEventListener('touchstart', onTouchStart);
 		canvas?.removeEventListener('touchmove',  onTouchMove);
@@ -165,27 +174,37 @@
 
 	function onTouchStart(e: TouchEvent): void {
 		e.preventDefault();
-		lastTouchY = e.touches[0].clientY;
+		updatePaddleFromTouch(e);
 	}
 
 	function onTouchMove(e: TouchEvent): void {
 		e.preventDefault();
-		if (lastTouchY === null) return;
-		const rect   = canvas.getBoundingClientRect();
-		const scaleY = ch() / rect.height;
-		const dy     = (e.touches[0].clientY - lastTouchY) * scaleY;
-		if (uiMode === 'solo' && gameState === 'playing') {
-			p1y = Math.max(0, Math.min(ch() - PH, p1y + dy));
-		}
-		if (uiMode === 'multi' && multiPhase === 'playing' && ws?.readyState === WebSocket.OPEN) {
-			const base = myRole === 'player1' ? (multiP1?.paddleY ?? ch()/2 - PH/2) : (multiP2?.paddleY ?? ch()/2 - PH/2);
-			const newY = Math.max(0, Math.min(ch() - PH, base + dy));
-			ws.send(JSON.stringify({ type: 'paddle', y: newY }));
-		}
-		lastTouchY = e.touches[0].clientY;
+		updatePaddleFromTouch(e);
 	}
 
-	function onTouchEnd(): void { lastTouchY = null; }
+	function onTouchEnd(e: TouchEvent): void {
+		e.preventDefault();
+	}
+
+	// Shared absolute-position handler — mirrors onMouseMove so touch and
+	// mouse feel identical, and avoids the drift that delta-based dragging
+	// causes once the paddle's "true" position is server-authoritative.
+	function updatePaddleFromTouch(e: TouchEvent): void {
+		if (e.touches.length === 0) return;
+		const rect   = canvas.getBoundingClientRect();
+		const scaleY = ch() / rect.height;
+		// Offset upward so the paddle isn't hidden directly under the player's finger
+		const FINGER_OFFSET = 40;
+		const touchY = (e.touches[0].clientY - rect.top) * scaleY - FINGER_OFFSET;
+
+		if (uiMode === 'solo' && gameState === 'playing') {
+			p1y = Math.max(0, Math.min(ch() - PH, touchY - PH / 2));
+		}
+		if (uiMode === 'multi' && multiPhase === 'playing' && ws?.readyState === WebSocket.OPEN) {
+			const newY = Math.max(0, Math.min(ch() - PH, touchY - PH / 2));
+			ws.send(JSON.stringify({ type: 'paddle', y: newY }));
+		}
+	}
 
 	// ── Solo ──────────────────────────────────────────────────────────────────
 
@@ -231,7 +250,8 @@
 	function generateRoomCode(): string { return Math.random().toString(36).slice(2, 7).toUpperCase(); }
 
 	function buildWsUrl(code: string): string {
-		const host  = 'calderra-party.em-codereever.partykit.dev';
+		const host  = import.meta.env.VITE_PARTYKIT_HOST ?? 'localhost:1999';
+		console.log("Using PartyKit Host: " + host)
 		const proto = host.startsWith('localhost') ? 'ws' : 'wss';
 		return `${proto}://${host}/parties/pongserver/${code.toLowerCase()}`;
 	}
@@ -247,7 +267,7 @@
 	function connectToRoom(code: string): void {
 		if (!browser) return;
 		wsError = ''; wsConnecting = true; uiMode = 'multi'; multiPhase = 'waiting';
-		initDimensions();
+		initDimensions()
 		ws = new WebSocket(buildWsUrl(code));
 		ws.onopen = () => {
 			wsConnecting = false;
@@ -263,7 +283,32 @@
 
 	function disconnectWs(): void { ws?.close(); ws = null; }
 
-	function sendReady(): void { ws?.send(JSON.stringify({ type: 'ready' })); multiReady = true; }
+	let amIReady = $derived(
+		myRole === 'player1' ? (multiP1?.ready ?? false) :
+		myRole === 'player2' ? (multiP2?.ready ?? false) :
+		false
+	);
+
+	let iWantRematch = $derived(
+		myRole === 'player1' ? (multiP1?.wantsRematch ?? false) :
+		myRole === 'player2' ? (multiP2?.wantsRematch ?? false) :
+		false
+	);
+
+	let opponentWantsRematch = $derived(
+		myRole === 'player1' ? (multiP2?.wantsRematch ?? false) :
+		myRole === 'player2' ? (multiP1?.wantsRematch ?? false) :
+		false
+	);
+
+	function sendReady(): void {
+		if (ws?.readyState !== WebSocket.OPEN) { console.warn('[pong] sendReady: socket not open', ws?.readyState); return; }
+		ws.send(JSON.stringify({ type: 'ready' }));
+	}
+	function sendRematch(): void {
+		if (ws?.readyState !== WebSocket.OPEN) { console.warn('[pong] sendRematch: socket not open', ws?.readyState); return; }
+		ws.send(JSON.stringify({ type: 'rematch' }));
+	}
 
 	async function copyRoomCode(): Promise<void> {
 		if (!browser) return;
@@ -302,7 +347,8 @@
 
 	function leaveRoom(): void {
 		disconnectWs(); uiMode = 'main_menu'; multiPhase = 'lobby';
-		roomCode = ''; roomCodeInput = ''; multiReady = false; winner = '';
+		roomCode = ''; roomCodeInput = ''; winner = '';
+		multiP1 = null; multiP2 = null;
 		particles = []; trailPts = [];
 	}
 
@@ -687,7 +733,7 @@
 				</div>
 				{/each}
 			</div>
-			{#if !multiReady && myRole !== 'spectator'}
+			{#if !amIReady && myRole !== 'spectator'}
 			<button onclick={sendReady}
 				class="px-8 py-3 rounded-lg bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors">
 				I'm Ready
@@ -720,6 +766,11 @@
 			<p class="text-5xl font-bold text-white/50 tabular-nums">
 				{uiMode === 'multi' ? (multiP1?.score ?? 0) : p1Score} — {uiMode === 'multi' ? (multiP2?.score ?? 0) : p2Score}
 			</p>
+
+			{#if uiMode === 'multi' && opponentWantsRematch && !iWantRematch}
+			<p class="text-sm text-green-400 animate-pulse">Opponent wants a rematch!</p>
+			{/if}
+
 			<div class="flex gap-3 mt-2">
 				{#if uiMode === 'solo'}
 				<button onclick={startSolo}
@@ -731,8 +782,19 @@
 					Options
 				</button>
 				{:else}
-				<button onclick={leaveRoom}
+				{#if !iWantRematch}
+				<button onclick={sendRematch}
 					class="px-6 py-2.5 rounded-lg bg-white text-black text-sm font-medium hover:bg-white/90 transition-colors">
+					Rematch
+				</button>
+				{:else}
+				<button disabled
+					class="px-6 py-2.5 rounded-lg bg-white/20 text-white/50 text-sm font-medium cursor-default">
+					Waiting for opponent…
+				</button>
+				{/if}
+				<button onclick={leaveRoom}
+					class="px-6 py-2.5 rounded-lg border border-white/25 text-white text-sm hover:bg-white/10 transition-colors">
 					Leave Room
 				</button>
 				{/if}
