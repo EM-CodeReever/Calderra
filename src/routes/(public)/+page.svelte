@@ -3,6 +3,7 @@
   import { onMount } from "svelte";
   import { cubicIn, cubicOut } from "svelte/easing";
   import { fly, blur, fade } from "svelte/transition";
+  import { themeState } from '$lib/state/theme.svelte.js';
   import { inview } from "svelte-inview";
   import type {
     ObserverEventDetails,
@@ -45,7 +46,7 @@
 <svelte:head>
   <title>Home</title>
 </svelte:head>
-<section class="w-full bg-base-100 text-base-content h-screen">
+<section class="w-full {themeState.current}-bg-top text-base-content h-screen">
   {#if show}
     <div
       class="flex space-y-8 justify-center items-center flex-col h-screen"
@@ -184,7 +185,7 @@
 <section
   use:inview={options}
   oninview_change={handleSectionTwoInviewChange}
-  class="w-full bg-linear-to-b from-secondary to-base-300 flex flex-col space-y-10 justify-center items-center relative"
+  class="w-full {themeState.current}-bg-below flex flex-col space-y-10 justify-center items-center relative"
   style="height: 60rem;"
   data-theme="custom"
 >

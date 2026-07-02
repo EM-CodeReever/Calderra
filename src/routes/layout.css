@@ -44,21 +44,118 @@
     backdrop-filter: blur(7px);
     }
 
-/* .test-bg{
-    background-image: url('/test.svg');
+.emerald-bg-top{
+    background-image: url('/emerald_bg_top.svg');
     width:100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    background-position: bottom;
 }
 
-.test-below-bg{
-    background-image: url('/test-below.svg');
+.emerald-bg-below{
+    background-image: url('/emerald_bg_below.svg');
     width:100%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
-} */
+    background-position: top;
+}
+
+.abyss-bg-top{
+    background-image: url('/abyss_bg_top.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.abyss-bg-below{
+    background-image: url('/abyss_bg_below.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+.aqua-bg-top{
+    background-image: url('/aqua_bg_top.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.aqua-bg-below{
+    background-image: url('/aqua_bg_below.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+.cupcake-bg-top{
+    background-image: url('/cupcake_bg_top.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.cupcake-bg-below{
+    background-image: url('/cupcake_bg_below.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
+.bumblebee-bg-top{
+    background-image: url('/bumblebee_bg_top.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.bumblebee-bg-below{
+    background-image: url('/bumblebee_bg_below.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}   
+
+.retro-bg-top{
+    background-image: url('/retro_bg_top.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.retro-bg-below{
+    background-image: url('/retro_bg_below.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}   
+
+.cyberpunk-bg-top{
+    background-image: url('/cyberpunk_bg_top.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+}
+
+.cyberpunk-bg-below{
+    background-image: url('/cyberpunk_bg_below.svg');
+    width:100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: top;
+}
+
 .custom-box-shadow{
     box-shadow: 6px 6px 30px 0 rgba(0,0,0,0.3);
 }

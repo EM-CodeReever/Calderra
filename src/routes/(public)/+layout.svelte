@@ -4,7 +4,7 @@
     let { children } = $props();
   </script>
   
-  <nav class=" fixed w-full top-0 bg-base-300 px-3 flex justify-center h-20 z-50" >
+  <nav class=" fixed w-full top-0 bg-base-100 px-3 flex justify-center h-20 z-50" >
     <div class="w-full max-w-6xl h-full flex justify-between">
         <div class="flex space-x-2 items-center pl-2 lg:p-0">
             <img src="/calderra_logo_rounded.png" alt="Calderra logo" class="w-9 h-9">

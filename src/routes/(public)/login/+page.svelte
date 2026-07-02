@@ -36,7 +36,7 @@
 	<title>Login</title>
 </svelte:head>
 <section
-	class="bg-base-300 h-fit min-h-screen flex items-center justify-center w-full"
+	class="bg-base-100 h-fit min-h-screen flex items-center justify-center w-full"
 >
 	<div
 		class="w-full min-w-fit max-w-xl h-fit flex items-center flex-col space-y-5 my-32 mx-5 pt-10 pb-5 rounded-xl"
@@ -80,7 +80,7 @@
             </svg>
             <input class="focus:ring-0 " type="email" placeholder="mail@site.com" bind:value={email} required />
             </label>
-            <div class="validator-hint hidden">Enter valid email address</div>
+            <div class="validator-hint hidden mb-1 -mt-6">Enter valid email address</div>
 
             <label class="input input-primary w-full">
             <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

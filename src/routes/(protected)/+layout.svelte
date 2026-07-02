@@ -26,7 +26,7 @@
 
   </script>
 
-  <section class="flex flex-col bg-base-300 w-full h-fit min-h-screen p-5 sm:p-4">
+  <section class="flex flex-col bg-base-100 w-full h-fit min-h-screen p-5 sm:p-4">
     <MainNavbar {userProfile} supabase={data.supabase}/>
       <SideNavbar {currentPath}>
         {@render children()}
