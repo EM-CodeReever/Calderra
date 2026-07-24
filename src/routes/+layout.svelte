@@ -4,11 +4,13 @@
 	import { invalidate } from '$app/navigation'
 	import { themeState } from '$lib/state/theme.svelte.js';
 	import { initTheme } from '$lib/state/theme.svelte';
+	import { initSidebarPreference } from '$lib/state/sidebar.svelte';
 	import { onMount } from 'svelte'
 	let { data, children } = $props()
 	let { supabase, claims } = $derived(data)
-	
+
     initTheme();
+    initSidebarPreference();
 
 	onMount(() => {
 		const { data } = supabase.auth.onAuthStateChange((event, _session) => {

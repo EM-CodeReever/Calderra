@@ -32,6 +32,3 @@
         {@render children()}
       </SideNavbar>
   </section>
-
-  <!-- <RiddleBox/> -->
- 

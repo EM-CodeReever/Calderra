@@ -1,6 +1,6 @@
 <script lang="ts">
-    import type { PageProps } from './$types';
-        import { themeState } from '$lib/state/theme.svelte';
+    import { themeState } from '$lib/state/theme.svelte';
+    import { sidebarState, setSidebarMode, type SidebarMode } from '$lib/state/sidebar.svelte';
 
     const themes = [
         "forest",
@@ -75,157 +75,35 @@
                         </div>
                     </div>
 
-                    <!-- Compact Mode -->
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">Compact Mode</p>
+                    <!-- Sidebar Behavior -->
+                    <div class="card bg-base-100 shadow">
+                        <div class="card-body">
+                            <h2 class="card-title">Sidebar Behavior</h2>
                             <p class="text-sm text-base-content/60">
-                                Reduce spacing throughout the application.
+                                Choose how the collapsed sidebar expands on desktop.
+                            </p>
+
+                            <div class="grid grid-cols-2 gap-3 mt-4">
+                                <button
+                                    class="btn {sidebarState.mode === 'hover' ? 'btn-primary' : 'btn-outline'}"
+                                    onclick={() => setSidebarMode('hover' as SidebarMode)}
+                                >
+                                    Expand on hover
+                                </button>
+                                <button
+                                    class="btn {sidebarState.mode === 'click' ? 'btn-primary' : 'btn-outline'}"
+                                    onclick={() => setSidebarMode('click' as SidebarMode)}
+                                >
+                                    Click to expand
+                                </button>
+                            </div>
+                            <p class="text-xs text-base-content/50 mt-2">
+                                On touch devices the sidebar always uses click to expand, regardless of this setting.
                             </p>
                         </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                        />
-                    </div>
-
-                    <!-- Animations -->
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">Enable Animations</p>
-                            <p class="text-sm text-base-content/60">
-                                Show interface transitions and effects.
-                            </p>
-                        </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                            checked
-                        />
-                    </div>
-
-                    <!-- Sidebar -->
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">
-                                Collapse Sidebar by Default
-                            </p>
-                            <p class="text-sm text-base-content/60">
-                                Start with a compact navigation menu.
-                            </p>
-                        </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                        />
                     </div>
 
                 </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- Notifications -->
-            <div>
-                <h2 class="text-xl font-semibold mb-4">
-                    Notifications
-                </h2>
-
-                <div class="space-y-5">
-
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">
-                                Email Notifications
-                            </p>
-                            <p class="text-sm text-base-content/60">
-                                Receive updates by email.
-                            </p>
-                        </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                            checked
-                        />
-                    </div>
-
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">
-                                Browser Notifications
-                            </p>
-                            <p class="text-sm text-base-content/60">
-                                Show alerts inside your browser.
-                            </p>
-                        </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                        />
-                    </div>
-
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">
-                                Sound Effects
-                            </p>
-                            <p class="text-sm text-base-content/60">
-                                Play sounds for actions and alerts.
-                            </p>
-                        </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                        />
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <!-- Data & Behavior -->
-            <div>
-                <h2 class="text-xl font-semibold mb-4">
-                    Behavior
-                </h2>
-
-                <div class="space-y-5">
-
-                    <div class="flex justify-between items-center">
-                        <div>
-                            <p class="font-medium">
-                                Auto Save Changes
-                            </p>
-                            <p class="text-sm text-base-content/60">
-                                Automatically save forms while editing.
-                            </p>
-                        </div>
-
-                        <input
-                            type="checkbox"
-                            class="toggle toggle-primary checkbox"
-                            checked
-                        />
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card-actions justify-end mt-8">
-                <button class="btn btn-ghost">
-                    Reset Defaults
-                </button>
-
-                <button class="btn btn-primary">
-                    Save Preferences
-                </button>
             </div>
 
         </div>
