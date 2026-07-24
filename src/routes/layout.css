@@ -171,6 +171,73 @@
     background-size: cover;
     background-position: top;
 }
+
+/* Generic theme-reactive wave, used for themes without bespoke artwork above.
+   Recolors itself via the active daisyUI theme's own CSS variables. */
+.wave-fallback-top{
+    -webkit-mask-image: url('/wave_top.svg');
+    mask-image: url('/wave_top.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: bottom;
+    mask-position: bottom;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    width: 100%;
+}
+
+.wave-fallback-below{
+    -webkit-mask-image: url('/wave_below.svg');
+    mask-image: url('/wave_below.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: top;
+    mask-position: top;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    width: 100%;
+}
+
+/* Landing-page-only: solid page-background cutouts shaped like a wave, used to hide
+   a shared gradient layer (painted once behind hero+showcase+tools) in the content
+   areas, while letting it show through continuously everywhere else. Note the shapes
+   are swapped relative to .wave-fallback-*: the hero needs a wave_below-shaped cutout
+   (solid at the top where the text sits, wavy opening toward the bottom), and the
+   tools section needs the opposite. */
+.page-mask-below{
+    -webkit-mask-image: url('/wave_below.svg');
+    mask-image: url('/wave_below.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: top;
+    mask-position: top;
+    background: var(--color-base-100);
+    width: 100%;
+}
+
+.page-mask-top{
+    -webkit-mask-image: url('/wave_top.svg');
+    mask-image: url('/wave_top.svg');
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: cover;
+    mask-size: cover;
+    -webkit-mask-position: bottom;
+    mask-position: bottom;
+    background: var(--color-base-100);
+    width: 100%;
+}
+
+/* Same gradient, no mask cut — for solid sections sandwiched between two waves. */
+.wave-fallback-gradient{
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    width: 100%;
+}
+
 .custom-box-shadow{
     box-shadow: 6px 6px 30px 0 rgba(0,0,0,0.3);
 }
