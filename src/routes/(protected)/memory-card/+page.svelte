@@ -250,6 +250,10 @@
                                         time: (time.minutes < 10 ? '0' + time.minutes : time.minutes) + ":" + (time.seconds < 10 ? '0' + time.seconds : time.seconds),
                                         score: scoreCalculation().toFixed(2),
                                         mps: calculateMPS().toFixed(2),
+                                        moves: moveCounter,
+                                        matches: matchedCounter,
+                                        duration_seconds: time.minutes * 60 + time.seconds,
+                                        emoji_set: chosenEmojiSet === 0 ? 'fruit' : chosenEmojiSet === 1 ? 'food_drinks' : 'stuff',
                                     })
                                 })
                                 let res = await request.json();

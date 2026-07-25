@@ -1,26 +1,27 @@
 import type { PageServerLoad } from './$types';
 import { prisma } from '$lib/index';
+import { getMemoryCardLeaderboard } from '$lib/memoryCardLeaderboard';
 
 
 export const load = (async ({ parent }) => {
     const { userProfile } = await parent();
 
-    const allRecords = await prisma.lB_MemoryCards.findMany({
-        orderBy: { score: 'desc' },
-    });
+    const leaderboard = await getMemoryCardLeaderboard();
 
-    const topScore = allRecords[0]?.score ?? null;
+    const topScore = leaderboard[0]?.score ?? null;
 
     let bestRecord = null;
     let rank: number | null = null;
+    let gamesPlayed = 0;
     if (userProfile) {
-        bestRecord = allRecords.find((r) => r.player_id === userProfile.id) ?? null;
+        bestRecord = leaderboard.find((r) => r.player_id === userProfile.id) ?? null;
         if (bestRecord) {
-            rank = allRecords.indexOf(bestRecord) + 1;
+            rank = leaderboard.indexOf(bestRecord) + 1;
         }
+        gamesPlayed = await prisma.lB_MemoryCards.count({ where: { player_id: userProfile.id } });
     }
 
-    return { bestRecord, rank, topScore };
+    return { bestRecord, rank, topScore, gamesPlayed };
 }) satisfies PageServerLoad;
 
 export const actions = { updateProfile: async ({ request }) => {

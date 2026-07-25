@@ -2787,6 +2787,10 @@ export const LB_MemoryCardsScalarFieldEnum = {
   mps: 'mps',
   score: 'score',
   time: 'time',
+  moves: 'moves',
+  matches: 'matches',
+  duration_seconds: 'duration_seconds',
+  emoji_set: 'emoji_set',
   player_id: 'player_id'
 } as const
 

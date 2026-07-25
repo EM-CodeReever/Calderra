@@ -7,7 +7,8 @@
       bestRecord = null,
       rank = null,
       topScore = null,
-  }: { bestRecord: LB_MemoryCards | null; rank: number | null; topScore: number | null } = $props();
+      gamesPlayed = 0,
+  }: { bestRecord: LB_MemoryCards | null; rank: number | null; topScore: number | null; gamesPlayed: number } = $props();
 </script>
 
 <div class="card bg-base-200 rounded-xl p-5 flex flex-col space-y-3 w-full">
@@ -19,6 +20,14 @@
     <p class="text-sm text-base-content/70">
         You're ranked <b>#{rank}</b> with a score of <b>{bestRecord.score}</b> ({bestRecord.time}).
     </p>
+    <p class="text-xs text-base-content/50">
+        {gamesPlayed} {gamesPlayed === 1 ? 'game' : 'games'} played
+    </p>
+    {:else if gamesPlayed > 0}
+    <p class="text-sm text-base-content/70">
+        You've played {gamesPlayed} {gamesPlayed === 1 ? 'game' : 'games'} — top score right now is <b>{topScore}</b>, keep going to crack the top 10!
+    </p>
+    <button class="btn btn-primary btn-sm w-fit" onclick={()=>{ goto('/memory-card') }}>Play Memory Cards</button>
     {:else}
     <p class="text-sm text-base-content/70">
         {#if topScore}

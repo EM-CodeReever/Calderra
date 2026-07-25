@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { PageData } from '../dashboard/$types';
+    import type { PageProps } from './$types';
     import { onMount } from 'svelte';
     import { Toaster } from 'svelte-5-french-toast';
     import { DiamondPercent, MessageSquareMore, Sticker } from '@lucide/svelte';
@@ -9,7 +9,8 @@
     import GameShortcutCard from '$components/GameShortcutCard.svelte';
     import LeaderboardTeaserCard from '$components/LeaderboardTeaserCard.svelte';
 
-    let { userProfile, bestRecord, rank, topScore }: PageData = $props();
+    let { data }: PageProps = $props();
+    let { userProfile, bestRecord, rank, topScore, gamesPlayed } = $derived(data);
 
     let completeProfileModal = $state(false);
 
@@ -46,8 +47,12 @@
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <LeaderboardTeaserCard {bestRecord} {rank} {topScore} />
-        <DadJokeBox/>
+        <div class="order-2 lg:order-1">
+            <LeaderboardTeaserCard {bestRecord} {rank} {topScore} {gamesPlayed} />
+        </div>
+        <div class="order-1 lg:order-2">
+            <DadJokeBox/>
+        </div>
     </div>
 </section>
 

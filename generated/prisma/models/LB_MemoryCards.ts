@@ -31,6 +31,9 @@ export type LB_MemoryCardsAvgAggregateOutputType = {
   id: number | null
   mps: number | null
   score: number | null
+  moves: number | null
+  matches: number | null
+  duration_seconds: number | null
   player_id: number | null
 }
 
@@ -38,6 +41,9 @@ export type LB_MemoryCardsSumAggregateOutputType = {
   id: bigint | null
   mps: number | null
   score: number | null
+  moves: number | null
+  matches: number | null
+  duration_seconds: number | null
   player_id: bigint | null
 }
 
@@ -47,6 +53,10 @@ export type LB_MemoryCardsMinAggregateOutputType = {
   mps: number | null
   score: number | null
   time: string | null
+  moves: number | null
+  matches: number | null
+  duration_seconds: number | null
+  emoji_set: string | null
   player_id: bigint | null
 }
 
@@ -56,6 +66,10 @@ export type LB_MemoryCardsMaxAggregateOutputType = {
   mps: number | null
   score: number | null
   time: string | null
+  moves: number | null
+  matches: number | null
+  duration_seconds: number | null
+  emoji_set: string | null
   player_id: bigint | null
 }
 
@@ -65,6 +79,10 @@ export type LB_MemoryCardsCountAggregateOutputType = {
   mps: number
   score: number
   time: number
+  moves: number
+  matches: number
+  duration_seconds: number
+  emoji_set: number
   player_id: number
   _all: number
 }
@@ -74,6 +92,9 @@ export type LB_MemoryCardsAvgAggregateInputType = {
   id?: true
   mps?: true
   score?: true
+  moves?: true
+  matches?: true
+  duration_seconds?: true
   player_id?: true
 }
 
@@ -81,6 +102,9 @@ export type LB_MemoryCardsSumAggregateInputType = {
   id?: true
   mps?: true
   score?: true
+  moves?: true
+  matches?: true
+  duration_seconds?: true
   player_id?: true
 }
 
@@ -90,6 +114,10 @@ export type LB_MemoryCardsMinAggregateInputType = {
   mps?: true
   score?: true
   time?: true
+  moves?: true
+  matches?: true
+  duration_seconds?: true
+  emoji_set?: true
   player_id?: true
 }
 
@@ -99,6 +127,10 @@ export type LB_MemoryCardsMaxAggregateInputType = {
   mps?: true
   score?: true
   time?: true
+  moves?: true
+  matches?: true
+  duration_seconds?: true
+  emoji_set?: true
   player_id?: true
 }
 
@@ -108,6 +140,10 @@ export type LB_MemoryCardsCountAggregateInputType = {
   mps?: true
   score?: true
   time?: true
+  moves?: true
+  matches?: true
+  duration_seconds?: true
+  emoji_set?: true
   player_id?: true
   _all?: true
 }
@@ -204,6 +240,10 @@ export type LB_MemoryCardsGroupByOutputType = {
   mps: number
   score: number
   time: string
+  moves: number | null
+  matches: number | null
+  duration_seconds: number | null
+  emoji_set: string | null
   player_id: bigint
   _count: LB_MemoryCardsCountAggregateOutputType | null
   _avg: LB_MemoryCardsAvgAggregateOutputType | null
@@ -236,6 +276,10 @@ export type LB_MemoryCardsWhereInput = {
   mps?: Prisma.FloatFilter<"LB_MemoryCards"> | number
   score?: Prisma.FloatFilter<"LB_MemoryCards"> | number
   time?: Prisma.StringFilter<"LB_MemoryCards"> | string
+  moves?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  matches?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  duration_seconds?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  emoji_set?: Prisma.StringNullableFilter<"LB_MemoryCards"> | string | null
   player_id?: Prisma.BigIntFilter<"LB_MemoryCards"> | bigint | number
   Profile?: Prisma.XOR<Prisma.ProfileScalarRelationFilter, Prisma.ProfileWhereInput>
 }
@@ -246,6 +290,10 @@ export type LB_MemoryCardsOrderByWithRelationInput = {
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
   time?: Prisma.SortOrder
+  moves?: Prisma.SortOrderInput | Prisma.SortOrder
+  matches?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrderInput | Prisma.SortOrder
+  emoji_set?: Prisma.SortOrderInput | Prisma.SortOrder
   player_id?: Prisma.SortOrder
   Profile?: Prisma.ProfileOrderByWithRelationInput
 }
@@ -259,6 +307,10 @@ export type LB_MemoryCardsWhereUniqueInput = Prisma.AtLeast<{
   mps?: Prisma.FloatFilter<"LB_MemoryCards"> | number
   score?: Prisma.FloatFilter<"LB_MemoryCards"> | number
   time?: Prisma.StringFilter<"LB_MemoryCards"> | string
+  moves?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  matches?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  duration_seconds?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  emoji_set?: Prisma.StringNullableFilter<"LB_MemoryCards"> | string | null
   player_id?: Prisma.BigIntFilter<"LB_MemoryCards"> | bigint | number
   Profile?: Prisma.XOR<Prisma.ProfileScalarRelationFilter, Prisma.ProfileWhereInput>
 }, "id">
@@ -269,6 +321,10 @@ export type LB_MemoryCardsOrderByWithAggregationInput = {
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
   time?: Prisma.SortOrder
+  moves?: Prisma.SortOrderInput | Prisma.SortOrder
+  matches?: Prisma.SortOrderInput | Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrderInput | Prisma.SortOrder
+  emoji_set?: Prisma.SortOrderInput | Prisma.SortOrder
   player_id?: Prisma.SortOrder
   _count?: Prisma.LB_MemoryCardsCountOrderByAggregateInput
   _avg?: Prisma.LB_MemoryCardsAvgOrderByAggregateInput
@@ -286,6 +342,10 @@ export type LB_MemoryCardsScalarWhereWithAggregatesInput = {
   mps?: Prisma.FloatWithAggregatesFilter<"LB_MemoryCards"> | number
   score?: Prisma.FloatWithAggregatesFilter<"LB_MemoryCards"> | number
   time?: Prisma.StringWithAggregatesFilter<"LB_MemoryCards"> | string
+  moves?: Prisma.IntNullableWithAggregatesFilter<"LB_MemoryCards"> | number | null
+  matches?: Prisma.IntNullableWithAggregatesFilter<"LB_MemoryCards"> | number | null
+  duration_seconds?: Prisma.IntNullableWithAggregatesFilter<"LB_MemoryCards"> | number | null
+  emoji_set?: Prisma.StringNullableWithAggregatesFilter<"LB_MemoryCards"> | string | null
   player_id?: Prisma.BigIntWithAggregatesFilter<"LB_MemoryCards"> | bigint | number
 }
 
@@ -295,6 +355,10 @@ export type LB_MemoryCardsCreateInput = {
   mps: number
   score: number
   time: string
+  moves?: number | null
+  matches?: number | null
+  duration_seconds?: number | null
+  emoji_set?: string | null
   Profile: Prisma.ProfileCreateNestedOneWithoutLB_MemoryCardsInput
 }
 
@@ -304,6 +368,10 @@ export type LB_MemoryCardsUncheckedCreateInput = {
   mps: number
   score: number
   time: string
+  moves?: number | null
+  matches?: number | null
+  duration_seconds?: number | null
+  emoji_set?: string | null
   player_id: bigint | number
 }
 
@@ -313,6 +381,10 @@ export type LB_MemoryCardsUpdateInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   Profile?: Prisma.ProfileUpdateOneRequiredWithoutLB_MemoryCardsNestedInput
 }
 
@@ -322,6 +394,10 @@ export type LB_MemoryCardsUncheckedUpdateInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
 }
 
@@ -331,6 +407,10 @@ export type LB_MemoryCardsCreateManyInput = {
   mps: number
   score: number
   time: string
+  moves?: number | null
+  matches?: number | null
+  duration_seconds?: number | null
+  emoji_set?: string | null
   player_id: bigint | number
 }
 
@@ -340,6 +420,10 @@ export type LB_MemoryCardsUpdateManyMutationInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LB_MemoryCardsUncheckedUpdateManyInput = {
@@ -348,6 +432,10 @@ export type LB_MemoryCardsUncheckedUpdateManyInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   player_id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
 }
 
@@ -357,6 +445,10 @@ export type LB_MemoryCardsCountOrderByAggregateInput = {
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
   time?: Prisma.SortOrder
+  moves?: Prisma.SortOrder
+  matches?: Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrder
+  emoji_set?: Prisma.SortOrder
   player_id?: Prisma.SortOrder
 }
 
@@ -364,6 +456,9 @@ export type LB_MemoryCardsAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
+  moves?: Prisma.SortOrder
+  matches?: Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrder
   player_id?: Prisma.SortOrder
 }
 
@@ -373,6 +468,10 @@ export type LB_MemoryCardsMaxOrderByAggregateInput = {
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
   time?: Prisma.SortOrder
+  moves?: Prisma.SortOrder
+  matches?: Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrder
+  emoji_set?: Prisma.SortOrder
   player_id?: Prisma.SortOrder
 }
 
@@ -382,6 +481,10 @@ export type LB_MemoryCardsMinOrderByAggregateInput = {
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
   time?: Prisma.SortOrder
+  moves?: Prisma.SortOrder
+  matches?: Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrder
+  emoji_set?: Prisma.SortOrder
   player_id?: Prisma.SortOrder
 }
 
@@ -389,6 +492,9 @@ export type LB_MemoryCardsSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   mps?: Prisma.SortOrder
   score?: Prisma.SortOrder
+  moves?: Prisma.SortOrder
+  matches?: Prisma.SortOrder
+  duration_seconds?: Prisma.SortOrder
   player_id?: Prisma.SortOrder
 }
 
@@ -458,6 +564,10 @@ export type LB_MemoryCardsCreateWithoutProfileInput = {
   mps: number
   score: number
   time: string
+  moves?: number | null
+  matches?: number | null
+  duration_seconds?: number | null
+  emoji_set?: string | null
 }
 
 export type LB_MemoryCardsUncheckedCreateWithoutProfileInput = {
@@ -466,6 +576,10 @@ export type LB_MemoryCardsUncheckedCreateWithoutProfileInput = {
   mps: number
   score: number
   time: string
+  moves?: number | null
+  matches?: number | null
+  duration_seconds?: number | null
+  emoji_set?: string | null
 }
 
 export type LB_MemoryCardsCreateOrConnectWithoutProfileInput = {
@@ -503,6 +617,10 @@ export type LB_MemoryCardsScalarWhereInput = {
   mps?: Prisma.FloatFilter<"LB_MemoryCards"> | number
   score?: Prisma.FloatFilter<"LB_MemoryCards"> | number
   time?: Prisma.StringFilter<"LB_MemoryCards"> | string
+  moves?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  matches?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  duration_seconds?: Prisma.IntNullableFilter<"LB_MemoryCards"> | number | null
+  emoji_set?: Prisma.StringNullableFilter<"LB_MemoryCards"> | string | null
   player_id?: Prisma.BigIntFilter<"LB_MemoryCards"> | bigint | number
 }
 
@@ -512,6 +630,10 @@ export type LB_MemoryCardsCreateManyProfileInput = {
   mps: number
   score: number
   time: string
+  moves?: number | null
+  matches?: number | null
+  duration_seconds?: number | null
+  emoji_set?: string | null
 }
 
 export type LB_MemoryCardsUpdateWithoutProfileInput = {
@@ -520,6 +642,10 @@ export type LB_MemoryCardsUpdateWithoutProfileInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LB_MemoryCardsUncheckedUpdateWithoutProfileInput = {
@@ -528,6 +654,10 @@ export type LB_MemoryCardsUncheckedUpdateWithoutProfileInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type LB_MemoryCardsUncheckedUpdateManyWithoutProfileInput = {
@@ -536,6 +666,10 @@ export type LB_MemoryCardsUncheckedUpdateManyWithoutProfileInput = {
   mps?: Prisma.FloatFieldUpdateOperationsInput | number
   score?: Prisma.FloatFieldUpdateOperationsInput | number
   time?: Prisma.StringFieldUpdateOperationsInput | string
+  moves?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  matches?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  duration_seconds?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  emoji_set?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -546,6 +680,10 @@ export type LB_MemoryCardsSelect<ExtArgs extends runtime.Types.Extensions.Intern
   mps?: boolean
   score?: boolean
   time?: boolean
+  moves?: boolean
+  matches?: boolean
+  duration_seconds?: boolean
+  emoji_set?: boolean
   player_id?: boolean
   Profile?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lB_MemoryCards"]>
@@ -556,6 +694,10 @@ export type LB_MemoryCardsSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   mps?: boolean
   score?: boolean
   time?: boolean
+  moves?: boolean
+  matches?: boolean
+  duration_seconds?: boolean
+  emoji_set?: boolean
   player_id?: boolean
   Profile?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lB_MemoryCards"]>
@@ -566,6 +708,10 @@ export type LB_MemoryCardsSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   mps?: boolean
   score?: boolean
   time?: boolean
+  moves?: boolean
+  matches?: boolean
+  duration_seconds?: boolean
+  emoji_set?: boolean
   player_id?: boolean
   Profile?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["lB_MemoryCards"]>
@@ -576,10 +722,14 @@ export type LB_MemoryCardsSelectScalar = {
   mps?: boolean
   score?: boolean
   time?: boolean
+  moves?: boolean
+  matches?: boolean
+  duration_seconds?: boolean
+  emoji_set?: boolean
   player_id?: boolean
 }
 
-export type LB_MemoryCardsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "mps" | "score" | "time" | "player_id", ExtArgs["result"]["lB_MemoryCards"]>
+export type LB_MemoryCardsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "mps" | "score" | "time" | "moves" | "matches" | "duration_seconds" | "emoji_set" | "player_id", ExtArgs["result"]["lB_MemoryCards"]>
 export type LB_MemoryCardsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   Profile?: boolean | Prisma.ProfileDefaultArgs<ExtArgs>
 }
@@ -601,6 +751,10 @@ export type $LB_MemoryCardsPayload<ExtArgs extends runtime.Types.Extensions.Inte
     mps: number
     score: number
     time: string
+    moves: number | null
+    matches: number | null
+    duration_seconds: number | null
+    emoji_set: string | null
     player_id: bigint
   }, ExtArgs["result"]["lB_MemoryCards"]>
   composites: {}
@@ -1031,6 +1185,10 @@ export interface LB_MemoryCardsFieldRefs {
   readonly mps: Prisma.FieldRef<"LB_MemoryCards", 'Float'>
   readonly score: Prisma.FieldRef<"LB_MemoryCards", 'Float'>
   readonly time: Prisma.FieldRef<"LB_MemoryCards", 'String'>
+  readonly moves: Prisma.FieldRef<"LB_MemoryCards", 'Int'>
+  readonly matches: Prisma.FieldRef<"LB_MemoryCards", 'Int'>
+  readonly duration_seconds: Prisma.FieldRef<"LB_MemoryCards", 'Int'>
+  readonly emoji_set: Prisma.FieldRef<"LB_MemoryCards", 'String'>
   readonly player_id: Prisma.FieldRef<"LB_MemoryCards", 'BigInt'>
 }
     

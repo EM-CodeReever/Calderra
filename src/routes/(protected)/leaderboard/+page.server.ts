@@ -1,12 +1,7 @@
-import { prisma } from "$lib";
+import { getMemoryCardLeaderboard } from "$lib/memoryCardLeaderboard";
 import type { PageServerLoad } from "./$types";
 
 export const load: PageServerLoad = async ({}) => {
-    let lb_memory_cards = await prisma.lB_MemoryCards.findMany({
-        include:{
-            Profile : true
-        }
-    })
-    lb_memory_cards = lb_memory_cards.sort((b,a) => a.score - b.score)
-    return { lb_memory_cards }
+    const leaderboard = await getMemoryCardLeaderboard();
+    return { lb_memory_cards: leaderboard.slice(0, 10) };
 }
