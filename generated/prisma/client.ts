@@ -183,10 +183,19 @@ export type webauthn_challenges = Prisma.webauthn_challengesModel
 export type webauthn_credentials = Prisma.webauthn_credentialsModel
 /**
  * Model ChatRoom
- * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
- * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+ * 
  */
 export type ChatRoom = Prisma.ChatRoomModel
+/**
+ * Model ChatRoomMember
+ * 
+ */
+export type ChatRoomMember = Prisma.ChatRoomMemberModel
+/**
+ * Model ChatMessage
+ * 
+ */
+export type ChatMessage = Prisma.ChatMessageModel
 /**
  * Model LB_MemoryCards
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments

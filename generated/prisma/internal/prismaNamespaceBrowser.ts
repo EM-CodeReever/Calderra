@@ -75,6 +75,8 @@ export const ModelName = {
   webauthn_challenges: 'webauthn_challenges',
   webauthn_credentials: 'webauthn_credentials',
   ChatRoom: 'ChatRoom',
+  ChatRoomMember: 'ChatRoomMember',
+  ChatMessage: 'ChatMessage',
   LB_MemoryCards: 'LB_MemoryCards',
   Profile: 'Profile'
 } as const
@@ -477,11 +479,31 @@ export const ChatRoomScalarFieldEnum = {
   created_at: 'created_at',
   code: 'code',
   name: 'name',
-  subscribed_users: 'subscribed_users',
-  owner: 'owner'
+  owner_id: 'owner_id'
 } as const
 
 export type ChatRoomScalarFieldEnum = (typeof ChatRoomScalarFieldEnum)[keyof typeof ChatRoomScalarFieldEnum]
+
+
+export const ChatRoomMemberScalarFieldEnum = {
+  id: 'id',
+  room_id: 'room_id',
+  profile_id: 'profile_id',
+  joined_at: 'joined_at'
+} as const
+
+export type ChatRoomMemberScalarFieldEnum = (typeof ChatRoomMemberScalarFieldEnum)[keyof typeof ChatRoomMemberScalarFieldEnum]
+
+
+export const ChatMessageScalarFieldEnum = {
+  id: 'id',
+  room_id: 'room_id',
+  profile_id: 'profile_id',
+  content: 'content',
+  created_at: 'created_at'
+} as const
+
+export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
 
 
 export const LB_MemoryCardsScalarFieldEnum = {
