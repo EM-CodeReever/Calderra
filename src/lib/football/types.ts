@@ -27,7 +27,7 @@ export const PERSONALITIES: Personality[] = ['FOCUSED', 'INCONSISTENT', 'RASH', 
 export const ATTRIBUTE_MIN = 1;
 export const ATTRIBUTE_MAX = 20;
 export const ATTRIBUTE_BASE = 5; // every new player starts with this in each of their 3 attributes
-export const CREATION_BONUS_POOL = 15; // extra points to distribute at creation
+export const CREATION_BONUS_POOL = 20; // extra points to distribute at creation
 export const CREATION_MAX_PER_ATTRIBUTE = 15; // cap at creation, room left to grow via XP up to ATTRIBUTE_MAX
 
 // Formation is expressed as outfield players in DEF-MID-FWD order (always sums to 6, GK is implicit).

@@ -2,7 +2,7 @@
     import type { PageData } from './$types';
     import { enhance } from '$app/forms';
     import { goto } from '$app/navigation';
-    import { Goal, Users, Trophy, Coins, ShieldPlus } from '@lucide/svelte';
+    import { Goal, Users, Trophy, Coins, ShieldPlus, Swords, Crown } from '@lucide/svelte';
 
     let { data }: { data: PageData } = $props();
 
@@ -27,6 +27,15 @@
             </button>
             <button class="btn btn-outline btn-sm" onclick={() => goto('/football/transfer-market')}>
                 <Coins size="16" /> Transfer Market
+            </button>
+            <button class="btn btn-outline btn-sm" onclick={() => goto('/football/challenges')}>
+                <Swords size="16" /> Challenges
+                {#if data.pendingChallengeCount > 0}
+                <span class="badge badge-primary badge-xs">{data.pendingChallengeCount}</span>
+                {/if}
+            </button>
+            <button class="btn btn-outline btn-sm" onclick={() => goto('/football/league')}>
+                <Crown size="16" /> League
             </button>
             {#if data.userProfile?.is_admin}
             <button class="btn btn-outline btn-sm" onclick={() => goto('/football/admin')}>
@@ -73,7 +82,13 @@
             >
                 <span>{m.homeTeamName} <b>{m.homeScore}</b> - <b>{m.awayScore}</b> {m.awayTeamName}</span>
                 <span class="text-xs text-base-content/50">
-                    {m.status === 'COMPLETED' ? 'Full time' : m.status === 'AWAITING_HALFTIME' ? 'Halftime — needs you!' : 'In progress'}
+                    {#if m.status === 'COMPLETED'}
+                        Full time
+                    {:else if m.status === 'AWAITING_HALFTIME'}
+                        {m.viewerSubmittedHalftime ? 'Halftime — waiting on opponent' : 'Halftime — needs you!'}
+                    {:else}
+                        In progress
+                    {/if}
                 </span>
             </button>
             {/each}

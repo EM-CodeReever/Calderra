@@ -30,6 +30,7 @@ export type FootballPlayerAvgAggregateOutputType = {
   id: number | null
   team_id: number | null
   price: number | null
+  listed_by_team_id: number | null
   level: number | null
   xp: number | null
   unspent_points: number | null
@@ -51,6 +52,7 @@ export type FootballPlayerSumAggregateOutputType = {
   id: bigint | null
   team_id: bigint | null
   price: number | null
+  listed_by_team_id: bigint | null
   level: number | null
   xp: number | null
   unspent_points: number | null
@@ -76,6 +78,7 @@ export type FootballPlayerMinAggregateOutputType = {
   position: string | null
   personality: string | null
   price: number | null
+  listed_by_team_id: bigint | null
   level: number | null
   xp: number | null
   unspent_points: number | null
@@ -101,6 +104,7 @@ export type FootballPlayerMaxAggregateOutputType = {
   position: string | null
   personality: string | null
   price: number | null
+  listed_by_team_id: bigint | null
   level: number | null
   xp: number | null
   unspent_points: number | null
@@ -126,6 +130,7 @@ export type FootballPlayerCountAggregateOutputType = {
   position: number
   personality: number
   price: number
+  listed_by_team_id: number
   level: number
   xp: number
   unspent_points: number
@@ -149,6 +154,7 @@ export type FootballPlayerAvgAggregateInputType = {
   id?: true
   team_id?: true
   price?: true
+  listed_by_team_id?: true
   level?: true
   xp?: true
   unspent_points?: true
@@ -170,6 +176,7 @@ export type FootballPlayerSumAggregateInputType = {
   id?: true
   team_id?: true
   price?: true
+  listed_by_team_id?: true
   level?: true
   xp?: true
   unspent_points?: true
@@ -195,6 +202,7 @@ export type FootballPlayerMinAggregateInputType = {
   position?: true
   personality?: true
   price?: true
+  listed_by_team_id?: true
   level?: true
   xp?: true
   unspent_points?: true
@@ -220,6 +228,7 @@ export type FootballPlayerMaxAggregateInputType = {
   position?: true
   personality?: true
   price?: true
+  listed_by_team_id?: true
   level?: true
   xp?: true
   unspent_points?: true
@@ -245,6 +254,7 @@ export type FootballPlayerCountAggregateInputType = {
   position?: true
   personality?: true
   price?: true
+  listed_by_team_id?: true
   level?: true
   xp?: true
   unspent_points?: true
@@ -357,6 +367,7 @@ export type FootballPlayerGroupByOutputType = {
   position: string
   personality: string
   price: number | null
+  listed_by_team_id: bigint | null
   level: number
   xp: number
   unspent_points: number
@@ -405,6 +416,7 @@ export type FootballPlayerWhereInput = {
   position?: Prisma.StringFilter<"FootballPlayer"> | string
   personality?: Prisma.StringFilter<"FootballPlayer"> | string
   price?: Prisma.IntNullableFilter<"FootballPlayer"> | number | null
+  listed_by_team_id?: Prisma.BigIntNullableFilter<"FootballPlayer"> | bigint | number | null
   level?: Prisma.IntFilter<"FootballPlayer"> | number
   xp?: Prisma.IntFilter<"FootballPlayer"> | number
   unspent_points?: Prisma.IntFilter<"FootballPlayer"> | number
@@ -421,6 +433,7 @@ export type FootballPlayerWhereInput = {
   handling?: Prisma.IntFilter<"FootballPlayer"> | number
   distribution?: Prisma.IntFilter<"FootballPlayer"> | number
   team?: Prisma.XOR<Prisma.FootballTeamNullableScalarRelationFilter, Prisma.FootballTeamWhereInput> | null
+  listed_by?: Prisma.XOR<Prisma.FootballTeamNullableScalarRelationFilter, Prisma.FootballTeamWhereInput> | null
 }
 
 export type FootballPlayerOrderByWithRelationInput = {
@@ -431,6 +444,7 @@ export type FootballPlayerOrderByWithRelationInput = {
   position?: Prisma.SortOrder
   personality?: Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrderInput | Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -447,6 +461,7 @@ export type FootballPlayerOrderByWithRelationInput = {
   handling?: Prisma.SortOrder
   distribution?: Prisma.SortOrder
   team?: Prisma.FootballTeamOrderByWithRelationInput
+  listed_by?: Prisma.FootballTeamOrderByWithRelationInput
 }
 
 export type FootballPlayerWhereUniqueInput = Prisma.AtLeast<{
@@ -460,6 +475,7 @@ export type FootballPlayerWhereUniqueInput = Prisma.AtLeast<{
   position?: Prisma.StringFilter<"FootballPlayer"> | string
   personality?: Prisma.StringFilter<"FootballPlayer"> | string
   price?: Prisma.IntNullableFilter<"FootballPlayer"> | number | null
+  listed_by_team_id?: Prisma.BigIntNullableFilter<"FootballPlayer"> | bigint | number | null
   level?: Prisma.IntFilter<"FootballPlayer"> | number
   xp?: Prisma.IntFilter<"FootballPlayer"> | number
   unspent_points?: Prisma.IntFilter<"FootballPlayer"> | number
@@ -476,6 +492,7 @@ export type FootballPlayerWhereUniqueInput = Prisma.AtLeast<{
   handling?: Prisma.IntFilter<"FootballPlayer"> | number
   distribution?: Prisma.IntFilter<"FootballPlayer"> | number
   team?: Prisma.XOR<Prisma.FootballTeamNullableScalarRelationFilter, Prisma.FootballTeamWhereInput> | null
+  listed_by?: Prisma.XOR<Prisma.FootballTeamNullableScalarRelationFilter, Prisma.FootballTeamWhereInput> | null
 }, "id">
 
 export type FootballPlayerOrderByWithAggregationInput = {
@@ -486,6 +503,7 @@ export type FootballPlayerOrderByWithAggregationInput = {
   position?: Prisma.SortOrder
   personality?: Prisma.SortOrder
   price?: Prisma.SortOrderInput | Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrderInput | Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -519,6 +537,7 @@ export type FootballPlayerScalarWhereWithAggregatesInput = {
   position?: Prisma.StringWithAggregatesFilter<"FootballPlayer"> | string
   personality?: Prisma.StringWithAggregatesFilter<"FootballPlayer"> | string
   price?: Prisma.IntNullableWithAggregatesFilter<"FootballPlayer"> | number | null
+  listed_by_team_id?: Prisma.BigIntNullableWithAggregatesFilter<"FootballPlayer"> | bigint | number | null
   level?: Prisma.IntWithAggregatesFilter<"FootballPlayer"> | number
   xp?: Prisma.IntWithAggregatesFilter<"FootballPlayer"> | number
   unspent_points?: Prisma.IntWithAggregatesFilter<"FootballPlayer"> | number
@@ -559,6 +578,7 @@ export type FootballPlayerCreateInput = {
   handling?: number
   distribution?: number
   team?: Prisma.FootballTeamCreateNestedOneWithoutPlayersInput
+  listed_by?: Prisma.FootballTeamCreateNestedOneWithoutListingsInput
 }
 
 export type FootballPlayerUncheckedCreateInput = {
@@ -569,6 +589,7 @@ export type FootballPlayerUncheckedCreateInput = {
   position: string
   personality: string
   price?: number | null
+  listed_by_team_id?: bigint | number | null
   level?: number
   xp?: number
   unspent_points?: number
@@ -609,6 +630,7 @@ export type FootballPlayerUpdateInput = {
   handling?: Prisma.IntFieldUpdateOperationsInput | number
   distribution?: Prisma.IntFieldUpdateOperationsInput | number
   team?: Prisma.FootballTeamUpdateOneWithoutPlayersNestedInput
+  listed_by?: Prisma.FootballTeamUpdateOneWithoutListingsNestedInput
 }
 
 export type FootballPlayerUncheckedUpdateInput = {
@@ -619,6 +641,7 @@ export type FootballPlayerUncheckedUpdateInput = {
   position?: Prisma.StringFieldUpdateOperationsInput | string
   personality?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listed_by_team_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   level?: Prisma.IntFieldUpdateOperationsInput | number
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   unspent_points?: Prisma.IntFieldUpdateOperationsInput | number
@@ -644,6 +667,7 @@ export type FootballPlayerCreateManyInput = {
   position: string
   personality: string
   price?: number | null
+  listed_by_team_id?: bigint | number | null
   level?: number
   xp?: number
   unspent_points?: number
@@ -693,6 +717,7 @@ export type FootballPlayerUncheckedUpdateManyInput = {
   position?: Prisma.StringFieldUpdateOperationsInput | string
   personality?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listed_by_team_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   level?: Prisma.IntFieldUpdateOperationsInput | number
   xp?: Prisma.IntFieldUpdateOperationsInput | number
   unspent_points?: Prisma.IntFieldUpdateOperationsInput | number
@@ -728,6 +753,7 @@ export type FootballPlayerCountOrderByAggregateInput = {
   position?: Prisma.SortOrder
   personality?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -749,6 +775,7 @@ export type FootballPlayerAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   team_id?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -774,6 +801,7 @@ export type FootballPlayerMaxOrderByAggregateInput = {
   position?: Prisma.SortOrder
   personality?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -799,6 +827,7 @@ export type FootballPlayerMinOrderByAggregateInput = {
   position?: Prisma.SortOrder
   personality?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -820,6 +849,7 @@ export type FootballPlayerSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   team_id?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  listed_by_team_id?: Prisma.SortOrder
   level?: Prisma.SortOrder
   xp?: Prisma.SortOrder
   unspent_points?: Prisma.SortOrder
@@ -844,10 +874,24 @@ export type FootballPlayerCreateNestedManyWithoutTeamInput = {
   connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
 }
 
+export type FootballPlayerCreateNestedManyWithoutListed_byInput = {
+  create?: Prisma.XOR<Prisma.FootballPlayerCreateWithoutListed_byInput, Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput> | Prisma.FootballPlayerCreateWithoutListed_byInput[] | Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput[]
+  connectOrCreate?: Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput | Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput[]
+  createMany?: Prisma.FootballPlayerCreateManyListed_byInputEnvelope
+  connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+}
+
 export type FootballPlayerUncheckedCreateNestedManyWithoutTeamInput = {
   create?: Prisma.XOR<Prisma.FootballPlayerCreateWithoutTeamInput, Prisma.FootballPlayerUncheckedCreateWithoutTeamInput> | Prisma.FootballPlayerCreateWithoutTeamInput[] | Prisma.FootballPlayerUncheckedCreateWithoutTeamInput[]
   connectOrCreate?: Prisma.FootballPlayerCreateOrConnectWithoutTeamInput | Prisma.FootballPlayerCreateOrConnectWithoutTeamInput[]
   createMany?: Prisma.FootballPlayerCreateManyTeamInputEnvelope
+  connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+}
+
+export type FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput = {
+  create?: Prisma.XOR<Prisma.FootballPlayerCreateWithoutListed_byInput, Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput> | Prisma.FootballPlayerCreateWithoutListed_byInput[] | Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput[]
+  connectOrCreate?: Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput | Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput[]
+  createMany?: Prisma.FootballPlayerCreateManyListed_byInputEnvelope
   connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
 }
 
@@ -865,6 +909,20 @@ export type FootballPlayerUpdateManyWithoutTeamNestedInput = {
   deleteMany?: Prisma.FootballPlayerScalarWhereInput | Prisma.FootballPlayerScalarWhereInput[]
 }
 
+export type FootballPlayerUpdateManyWithoutListed_byNestedInput = {
+  create?: Prisma.XOR<Prisma.FootballPlayerCreateWithoutListed_byInput, Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput> | Prisma.FootballPlayerCreateWithoutListed_byInput[] | Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput[]
+  connectOrCreate?: Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput | Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput[]
+  upsert?: Prisma.FootballPlayerUpsertWithWhereUniqueWithoutListed_byInput | Prisma.FootballPlayerUpsertWithWhereUniqueWithoutListed_byInput[]
+  createMany?: Prisma.FootballPlayerCreateManyListed_byInputEnvelope
+  set?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  disconnect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  delete?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  update?: Prisma.FootballPlayerUpdateWithWhereUniqueWithoutListed_byInput | Prisma.FootballPlayerUpdateWithWhereUniqueWithoutListed_byInput[]
+  updateMany?: Prisma.FootballPlayerUpdateManyWithWhereWithoutListed_byInput | Prisma.FootballPlayerUpdateManyWithWhereWithoutListed_byInput[]
+  deleteMany?: Prisma.FootballPlayerScalarWhereInput | Prisma.FootballPlayerScalarWhereInput[]
+}
+
 export type FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput = {
   create?: Prisma.XOR<Prisma.FootballPlayerCreateWithoutTeamInput, Prisma.FootballPlayerUncheckedCreateWithoutTeamInput> | Prisma.FootballPlayerCreateWithoutTeamInput[] | Prisma.FootballPlayerUncheckedCreateWithoutTeamInput[]
   connectOrCreate?: Prisma.FootballPlayerCreateOrConnectWithoutTeamInput | Prisma.FootballPlayerCreateOrConnectWithoutTeamInput[]
@@ -876,6 +934,20 @@ export type FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput = {
   connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
   update?: Prisma.FootballPlayerUpdateWithWhereUniqueWithoutTeamInput | Prisma.FootballPlayerUpdateWithWhereUniqueWithoutTeamInput[]
   updateMany?: Prisma.FootballPlayerUpdateManyWithWhereWithoutTeamInput | Prisma.FootballPlayerUpdateManyWithWhereWithoutTeamInput[]
+  deleteMany?: Prisma.FootballPlayerScalarWhereInput | Prisma.FootballPlayerScalarWhereInput[]
+}
+
+export type FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput = {
+  create?: Prisma.XOR<Prisma.FootballPlayerCreateWithoutListed_byInput, Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput> | Prisma.FootballPlayerCreateWithoutListed_byInput[] | Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput[]
+  connectOrCreate?: Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput | Prisma.FootballPlayerCreateOrConnectWithoutListed_byInput[]
+  upsert?: Prisma.FootballPlayerUpsertWithWhereUniqueWithoutListed_byInput | Prisma.FootballPlayerUpsertWithWhereUniqueWithoutListed_byInput[]
+  createMany?: Prisma.FootballPlayerCreateManyListed_byInputEnvelope
+  set?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  disconnect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  delete?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  connect?: Prisma.FootballPlayerWhereUniqueInput | Prisma.FootballPlayerWhereUniqueInput[]
+  update?: Prisma.FootballPlayerUpdateWithWhereUniqueWithoutListed_byInput | Prisma.FootballPlayerUpdateWithWhereUniqueWithoutListed_byInput[]
+  updateMany?: Prisma.FootballPlayerUpdateManyWithWhereWithoutListed_byInput | Prisma.FootballPlayerUpdateManyWithWhereWithoutListed_byInput[]
   deleteMany?: Prisma.FootballPlayerScalarWhereInput | Prisma.FootballPlayerScalarWhereInput[]
 }
 
@@ -901,6 +973,7 @@ export type FootballPlayerCreateWithoutTeamInput = {
   reflexes?: number
   handling?: number
   distribution?: number
+  listed_by?: Prisma.FootballTeamCreateNestedOneWithoutListingsInput
 }
 
 export type FootballPlayerUncheckedCreateWithoutTeamInput = {
@@ -910,6 +983,7 @@ export type FootballPlayerUncheckedCreateWithoutTeamInput = {
   position: string
   personality: string
   price?: number | null
+  listed_by_team_id?: bigint | number | null
   level?: number
   xp?: number
   unspent_points?: number
@@ -934,6 +1008,66 @@ export type FootballPlayerCreateOrConnectWithoutTeamInput = {
 
 export type FootballPlayerCreateManyTeamInputEnvelope = {
   data: Prisma.FootballPlayerCreateManyTeamInput | Prisma.FootballPlayerCreateManyTeamInput[]
+  skipDuplicates?: boolean
+}
+
+export type FootballPlayerCreateWithoutListed_byInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  name: string
+  position: string
+  personality: string
+  price?: number | null
+  level?: number
+  xp?: number
+  unspent_points?: number
+  finishing?: number
+  trickery?: number
+  timing?: number
+  control?: number
+  passing?: number
+  vision?: number
+  tackling?: number
+  disruption?: number
+  positioning?: number
+  reflexes?: number
+  handling?: number
+  distribution?: number
+  team?: Prisma.FootballTeamCreateNestedOneWithoutPlayersInput
+}
+
+export type FootballPlayerUncheckedCreateWithoutListed_byInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  team_id?: bigint | number | null
+  name: string
+  position: string
+  personality: string
+  price?: number | null
+  level?: number
+  xp?: number
+  unspent_points?: number
+  finishing?: number
+  trickery?: number
+  timing?: number
+  control?: number
+  passing?: number
+  vision?: number
+  tackling?: number
+  disruption?: number
+  positioning?: number
+  reflexes?: number
+  handling?: number
+  distribution?: number
+}
+
+export type FootballPlayerCreateOrConnectWithoutListed_byInput = {
+  where: Prisma.FootballPlayerWhereUniqueInput
+  create: Prisma.XOR<Prisma.FootballPlayerCreateWithoutListed_byInput, Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput>
+}
+
+export type FootballPlayerCreateManyListed_byInputEnvelope = {
+  data: Prisma.FootballPlayerCreateManyListed_byInput | Prisma.FootballPlayerCreateManyListed_byInput[]
   skipDuplicates?: boolean
 }
 
@@ -964,6 +1098,7 @@ export type FootballPlayerScalarWhereInput = {
   position?: Prisma.StringFilter<"FootballPlayer"> | string
   personality?: Prisma.StringFilter<"FootballPlayer"> | string
   price?: Prisma.IntNullableFilter<"FootballPlayer"> | number | null
+  listed_by_team_id?: Prisma.BigIntNullableFilter<"FootballPlayer"> | bigint | number | null
   level?: Prisma.IntFilter<"FootballPlayer"> | number
   xp?: Prisma.IntFilter<"FootballPlayer"> | number
   unspent_points?: Prisma.IntFilter<"FootballPlayer"> | number
@@ -981,9 +1116,51 @@ export type FootballPlayerScalarWhereInput = {
   distribution?: Prisma.IntFilter<"FootballPlayer"> | number
 }
 
+export type FootballPlayerUpsertWithWhereUniqueWithoutListed_byInput = {
+  where: Prisma.FootballPlayerWhereUniqueInput
+  update: Prisma.XOR<Prisma.FootballPlayerUpdateWithoutListed_byInput, Prisma.FootballPlayerUncheckedUpdateWithoutListed_byInput>
+  create: Prisma.XOR<Prisma.FootballPlayerCreateWithoutListed_byInput, Prisma.FootballPlayerUncheckedCreateWithoutListed_byInput>
+}
+
+export type FootballPlayerUpdateWithWhereUniqueWithoutListed_byInput = {
+  where: Prisma.FootballPlayerWhereUniqueInput
+  data: Prisma.XOR<Prisma.FootballPlayerUpdateWithoutListed_byInput, Prisma.FootballPlayerUncheckedUpdateWithoutListed_byInput>
+}
+
+export type FootballPlayerUpdateManyWithWhereWithoutListed_byInput = {
+  where: Prisma.FootballPlayerScalarWhereInput
+  data: Prisma.XOR<Prisma.FootballPlayerUpdateManyMutationInput, Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byInput>
+}
+
 export type FootballPlayerCreateManyTeamInput = {
   id?: bigint | number
   created_at?: Date | string
+  name: string
+  position: string
+  personality: string
+  price?: number | null
+  listed_by_team_id?: bigint | number | null
+  level?: number
+  xp?: number
+  unspent_points?: number
+  finishing?: number
+  trickery?: number
+  timing?: number
+  control?: number
+  passing?: number
+  vision?: number
+  tackling?: number
+  disruption?: number
+  positioning?: number
+  reflexes?: number
+  handling?: number
+  distribution?: number
+}
+
+export type FootballPlayerCreateManyListed_byInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  team_id?: bigint | number | null
   name: string
   position: string
   personality: string
@@ -1027,9 +1204,60 @@ export type FootballPlayerUpdateWithoutTeamInput = {
   reflexes?: Prisma.IntFieldUpdateOperationsInput | number
   handling?: Prisma.IntFieldUpdateOperationsInput | number
   distribution?: Prisma.IntFieldUpdateOperationsInput | number
+  listed_by?: Prisma.FootballTeamUpdateOneWithoutListingsNestedInput
 }
 
 export type FootballPlayerUncheckedUpdateWithoutTeamInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  personality?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listed_by_team_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  unspent_points?: Prisma.IntFieldUpdateOperationsInput | number
+  finishing?: Prisma.IntFieldUpdateOperationsInput | number
+  trickery?: Prisma.IntFieldUpdateOperationsInput | number
+  timing?: Prisma.IntFieldUpdateOperationsInput | number
+  control?: Prisma.IntFieldUpdateOperationsInput | number
+  passing?: Prisma.IntFieldUpdateOperationsInput | number
+  vision?: Prisma.IntFieldUpdateOperationsInput | number
+  tackling?: Prisma.IntFieldUpdateOperationsInput | number
+  disruption?: Prisma.IntFieldUpdateOperationsInput | number
+  positioning?: Prisma.IntFieldUpdateOperationsInput | number
+  reflexes?: Prisma.IntFieldUpdateOperationsInput | number
+  handling?: Prisma.IntFieldUpdateOperationsInput | number
+  distribution?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type FootballPlayerUncheckedUpdateManyWithoutTeamInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  personality?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  listed_by_team_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  unspent_points?: Prisma.IntFieldUpdateOperationsInput | number
+  finishing?: Prisma.IntFieldUpdateOperationsInput | number
+  trickery?: Prisma.IntFieldUpdateOperationsInput | number
+  timing?: Prisma.IntFieldUpdateOperationsInput | number
+  control?: Prisma.IntFieldUpdateOperationsInput | number
+  passing?: Prisma.IntFieldUpdateOperationsInput | number
+  vision?: Prisma.IntFieldUpdateOperationsInput | number
+  tackling?: Prisma.IntFieldUpdateOperationsInput | number
+  disruption?: Prisma.IntFieldUpdateOperationsInput | number
+  positioning?: Prisma.IntFieldUpdateOperationsInput | number
+  reflexes?: Prisma.IntFieldUpdateOperationsInput | number
+  handling?: Prisma.IntFieldUpdateOperationsInput | number
+  distribution?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type FootballPlayerUpdateWithoutListed_byInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1051,11 +1279,38 @@ export type FootballPlayerUncheckedUpdateWithoutTeamInput = {
   reflexes?: Prisma.IntFieldUpdateOperationsInput | number
   handling?: Prisma.IntFieldUpdateOperationsInput | number
   distribution?: Prisma.IntFieldUpdateOperationsInput | number
+  team?: Prisma.FootballTeamUpdateOneWithoutPlayersNestedInput
 }
 
-export type FootballPlayerUncheckedUpdateManyWithoutTeamInput = {
+export type FootballPlayerUncheckedUpdateWithoutListed_byInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  team_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  position?: Prisma.StringFieldUpdateOperationsInput | string
+  personality?: Prisma.StringFieldUpdateOperationsInput | string
+  price?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  level?: Prisma.IntFieldUpdateOperationsInput | number
+  xp?: Prisma.IntFieldUpdateOperationsInput | number
+  unspent_points?: Prisma.IntFieldUpdateOperationsInput | number
+  finishing?: Prisma.IntFieldUpdateOperationsInput | number
+  trickery?: Prisma.IntFieldUpdateOperationsInput | number
+  timing?: Prisma.IntFieldUpdateOperationsInput | number
+  control?: Prisma.IntFieldUpdateOperationsInput | number
+  passing?: Prisma.IntFieldUpdateOperationsInput | number
+  vision?: Prisma.IntFieldUpdateOperationsInput | number
+  tackling?: Prisma.IntFieldUpdateOperationsInput | number
+  disruption?: Prisma.IntFieldUpdateOperationsInput | number
+  positioning?: Prisma.IntFieldUpdateOperationsInput | number
+  reflexes?: Prisma.IntFieldUpdateOperationsInput | number
+  handling?: Prisma.IntFieldUpdateOperationsInput | number
+  distribution?: Prisma.IntFieldUpdateOperationsInput | number
+}
+
+export type FootballPlayerUncheckedUpdateManyWithoutListed_byInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  team_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
   name?: Prisma.StringFieldUpdateOperationsInput | string
   position?: Prisma.StringFieldUpdateOperationsInput | string
   personality?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1087,6 +1342,7 @@ export type FootballPlayerSelect<ExtArgs extends runtime.Types.Extensions.Intern
   position?: boolean
   personality?: boolean
   price?: boolean
+  listed_by_team_id?: boolean
   level?: boolean
   xp?: boolean
   unspent_points?: boolean
@@ -1103,6 +1359,7 @@ export type FootballPlayerSelect<ExtArgs extends runtime.Types.Extensions.Intern
   handling?: boolean
   distribution?: boolean
   team?: boolean | Prisma.FootballPlayer$teamArgs<ExtArgs>
+  listed_by?: boolean | Prisma.FootballPlayer$listed_byArgs<ExtArgs>
 }, ExtArgs["result"]["footballPlayer"]>
 
 export type FootballPlayerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1113,6 +1370,7 @@ export type FootballPlayerSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   position?: boolean
   personality?: boolean
   price?: boolean
+  listed_by_team_id?: boolean
   level?: boolean
   xp?: boolean
   unspent_points?: boolean
@@ -1129,6 +1387,7 @@ export type FootballPlayerSelectCreateManyAndReturn<ExtArgs extends runtime.Type
   handling?: boolean
   distribution?: boolean
   team?: boolean | Prisma.FootballPlayer$teamArgs<ExtArgs>
+  listed_by?: boolean | Prisma.FootballPlayer$listed_byArgs<ExtArgs>
 }, ExtArgs["result"]["footballPlayer"]>
 
 export type FootballPlayerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1139,6 +1398,7 @@ export type FootballPlayerSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   position?: boolean
   personality?: boolean
   price?: boolean
+  listed_by_team_id?: boolean
   level?: boolean
   xp?: boolean
   unspent_points?: boolean
@@ -1155,6 +1415,7 @@ export type FootballPlayerSelectUpdateManyAndReturn<ExtArgs extends runtime.Type
   handling?: boolean
   distribution?: boolean
   team?: boolean | Prisma.FootballPlayer$teamArgs<ExtArgs>
+  listed_by?: boolean | Prisma.FootballPlayer$listed_byArgs<ExtArgs>
 }, ExtArgs["result"]["footballPlayer"]>
 
 export type FootballPlayerSelectScalar = {
@@ -1165,6 +1426,7 @@ export type FootballPlayerSelectScalar = {
   position?: boolean
   personality?: boolean
   price?: boolean
+  listed_by_team_id?: boolean
   level?: boolean
   xp?: boolean
   unspent_points?: boolean
@@ -1182,21 +1444,25 @@ export type FootballPlayerSelectScalar = {
   distribution?: boolean
 }
 
-export type FootballPlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "team_id" | "name" | "position" | "personality" | "price" | "level" | "xp" | "unspent_points" | "finishing" | "trickery" | "timing" | "control" | "passing" | "vision" | "tackling" | "disruption" | "positioning" | "reflexes" | "handling" | "distribution", ExtArgs["result"]["footballPlayer"]>
+export type FootballPlayerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "team_id" | "name" | "position" | "personality" | "price" | "listed_by_team_id" | "level" | "xp" | "unspent_points" | "finishing" | "trickery" | "timing" | "control" | "passing" | "vision" | "tackling" | "disruption" | "positioning" | "reflexes" | "handling" | "distribution", ExtArgs["result"]["footballPlayer"]>
 export type FootballPlayerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.FootballPlayer$teamArgs<ExtArgs>
+  listed_by?: boolean | Prisma.FootballPlayer$listed_byArgs<ExtArgs>
 }
 export type FootballPlayerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.FootballPlayer$teamArgs<ExtArgs>
+  listed_by?: boolean | Prisma.FootballPlayer$listed_byArgs<ExtArgs>
 }
 export type FootballPlayerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   team?: boolean | Prisma.FootballPlayer$teamArgs<ExtArgs>
+  listed_by?: boolean | Prisma.FootballPlayer$listed_byArgs<ExtArgs>
 }
 
 export type $FootballPlayerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FootballPlayer"
   objects: {
     team: Prisma.$FootballTeamPayload<ExtArgs> | null
+    listed_by: Prisma.$FootballTeamPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1206,6 +1472,7 @@ export type $FootballPlayerPayload<ExtArgs extends runtime.Types.Extensions.Inte
     position: string
     personality: string
     price: number | null
+    listed_by_team_id: bigint | null
     level: number
     xp: number
     unspent_points: number
@@ -1616,6 +1883,7 @@ readonly fields: FootballPlayerFieldRefs;
 export interface Prisma__FootballPlayerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   team<T extends Prisma.FootballPlayer$teamArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballPlayer$teamArgs<ExtArgs>>): Prisma.Prisma__FootballTeamClient<runtime.Types.Result.GetResult<Prisma.$FootballTeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  listed_by<T extends Prisma.FootballPlayer$listed_byArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballPlayer$listed_byArgs<ExtArgs>>): Prisma.Prisma__FootballTeamClient<runtime.Types.Result.GetResult<Prisma.$FootballTeamPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1652,6 +1920,7 @@ export interface FootballPlayerFieldRefs {
   readonly position: Prisma.FieldRef<"FootballPlayer", 'String'>
   readonly personality: Prisma.FieldRef<"FootballPlayer", 'String'>
   readonly price: Prisma.FieldRef<"FootballPlayer", 'Int'>
+  readonly listed_by_team_id: Prisma.FieldRef<"FootballPlayer", 'BigInt'>
   readonly level: Prisma.FieldRef<"FootballPlayer", 'Int'>
   readonly xp: Prisma.FieldRef<"FootballPlayer", 'Int'>
   readonly unspent_points: Prisma.FieldRef<"FootballPlayer", 'Int'>
@@ -2071,6 +2340,25 @@ export type FootballPlayerDeleteManyArgs<ExtArgs extends runtime.Types.Extension
  * FootballPlayer.team
  */
 export type FootballPlayer$teamArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FootballTeam
+   */
+  select?: Prisma.FootballTeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FootballTeam
+   */
+  omit?: Prisma.FootballTeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FootballTeamInclude<ExtArgs> | null
+  where?: Prisma.FootballTeamWhereInput
+}
+
+/**
+ * FootballPlayer.listed_by
+ */
+export type FootballPlayer$listed_byArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
    * Select specific fields to fetch from the FootballTeam
    */

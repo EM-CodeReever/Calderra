@@ -37,6 +37,8 @@ export const load: PageServerLoad = async ({ params, parent }) => {
             awayScore: match.away_score,
             homeTeamName: match.home_team.name,
             awayTeamName: match.away_team.name,
+            homeIsAi: match.home_team.is_ai,
+            awayIsAi: match.away_team.is_ai,
             homeLineup: match.home_lineup,
             awayLineup: match.away_lineup,
             homeHalftimeLineup: match.home_halftime_lineup,
@@ -72,6 +74,9 @@ export const actions: Actions = {
         const viewerIsHome = match.home_team.owner_id === userProfile.id;
         if (!viewerIsHome && match.away_team.owner_id !== userProfile.id) return fail(403);
 
+        const existingOwnHalftime = viewerIsHome ? match.home_halftime_lineup : match.away_halftime_lineup;
+        if (existingOwnHalftime) return fail(400, { error: 'You already submitted your halftime move.' });
+
         const formData = await request.formData();
         const subOutId = formData.get('subOut') as string | null;
         const subInId = formData.get('subIn') as string | null;
@@ -90,10 +95,23 @@ export const actions: Actions = {
             }
         }
 
+        // The opponent's halftime move: already present if they're AI (pre-filled at kickoff)
+        // or a human who submitted first. Null means we're the first to move — just save and wait.
+        const opponentHalftimeLineup = viewerIsHome ? match.away_halftime_lineup : match.home_halftime_lineup;
+
+        if (!opponentHalftimeLineup) {
+            await prisma.footballMatch.update({
+                where: { id: match.id },
+                data: viewerIsHome ? { home_halftime_lineup: newLineup as any } : { away_halftime_lineup: newLineup as any },
+            });
+            throw redirect(303, `/football/match/${match.id}`);
+        }
+
+        const homeLineupFinal = viewerIsHome ? newLineup : (opponentHalftimeLineup as unknown as Lineup);
+        const awayLineupFinal = !viewerIsHome ? newLineup : (opponentHalftimeLineup as unknown as Lineup);
+
         const homeRoster = match.home_team.players.map(toLite);
         const awayRoster = match.away_team.players.map(toLite);
-        const homeLineupFinal = viewerIsHome ? newLineup : ((match.home_halftime_lineup as unknown as Lineup) ?? (match.home_lineup as unknown as Lineup));
-        const awayLineupFinal = !viewerIsHome ? newLineup : ((match.away_halftime_lineup as unknown as Lineup) ?? (match.away_lineup as unknown as Lineup));
 
         const seed = Number(BigInt.asIntN(32, id * 7919n + BigInt(Date.now())));
         const rng = createRng(seed);
@@ -130,27 +148,27 @@ export const actions: Actions = {
             },
         });
 
-        // Award XP only for the human-owned side (AI players don't need progression).
-        const humanTeam = match.home_team.owner_id ? match.home_team : match.away_team;
-        if (humanTeam.owner_id) {
-            const isHomeHuman = humanTeam.id === match.home_team.id;
-            const humanLineup = isHomeHuman ? homeLineupFinal : awayLineupFinal;
-            const conceded = isHomeHuman ? finalAwayScore : finalHomeScore;
-            const allEvents = [...match.events, ...half2.events.map((e) => ({ ...e, player_id: e.playerId ? BigInt(e.playerId) : null }))];
-            const participants = new Set([humanLineup.GK, ...humanLineup.DEF, ...humanLineup.MID, ...humanLineup.FWD].filter(Boolean));
-            // include first-half starters too, in case they were subbed off at halftime
-            const firstHalfLineup = isHomeHuman ? (match.home_lineup as unknown as Lineup) : (match.away_lineup as unknown as Lineup);
-            for (const id of [firstHalfLineup.GK, ...firstHalfLineup.DEF, ...firstHalfLineup.MID, ...firstHalfLineup.FWD]) {
-                if (id) participants.add(id);
+        // Award XP to every human-owned side. AI opponents give half XP; a human opponent (PvP) gives full XP.
+        const allEvents = [...match.events, ...half2.events.map((e) => ({ ...e, player_id: e.playerId ? BigInt(e.playerId) : null }))];
+        const sides = [
+            { team: match.home_team, lineup: homeLineupFinal, firstHalfLineup: match.home_lineup as unknown as Lineup, conceded: finalAwayScore, vsAi: match.away_team.is_ai },
+            { team: match.away_team, lineup: awayLineupFinal, firstHalfLineup: match.away_lineup as unknown as Lineup, conceded: finalHomeScore, vsAi: match.home_team.is_ai },
+        ];
+
+        for (const side of sides) {
+            if (!side.team.owner_id) continue; // AI teams don't need progression
+            const participants = new Set([side.lineup.GK, ...side.lineup.DEF, ...side.lineup.MID, ...side.lineup.FWD].filter(Boolean));
+            for (const pid of [side.firstHalfLineup.GK, ...side.firstHalfLineup.DEF, ...side.firstHalfLineup.MID, ...side.firstHalfLineup.FWD]) {
+                if (pid) participants.add(pid);
             }
 
             for (const playerId of participants) {
-                const player = humanTeam.players.find((p) => p.id.toString() === playerId);
+                const player = side.team.players.find((p) => p.id.toString() === playerId);
                 if (!player) continue;
                 const goals = allEvents.filter((e: any) => e.type === 'SHOT_GOAL' && (e.playerId ?? e.player_id?.toString()) === playerId).length;
                 const redCard = allEvents.some((e: any) => e.type === 'CARD_RED' && (e.playerId ?? e.player_id?.toString()) === playerId);
-                const cleanSheet = conceded === 0 && (player.position === 'GK' || player.position === 'DEF');
-                const gained = computeMatchXp({ playedInMatch: true, goals, assists: 0, cleanSheet, redCard, vsAi: true });
+                const cleanSheet = side.conceded === 0 && (player.position === 'GK' || player.position === 'DEF');
+                const gained = computeMatchXp({ playedInMatch: true, goals, assists: 0, cleanSheet, redCard, vsAi: side.vsAi });
                 const result = applyXp(player.level, player.xp, player.unspent_points, gained);
                 await prisma.footballPlayer.update({
                     where: { id: player.id },

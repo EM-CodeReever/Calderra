@@ -32,10 +32,10 @@ export function generateFillerPlayer(position: Position, rng: () => number = Mat
     return { name, position, personality, level: 1, xp: 0, unspent_points: 0, ...attrs };
 }
 
-/** Fills out the rest of a 10-player squad (1 GK, 3 DEF, 3 MID, 3 FWD total) around one
+/** Fills out the rest of a 15-player squad (2 GK, 5 DEF, 4 MID, 4 FWD total) around one
  *  already-chosen position (the manager's custom star player). */
 export function generateSquadFillers(starPosition: Position, rng: () => number = Math.random): GeneratedPlayer[] {
-    const need: Record<Position, number> = { GK: 1, DEF: 3, MID: 3, FWD: 3 };
+    const need: Record<Position, number> = { GK: 2, DEF: 5, MID: 4, FWD: 4 };
     need[starPosition] -= 1;
     const players: GeneratedPlayer[] = [];
     for (const pos of ['GK', 'DEF', 'MID', 'FWD'] as Position[]) {

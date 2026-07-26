@@ -248,6 +248,9 @@ export type FootballTeamWhereInput = {
   players?: Prisma.FootballPlayerListRelationFilter
   homeMatches?: Prisma.FootballMatchListRelationFilter
   awayMatches?: Prisma.FootballMatchListRelationFilter
+  challengesSent?: Prisma.FootballChallengeListRelationFilter
+  challengesReceived?: Prisma.FootballChallengeListRelationFilter
+  listings?: Prisma.FootballPlayerListRelationFilter
 }
 
 export type FootballTeamOrderByWithRelationInput = {
@@ -263,6 +266,9 @@ export type FootballTeamOrderByWithRelationInput = {
   players?: Prisma.FootballPlayerOrderByRelationAggregateInput
   homeMatches?: Prisma.FootballMatchOrderByRelationAggregateInput
   awayMatches?: Prisma.FootballMatchOrderByRelationAggregateInput
+  challengesSent?: Prisma.FootballChallengeOrderByRelationAggregateInput
+  challengesReceived?: Prisma.FootballChallengeOrderByRelationAggregateInput
+  listings?: Prisma.FootballPlayerOrderByRelationAggregateInput
 }
 
 export type FootballTeamWhereUniqueInput = Prisma.AtLeast<{
@@ -281,6 +287,9 @@ export type FootballTeamWhereUniqueInput = Prisma.AtLeast<{
   players?: Prisma.FootballPlayerListRelationFilter
   homeMatches?: Prisma.FootballMatchListRelationFilter
   awayMatches?: Prisma.FootballMatchListRelationFilter
+  challengesSent?: Prisma.FootballChallengeListRelationFilter
+  challengesReceived?: Prisma.FootballChallengeListRelationFilter
+  listings?: Prisma.FootballPlayerListRelationFilter
 }, "id">
 
 export type FootballTeamOrderByWithAggregationInput = {
@@ -325,6 +334,9 @@ export type FootballTeamCreateInput = {
   players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
   homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
   awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamUncheckedCreateInput = {
@@ -339,6 +351,9 @@ export type FootballTeamUncheckedCreateInput = {
   players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
   homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
   awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamUpdateInput = {
@@ -353,6 +368,9 @@ export type FootballTeamUpdateInput = {
   players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
   homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
   awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUncheckedUpdateInput = {
@@ -367,6 +385,9 @@ export type FootballTeamUncheckedUpdateInput = {
   players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
   homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
   awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamCreateManyInput = {
@@ -478,6 +499,12 @@ export type FootballTeamCreateNestedOneWithoutPlayersInput = {
   connect?: Prisma.FootballTeamWhereUniqueInput
 }
 
+export type FootballTeamCreateNestedOneWithoutListingsInput = {
+  create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutListingsInput, Prisma.FootballTeamUncheckedCreateWithoutListingsInput>
+  connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutListingsInput
+  connect?: Prisma.FootballTeamWhereUniqueInput
+}
+
 export type FootballTeamUpdateOneWithoutPlayersNestedInput = {
   create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutPlayersInput, Prisma.FootballTeamUncheckedCreateWithoutPlayersInput>
   connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutPlayersInput
@@ -486,6 +513,16 @@ export type FootballTeamUpdateOneWithoutPlayersNestedInput = {
   delete?: Prisma.FootballTeamWhereInput | boolean
   connect?: Prisma.FootballTeamWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.FootballTeamUpdateToOneWithWhereWithoutPlayersInput, Prisma.FootballTeamUpdateWithoutPlayersInput>, Prisma.FootballTeamUncheckedUpdateWithoutPlayersInput>
+}
+
+export type FootballTeamUpdateOneWithoutListingsNestedInput = {
+  create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutListingsInput, Prisma.FootballTeamUncheckedCreateWithoutListingsInput>
+  connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutListingsInput
+  upsert?: Prisma.FootballTeamUpsertWithoutListingsInput
+  disconnect?: Prisma.FootballTeamWhereInput | boolean
+  delete?: Prisma.FootballTeamWhereInput | boolean
+  connect?: Prisma.FootballTeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FootballTeamUpdateToOneWithWhereWithoutListingsInput, Prisma.FootballTeamUpdateWithoutListingsInput>, Prisma.FootballTeamUncheckedUpdateWithoutListingsInput>
 }
 
 export type FootballTeamCreateNestedOneWithoutHomeMatchesInput = {
@@ -514,6 +551,34 @@ export type FootballTeamUpdateOneRequiredWithoutAwayMatchesNestedInput = {
   upsert?: Prisma.FootballTeamUpsertWithoutAwayMatchesInput
   connect?: Prisma.FootballTeamWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.FootballTeamUpdateToOneWithWhereWithoutAwayMatchesInput, Prisma.FootballTeamUpdateWithoutAwayMatchesInput>, Prisma.FootballTeamUncheckedUpdateWithoutAwayMatchesInput>
+}
+
+export type FootballTeamCreateNestedOneWithoutChallengesSentInput = {
+  create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesSentInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesSentInput>
+  connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutChallengesSentInput
+  connect?: Prisma.FootballTeamWhereUniqueInput
+}
+
+export type FootballTeamCreateNestedOneWithoutChallengesReceivedInput = {
+  create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesReceivedInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesReceivedInput>
+  connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutChallengesReceivedInput
+  connect?: Prisma.FootballTeamWhereUniqueInput
+}
+
+export type FootballTeamUpdateOneRequiredWithoutChallengesSentNestedInput = {
+  create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesSentInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesSentInput>
+  connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutChallengesSentInput
+  upsert?: Prisma.FootballTeamUpsertWithoutChallengesSentInput
+  connect?: Prisma.FootballTeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FootballTeamUpdateToOneWithWhereWithoutChallengesSentInput, Prisma.FootballTeamUpdateWithoutChallengesSentInput>, Prisma.FootballTeamUncheckedUpdateWithoutChallengesSentInput>
+}
+
+export type FootballTeamUpdateOneRequiredWithoutChallengesReceivedNestedInput = {
+  create?: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesReceivedInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesReceivedInput>
+  connectOrCreate?: Prisma.FootballTeamCreateOrConnectWithoutChallengesReceivedInput
+  upsert?: Prisma.FootballTeamUpsertWithoutChallengesReceivedInput
+  connect?: Prisma.FootballTeamWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.FootballTeamUpdateToOneWithWhereWithoutChallengesReceivedInput, Prisma.FootballTeamUpdateWithoutChallengesReceivedInput>, Prisma.FootballTeamUncheckedUpdateWithoutChallengesReceivedInput>
 }
 
 export type FootballTeamCreateNestedManyWithoutOwnerInput = {
@@ -569,6 +634,9 @@ export type FootballTeamCreateWithoutPlayersInput = {
   owner?: Prisma.ProfileCreateNestedOneWithoutFootballTeamsInput
   homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
   awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamUncheckedCreateWithoutPlayersInput = {
@@ -582,11 +650,51 @@ export type FootballTeamUncheckedCreateWithoutPlayersInput = {
   budget?: number
   homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
   awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamCreateOrConnectWithoutPlayersInput = {
   where: Prisma.FootballTeamWhereUniqueInput
   create: Prisma.XOR<Prisma.FootballTeamCreateWithoutPlayersInput, Prisma.FootballTeamUncheckedCreateWithoutPlayersInput>
+}
+
+export type FootballTeamCreateWithoutListingsInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  name: string
+  is_ai?: boolean
+  default_formation?: string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: number
+  owner?: Prisma.ProfileCreateNestedOneWithoutFootballTeamsInput
+  players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
+  awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+}
+
+export type FootballTeamUncheckedCreateWithoutListingsInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  owner_id?: bigint | number | null
+  name: string
+  is_ai?: boolean
+  default_formation?: string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: number
+  players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
+  awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+}
+
+export type FootballTeamCreateOrConnectWithoutListingsInput = {
+  where: Prisma.FootballTeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.FootballTeamCreateWithoutListingsInput, Prisma.FootballTeamUncheckedCreateWithoutListingsInput>
 }
 
 export type FootballTeamUpsertWithoutPlayersInput = {
@@ -611,6 +719,9 @@ export type FootballTeamUpdateWithoutPlayersInput = {
   owner?: Prisma.ProfileUpdateOneWithoutFootballTeamsNestedInput
   homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
   awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUncheckedUpdateWithoutPlayersInput = {
@@ -624,6 +735,52 @@ export type FootballTeamUncheckedUpdateWithoutPlayersInput = {
   budget?: Prisma.IntFieldUpdateOperationsInput | number
   homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
   awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
+}
+
+export type FootballTeamUpsertWithoutListingsInput = {
+  update: Prisma.XOR<Prisma.FootballTeamUpdateWithoutListingsInput, Prisma.FootballTeamUncheckedUpdateWithoutListingsInput>
+  create: Prisma.XOR<Prisma.FootballTeamCreateWithoutListingsInput, Prisma.FootballTeamUncheckedCreateWithoutListingsInput>
+  where?: Prisma.FootballTeamWhereInput
+}
+
+export type FootballTeamUpdateToOneWithWhereWithoutListingsInput = {
+  where?: Prisma.FootballTeamWhereInput
+  data: Prisma.XOR<Prisma.FootballTeamUpdateWithoutListingsInput, Prisma.FootballTeamUncheckedUpdateWithoutListingsInput>
+}
+
+export type FootballTeamUpdateWithoutListingsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_ai?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_formation?: Prisma.StringFieldUpdateOperationsInput | string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: Prisma.IntFieldUpdateOperationsInput | number
+  owner?: Prisma.ProfileUpdateOneWithoutFootballTeamsNestedInput
+  players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
+  awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+}
+
+export type FootballTeamUncheckedUpdateWithoutListingsInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_ai?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_formation?: Prisma.StringFieldUpdateOperationsInput | string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: Prisma.IntFieldUpdateOperationsInput | number
+  players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
+  awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
 }
 
 export type FootballTeamCreateWithoutHomeMatchesInput = {
@@ -637,6 +794,9 @@ export type FootballTeamCreateWithoutHomeMatchesInput = {
   owner?: Prisma.ProfileCreateNestedOneWithoutFootballTeamsInput
   players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
   awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamUncheckedCreateWithoutHomeMatchesInput = {
@@ -650,6 +810,9 @@ export type FootballTeamUncheckedCreateWithoutHomeMatchesInput = {
   budget?: number
   players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
   awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamCreateOrConnectWithoutHomeMatchesInput = {
@@ -668,6 +831,9 @@ export type FootballTeamCreateWithoutAwayMatchesInput = {
   owner?: Prisma.ProfileCreateNestedOneWithoutFootballTeamsInput
   players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
   homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamUncheckedCreateWithoutAwayMatchesInput = {
@@ -681,6 +847,9 @@ export type FootballTeamUncheckedCreateWithoutAwayMatchesInput = {
   budget?: number
   players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
   homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamCreateOrConnectWithoutAwayMatchesInput = {
@@ -710,6 +879,9 @@ export type FootballTeamUpdateWithoutHomeMatchesInput = {
   owner?: Prisma.ProfileUpdateOneWithoutFootballTeamsNestedInput
   players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
   awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUncheckedUpdateWithoutHomeMatchesInput = {
@@ -723,6 +895,9 @@ export type FootballTeamUncheckedUpdateWithoutHomeMatchesInput = {
   budget?: Prisma.IntFieldUpdateOperationsInput | number
   players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
   awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUpsertWithoutAwayMatchesInput = {
@@ -747,6 +922,9 @@ export type FootballTeamUpdateWithoutAwayMatchesInput = {
   owner?: Prisma.ProfileUpdateOneWithoutFootballTeamsNestedInput
   players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
   homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUncheckedUpdateWithoutAwayMatchesInput = {
@@ -760,6 +938,169 @@ export type FootballTeamUncheckedUpdateWithoutAwayMatchesInput = {
   budget?: Prisma.IntFieldUpdateOperationsInput | number
   players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
   homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
+}
+
+export type FootballTeamCreateWithoutChallengesSentInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  name: string
+  is_ai?: boolean
+  default_formation?: string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: number
+  owner?: Prisma.ProfileCreateNestedOneWithoutFootballTeamsInput
+  players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
+  awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
+}
+
+export type FootballTeamUncheckedCreateWithoutChallengesSentInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  owner_id?: bigint | number | null
+  name: string
+  is_ai?: boolean
+  default_formation?: string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: number
+  players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
+  awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
+}
+
+export type FootballTeamCreateOrConnectWithoutChallengesSentInput = {
+  where: Prisma.FootballTeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesSentInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesSentInput>
+}
+
+export type FootballTeamCreateWithoutChallengesReceivedInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  name: string
+  is_ai?: boolean
+  default_formation?: string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: number
+  owner?: Prisma.ProfileCreateNestedOneWithoutFootballTeamsInput
+  players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
+  awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
+}
+
+export type FootballTeamUncheckedCreateWithoutChallengesReceivedInput = {
+  id?: bigint | number
+  created_at?: Date | string
+  owner_id?: bigint | number | null
+  name: string
+  is_ai?: boolean
+  default_formation?: string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: number
+  players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
+  homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
+  awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
+}
+
+export type FootballTeamCreateOrConnectWithoutChallengesReceivedInput = {
+  where: Prisma.FootballTeamWhereUniqueInput
+  create: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesReceivedInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesReceivedInput>
+}
+
+export type FootballTeamUpsertWithoutChallengesSentInput = {
+  update: Prisma.XOR<Prisma.FootballTeamUpdateWithoutChallengesSentInput, Prisma.FootballTeamUncheckedUpdateWithoutChallengesSentInput>
+  create: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesSentInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesSentInput>
+  where?: Prisma.FootballTeamWhereInput
+}
+
+export type FootballTeamUpdateToOneWithWhereWithoutChallengesSentInput = {
+  where?: Prisma.FootballTeamWhereInput
+  data: Prisma.XOR<Prisma.FootballTeamUpdateWithoutChallengesSentInput, Prisma.FootballTeamUncheckedUpdateWithoutChallengesSentInput>
+}
+
+export type FootballTeamUpdateWithoutChallengesSentInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_ai?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_formation?: Prisma.StringFieldUpdateOperationsInput | string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: Prisma.IntFieldUpdateOperationsInput | number
+  owner?: Prisma.ProfileUpdateOneWithoutFootballTeamsNestedInput
+  players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
+  awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
+}
+
+export type FootballTeamUncheckedUpdateWithoutChallengesSentInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_ai?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_formation?: Prisma.StringFieldUpdateOperationsInput | string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: Prisma.IntFieldUpdateOperationsInput | number
+  players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
+  awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
+}
+
+export type FootballTeamUpsertWithoutChallengesReceivedInput = {
+  update: Prisma.XOR<Prisma.FootballTeamUpdateWithoutChallengesReceivedInput, Prisma.FootballTeamUncheckedUpdateWithoutChallengesReceivedInput>
+  create: Prisma.XOR<Prisma.FootballTeamCreateWithoutChallengesReceivedInput, Prisma.FootballTeamUncheckedCreateWithoutChallengesReceivedInput>
+  where?: Prisma.FootballTeamWhereInput
+}
+
+export type FootballTeamUpdateToOneWithWhereWithoutChallengesReceivedInput = {
+  where?: Prisma.FootballTeamWhereInput
+  data: Prisma.XOR<Prisma.FootballTeamUpdateWithoutChallengesReceivedInput, Prisma.FootballTeamUncheckedUpdateWithoutChallengesReceivedInput>
+}
+
+export type FootballTeamUpdateWithoutChallengesReceivedInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_ai?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_formation?: Prisma.StringFieldUpdateOperationsInput | string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: Prisma.IntFieldUpdateOperationsInput | number
+  owner?: Prisma.ProfileUpdateOneWithoutFootballTeamsNestedInput
+  players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
+  awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
+}
+
+export type FootballTeamUncheckedUpdateWithoutChallengesReceivedInput = {
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  created_at?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner_id?: Prisma.NullableBigIntFieldUpdateOperationsInput | bigint | number | null
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  is_ai?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  default_formation?: Prisma.StringFieldUpdateOperationsInput | string
+  default_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  budget?: Prisma.IntFieldUpdateOperationsInput | number
+  players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
+  homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
+  awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamCreateWithoutOwnerInput = {
@@ -773,6 +1114,9 @@ export type FootballTeamCreateWithoutOwnerInput = {
   players?: Prisma.FootballPlayerCreateNestedManyWithoutTeamInput
   homeMatches?: Prisma.FootballMatchCreateNestedManyWithoutHome_teamInput
   awayMatches?: Prisma.FootballMatchCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamUncheckedCreateWithoutOwnerInput = {
@@ -786,6 +1130,9 @@ export type FootballTeamUncheckedCreateWithoutOwnerInput = {
   players?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutTeamInput
   homeMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutHome_teamInput
   awayMatches?: Prisma.FootballMatchUncheckedCreateNestedManyWithoutAway_teamInput
+  challengesSent?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutChallenger_teamInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutOpponent_teamInput
+  listings?: Prisma.FootballPlayerUncheckedCreateNestedManyWithoutListed_byInput
 }
 
 export type FootballTeamCreateOrConnectWithoutOwnerInput = {
@@ -849,6 +1196,9 @@ export type FootballTeamUpdateWithoutOwnerInput = {
   players?: Prisma.FootballPlayerUpdateManyWithoutTeamNestedInput
   homeMatches?: Prisma.FootballMatchUpdateManyWithoutHome_teamNestedInput
   awayMatches?: Prisma.FootballMatchUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUncheckedUpdateWithoutOwnerInput = {
@@ -862,6 +1212,9 @@ export type FootballTeamUncheckedUpdateWithoutOwnerInput = {
   players?: Prisma.FootballPlayerUncheckedUpdateManyWithoutTeamNestedInput
   homeMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutHome_teamNestedInput
   awayMatches?: Prisma.FootballMatchUncheckedUpdateManyWithoutAway_teamNestedInput
+  challengesSent?: Prisma.FootballChallengeUncheckedUpdateManyWithoutChallenger_teamNestedInput
+  challengesReceived?: Prisma.FootballChallengeUncheckedUpdateManyWithoutOpponent_teamNestedInput
+  listings?: Prisma.FootballPlayerUncheckedUpdateManyWithoutListed_byNestedInput
 }
 
 export type FootballTeamUncheckedUpdateManyWithoutOwnerInput = {
@@ -883,12 +1236,18 @@ export type FootballTeamCountOutputType = {
   players: number
   homeMatches: number
   awayMatches: number
+  challengesSent: number
+  challengesReceived: number
+  listings: number
 }
 
 export type FootballTeamCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   players?: boolean | FootballTeamCountOutputTypeCountPlayersArgs
   homeMatches?: boolean | FootballTeamCountOutputTypeCountHomeMatchesArgs
   awayMatches?: boolean | FootballTeamCountOutputTypeCountAwayMatchesArgs
+  challengesSent?: boolean | FootballTeamCountOutputTypeCountChallengesSentArgs
+  challengesReceived?: boolean | FootballTeamCountOutputTypeCountChallengesReceivedArgs
+  listings?: boolean | FootballTeamCountOutputTypeCountListingsArgs
 }
 
 /**
@@ -922,6 +1281,27 @@ export type FootballTeamCountOutputTypeCountAwayMatchesArgs<ExtArgs extends runt
   where?: Prisma.FootballMatchWhereInput
 }
 
+/**
+ * FootballTeamCountOutputType without action
+ */
+export type FootballTeamCountOutputTypeCountChallengesSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FootballChallengeWhereInput
+}
+
+/**
+ * FootballTeamCountOutputType without action
+ */
+export type FootballTeamCountOutputTypeCountChallengesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FootballChallengeWhereInput
+}
+
+/**
+ * FootballTeamCountOutputType without action
+ */
+export type FootballTeamCountOutputTypeCountListingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FootballPlayerWhereInput
+}
+
 
 export type FootballTeamSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -936,6 +1316,9 @@ export type FootballTeamSelect<ExtArgs extends runtime.Types.Extensions.Internal
   players?: boolean | Prisma.FootballTeam$playersArgs<ExtArgs>
   homeMatches?: boolean | Prisma.FootballTeam$homeMatchesArgs<ExtArgs>
   awayMatches?: boolean | Prisma.FootballTeam$awayMatchesArgs<ExtArgs>
+  challengesSent?: boolean | Prisma.FootballTeam$challengesSentArgs<ExtArgs>
+  challengesReceived?: boolean | Prisma.FootballTeam$challengesReceivedArgs<ExtArgs>
+  listings?: boolean | Prisma.FootballTeam$listingsArgs<ExtArgs>
   _count?: boolean | Prisma.FootballTeamCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["footballTeam"]>
 
@@ -980,6 +1363,9 @@ export type FootballTeamInclude<ExtArgs extends runtime.Types.Extensions.Interna
   players?: boolean | Prisma.FootballTeam$playersArgs<ExtArgs>
   homeMatches?: boolean | Prisma.FootballTeam$homeMatchesArgs<ExtArgs>
   awayMatches?: boolean | Prisma.FootballTeam$awayMatchesArgs<ExtArgs>
+  challengesSent?: boolean | Prisma.FootballTeam$challengesSentArgs<ExtArgs>
+  challengesReceived?: boolean | Prisma.FootballTeam$challengesReceivedArgs<ExtArgs>
+  listings?: boolean | Prisma.FootballTeam$listingsArgs<ExtArgs>
   _count?: boolean | Prisma.FootballTeamCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FootballTeamIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -996,6 +1382,9 @@ export type $FootballTeamPayload<ExtArgs extends runtime.Types.Extensions.Intern
     players: Prisma.$FootballPlayerPayload<ExtArgs>[]
     homeMatches: Prisma.$FootballMatchPayload<ExtArgs>[]
     awayMatches: Prisma.$FootballMatchPayload<ExtArgs>[]
+    challengesSent: Prisma.$FootballChallengePayload<ExtArgs>[]
+    challengesReceived: Prisma.$FootballChallengePayload<ExtArgs>[]
+    listings: Prisma.$FootballPlayerPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: bigint
@@ -1404,6 +1793,9 @@ export interface Prisma__FootballTeamClient<T, Null = never, ExtArgs extends run
   players<T extends Prisma.FootballTeam$playersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballTeam$playersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   homeMatches<T extends Prisma.FootballTeam$homeMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballTeam$homeMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   awayMatches<T extends Prisma.FootballTeam$awayMatchesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballTeam$awayMatchesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballMatchPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  challengesSent<T extends Prisma.FootballTeam$challengesSentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballTeam$challengesSentArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  challengesReceived<T extends Prisma.FootballTeam$challengesReceivedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballTeam$challengesReceivedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballChallengePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  listings<T extends Prisma.FootballTeam$listingsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FootballTeam$listingsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballPlayerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1930,6 +2322,78 @@ export type FootballTeam$awayMatchesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.FootballMatchScalarFieldEnum | Prisma.FootballMatchScalarFieldEnum[]
+}
+
+/**
+ * FootballTeam.challengesSent
+ */
+export type FootballTeam$challengesSentArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FootballChallenge
+   */
+  select?: Prisma.FootballChallengeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FootballChallenge
+   */
+  omit?: Prisma.FootballChallengeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FootballChallengeInclude<ExtArgs> | null
+  where?: Prisma.FootballChallengeWhereInput
+  orderBy?: Prisma.FootballChallengeOrderByWithRelationInput | Prisma.FootballChallengeOrderByWithRelationInput[]
+  cursor?: Prisma.FootballChallengeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FootballChallengeScalarFieldEnum | Prisma.FootballChallengeScalarFieldEnum[]
+}
+
+/**
+ * FootballTeam.challengesReceived
+ */
+export type FootballTeam$challengesReceivedArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FootballChallenge
+   */
+  select?: Prisma.FootballChallengeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FootballChallenge
+   */
+  omit?: Prisma.FootballChallengeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FootballChallengeInclude<ExtArgs> | null
+  where?: Prisma.FootballChallengeWhereInput
+  orderBy?: Prisma.FootballChallengeOrderByWithRelationInput | Prisma.FootballChallengeOrderByWithRelationInput[]
+  cursor?: Prisma.FootballChallengeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FootballChallengeScalarFieldEnum | Prisma.FootballChallengeScalarFieldEnum[]
+}
+
+/**
+ * FootballTeam.listings
+ */
+export type FootballTeam$listingsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FootballPlayer
+   */
+  select?: Prisma.FootballPlayerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FootballPlayer
+   */
+  omit?: Prisma.FootballPlayerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FootballPlayerInclude<ExtArgs> | null
+  where?: Prisma.FootballPlayerWhereInput
+  orderBy?: Prisma.FootballPlayerOrderByWithRelationInput | Prisma.FootballPlayerOrderByWithRelationInput[]
+  cursor?: Prisma.FootballPlayerWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FootballPlayerScalarFieldEnum | Prisma.FootballPlayerScalarFieldEnum[]
 }
 
 /**

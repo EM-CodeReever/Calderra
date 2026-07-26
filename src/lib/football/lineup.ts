@@ -1,4 +1,4 @@
-import type { Formation, FootballPlayerLite, Lineup } from './types';
+import type { Formation, FootballPlayerLite, Lineup, Position } from './types';
 
 export function formationCounts(formation: Formation): { DEF: number; MID: number; FWD: number } {
     const [d, m, f] = formation.split('-').map(Number);
@@ -39,13 +39,34 @@ export function buildDefaultLineup(players: FootballPlayerLite[], formation: For
     };
 }
 
-function attributeTotal(p: FootballPlayerLite): number {
+export function attributeTotal(p: FootballPlayerLite): number {
     return (
         p.finishing + p.trickery + p.timing +
         p.control + p.passing + p.vision +
         p.tackling + p.disruption + p.positioning +
         p.reflexes + p.handling + p.distribution
     );
+}
+
+export type FormationSlot = { position: Position; x: number; y: number };
+
+/** Empty slot geometry for a formation (single team, home-style orientation), used to lay
+ *  out the squad builder's pitch before any specific players are assigned to it. */
+export function formationSlotPositions(formation: Formation): FormationSlot[] {
+    const counts = formationCounts(formation);
+    const spread = (n: number, baseX: number, position: Position): FormationSlot[] =>
+        Array.from({ length: n }, (_, i) => ({
+            position,
+            x: baseX,
+            y: n === 1 ? 50 : 15 + (70 * i) / (n - 1),
+        }));
+
+    return [
+        { position: 'GK', x: 5, y: 50 },
+        ...spread(counts.DEF, 22, 'DEF'),
+        ...spread(counts.MID, 48, 'MID'),
+        ...spread(counts.FWD, 74, 'FWD'),
+    ];
 }
 
 export type PitchSlot = { id: string; name: string; x: number; y: number; team: 'HOME' | 'AWAY' };

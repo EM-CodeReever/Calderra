@@ -2,7 +2,7 @@
     import type { PageData } from './$types';
     import { enhance } from '$app/forms';
     import { onDestroy } from 'svelte';
-    import { goto } from '$app/navigation';
+    import { goto, invalidateAll } from '$app/navigation';
     import { scale } from 'svelte/transition';
     import PitchVisualizer from '$components/football/PitchVisualizer.svelte';
     import { computeSlots, toLite } from '$lib/football/lineup';
@@ -43,10 +43,27 @@
         timer = setInterval(tick, 2200);
     }
 
+    let lastMatchId = '';
+    let lastTotalToShowNow = 0;
+
     $effect(() => {
-        match.status;
-        showHalftimePanel = false;
-        startTimer();
+        const currentTotal = totalToShowNow;
+        if (match.id !== lastMatchId) {
+            // genuinely a different match — reset playback from the start
+            lastMatchId = match.id;
+            lastTotalToShowNow = currentTotal;
+            visibleCount = 0;
+            showHalftimePanel = false;
+            startTimer();
+        } else if (currentTotal > lastTotalToShowNow) {
+            // new events actually arrived (second half simulated) — resume playback through them
+            lastTotalToShowNow = currentTotal;
+            showHalftimePanel = false;
+            startTimer();
+        }
+        // otherwise this is just a data refresh with nothing new to show (our own halftime
+        // submission while still waiting on the opponent, or a poll that found no change yet)
+        // — leave playback state untouched so the "waiting" panel doesn't flicker/replay.
     });
 
     onDestroy(() => clearInterval(timer));
@@ -84,11 +101,26 @@
     });
     onDestroy(() => clearTimeout(goalFlashTimer));
 
+    let homeScore = $derived(visibleEvents.filter((e) => e.type === 'SHOT_GOAL' && homeRoster.some((p) => p.id === e.playerId)).length);
+    let awayScore = $derived(visibleEvents.filter((e) => e.type === 'SHOT_GOAL' && awayRoster.some((p) => p.id === e.playerId)).length);
+
     let myLineup = $derived(data.viewerIsHome ? homeLineup : awayLineup);
     let myRoster = $derived(data.viewerIsHome ? homeRoster : awayRoster);
     let starterIds = $derived(new Set([myLineup.GK, ...myLineup.DEF, ...myLineup.MID, ...myLineup.FWD]));
     let subOut = $state('');
     let subIn = $state('');
+
+    let viewerAlreadySubmitted = $derived(!!(data.viewerIsHome ? match.homeHalftimeLineup : match.awayHalftimeLineup));
+    let isPvpMatch = $derived(!match.homeIsAi && !match.awayIsAi);
+
+    let pollTimer: ReturnType<typeof setInterval> | undefined;
+    $effect(() => {
+        const shouldPoll = showHalftimePanel && match.status === 'AWAITING_HALFTIME' && viewerAlreadySubmitted;
+        if (shouldPoll) {
+            pollTimer = setInterval(() => invalidateAll(), 4000);
+        }
+        return () => clearInterval(pollTimer);
+    });
 </script>
 
 <svelte:head>
@@ -104,8 +136,14 @@
         </span>
     </div>
 
-    <div class="text-center">
-        <h1 class="text-2xl font-bold">{match.homeTeamName} <span class="text-primary">{visibleEvents.filter(e=>e.type==='SHOT_GOAL' && homeRoster.some(p=>p.id===e.playerId)).length}</span> - <span class="text-secondary">{visibleEvents.filter(e=>e.type==='SHOT_GOAL' && awayRoster.some(p=>p.id===e.playerId)).length}</span> {match.awayTeamName}</h1>
+    <div class="flex justify-center">
+        <div class="inline-flex items-center gap-3 bg-neutral text-neutral-content rounded-full px-5 py-2 max-w-full">
+            <span class="font-semibold truncate">{match.homeTeamName}</span>
+            <span class="badge badge-primary badge-lg font-bold">{homeScore}</span>
+            <span class="opacity-50">-</span>
+            <span class="badge badge-secondary badge-lg font-bold">{awayScore}</span>
+            <span class="font-semibold truncate">{match.awayTeamName}</span>
+        </div>
     </div>
 
     <div class="relative">
@@ -135,7 +173,7 @@
         {/if}
     </div>
 
-    {#if showHalftimePanel && match.status === 'AWAITING_HALFTIME'}
+    {#if showHalftimePanel && match.status === 'AWAITING_HALFTIME' && !viewerAlreadySubmitted}
     <div class="card bg-base-200 p-5 space-y-4">
         <h2 class="text-lg font-semibold">Halftime</h2>
         <p class="text-sm text-base-content/70">Make a substitution if you like, or continue as you are.</p>
@@ -162,6 +200,16 @@
             </div>
             <button type="submit" class="btn btn-primary w-full mt-4">Start Second Half</button>
         </form>
+    </div>
+    {/if}
+
+    {#if showHalftimePanel && match.status === 'AWAITING_HALFTIME' && viewerAlreadySubmitted}
+    <div class="card bg-base-200 p-5 space-y-2 text-center">
+        <h2 class="text-lg font-semibold">Halftime submitted</h2>
+        <p class="text-sm text-base-content/70">
+            {isPvpMatch ? "Waiting for the other manager to make their move..." : 'Waiting for the second half to kick off...'}
+        </p>
+        <span class="loading loading-dots loading-md mx-auto"></span>
     </div>
     {/if}
 

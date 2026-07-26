@@ -9,9 +9,14 @@
 
     let filterPosition = $state<Position | 'ALL'>('ALL');
     let signingId = $state<string | null>(null);
+    let updatingId = $state<string | null>(null);
+    let cancelingId = $state<string | null>(null);
+    let editPrices = $state<Record<string, number>>({});
 
+    let myListings = $derived(data.freeAgents.filter((p: any) => p.isMine));
+    let availableAgents = $derived(data.freeAgents.filter((p: any) => !p.isMine));
     let visibleAgents = $derived(
-        filterPosition === 'ALL' ? data.freeAgents : data.freeAgents.filter((p: any) => p.position === filterPosition)
+        filterPosition === 'ALL' ? availableAgents : availableAgents.filter((p: any) => p.position === filterPosition)
     );
 
     const attrLabels: Record<AttributeKey, string> = {
@@ -39,8 +44,45 @@
     {#if form?.error}
     <div class="alert alert-error text-sm">{form.error}</div>
     {/if}
-    {#if form?.success}
+    {#if form?.success && form?.signedName}
     <div class="alert alert-success text-sm">Signed {form.signedName}!</div>
+    {/if}
+
+    {#if myListings.length > 0}
+    <div class="card bg-base-200 p-5 space-y-3">
+        <h2 class="text-lg font-semibold">Your Listings</h2>
+        {#each myListings as p (p.id)}
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-lg border border-base-300">
+            <div>
+                <p class="font-semibold">{p.name}</p>
+                <p class="text-xs text-base-content/60">{p.position} · {p.personality}</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <form
+                    method="POST"
+                    action="?/updatePrice"
+                    class="flex items-center gap-2"
+                    use:enhance={() => { updatingId = p.id.toString(); return async ({ update }) => { await update(); updatingId = null; }; }}
+                >
+                    <input type="hidden" name="playerId" value={p.id} />
+                    <input
+                        class="input input-sm w-24"
+                        type="number"
+                        name="price"
+                        min="0"
+                        value={editPrices[p.id.toString()] ?? p.price ?? 0}
+                        oninput={(e) => editPrices[p.id.toString()] = Number((e.target as HTMLInputElement).value)}
+                    />
+                    <button type="submit" class="btn btn-sm btn-outline" disabled={updatingId === p.id.toString()}>Update</button>
+                </form>
+                <form method="POST" action="?/cancelListing" use:enhance={() => { cancelingId = p.id.toString(); return async ({ update }) => { await update(); cancelingId = null; }; }}>
+                    <input type="hidden" name="playerId" value={p.id} />
+                    <button type="submit" class="btn btn-sm btn-ghost text-error" disabled={cancelingId === p.id.toString()}>Take off market</button>
+                </form>
+            </div>
+        </div>
+        {/each}
+    </div>
     {/if}
 
     <div class="flex flex-wrap gap-2">

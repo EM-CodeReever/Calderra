@@ -212,6 +212,11 @@ export type FootballPlayer = Prisma.FootballPlayerModel
  */
 export type FootballMatch = Prisma.FootballMatchModel
 /**
+ * Model FootballChallenge
+ * 
+ */
+export type FootballChallenge = Prisma.FootballChallengeModel
+/**
  * Model FootballMatchEvent
  * 
  */

@@ -413,6 +413,7 @@ export const ModelName = {
   FootballTeam: 'FootballTeam',
   FootballPlayer: 'FootballPlayer',
   FootballMatch: 'FootballMatch',
+  FootballChallenge: 'FootballChallenge',
   FootballMatchEvent: 'FootballMatchEvent',
   LB_MemoryCards: 'LB_MemoryCards',
   Profile: 'Profile'
@@ -431,7 +432,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "audit_log_entries" | "custom_oauth_providers" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "oauth_authorizations" | "oauth_client_states" | "oauth_clients" | "oauth_consents" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "webauthn_challenges" | "webauthn_credentials" | "chatRoom" | "chatRoomMember" | "chatMessage" | "footballTeam" | "footballPlayer" | "footballMatch" | "footballMatchEvent" | "lB_MemoryCards" | "profile"
+    modelProps: "audit_log_entries" | "custom_oauth_providers" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "oauth_authorizations" | "oauth_client_states" | "oauth_clients" | "oauth_consents" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "webauthn_challenges" | "webauthn_credentials" | "chatRoom" | "chatRoomMember" | "chatMessage" | "footballTeam" | "footballPlayer" | "footballMatch" | "footballChallenge" | "footballMatchEvent" | "lB_MemoryCards" | "profile"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2581,6 +2582,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FootballChallenge: {
+      payload: Prisma.$FootballChallengePayload<ExtArgs>
+      fields: Prisma.FootballChallengeFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FootballChallengeFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FootballChallengeFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>
+        }
+        findFirst: {
+          args: Prisma.FootballChallengeFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FootballChallengeFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>
+        }
+        findMany: {
+          args: Prisma.FootballChallengeFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>[]
+        }
+        create: {
+          args: Prisma.FootballChallengeCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>
+        }
+        createMany: {
+          args: Prisma.FootballChallengeCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FootballChallengeCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>[]
+        }
+        delete: {
+          args: Prisma.FootballChallengeDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>
+        }
+        update: {
+          args: Prisma.FootballChallengeUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>
+        }
+        deleteMany: {
+          args: Prisma.FootballChallengeDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FootballChallengeUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FootballChallengeUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>[]
+        }
+        upsert: {
+          args: Prisma.FootballChallengeUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballChallengePayload>
+        }
+        aggregate: {
+          args: Prisma.FootballChallengeAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFootballChallenge>
+        }
+        groupBy: {
+          args: Prisma.FootballChallengeGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballChallengeGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FootballChallengeCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballChallengeCountAggregateOutputType> | number
+        }
+      }
+    }
     FootballMatchEvent: {
       payload: Prisma.$FootballMatchEventPayload<ExtArgs>
       fields: Prisma.FootballMatchEventFieldRefs
@@ -3273,6 +3348,7 @@ export const FootballPlayerScalarFieldEnum = {
   position: 'position',
   personality: 'personality',
   price: 'price',
+  listed_by_team_id: 'listed_by_team_id',
   level: 'level',
   xp: 'xp',
   unspent_points: 'unspent_points',
@@ -3309,6 +3385,18 @@ export const FootballMatchScalarFieldEnum = {
 } as const
 
 export type FootballMatchScalarFieldEnum = (typeof FootballMatchScalarFieldEnum)[keyof typeof FootballMatchScalarFieldEnum]
+
+
+export const FootballChallengeScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  challenger_team_id: 'challenger_team_id',
+  opponent_team_id: 'opponent_team_id',
+  status: 'status',
+  match_id: 'match_id'
+} as const
+
+export type FootballChallengeScalarFieldEnum = (typeof FootballChallengeScalarFieldEnum)[keyof typeof FootballChallengeScalarFieldEnum]
 
 
 export const FootballMatchEventScalarFieldEnum = {
@@ -3780,6 +3868,7 @@ export type GlobalOmitConfig = {
   footballTeam?: Prisma.FootballTeamOmit
   footballPlayer?: Prisma.FootballPlayerOmit
   footballMatch?: Prisma.FootballMatchOmit
+  footballChallenge?: Prisma.FootballChallengeOmit
   footballMatchEvent?: Prisma.FootballMatchEventOmit
   lB_MemoryCards?: Prisma.LB_MemoryCardsOmit
   profile?: Prisma.ProfileOmit

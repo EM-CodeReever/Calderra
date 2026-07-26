@@ -80,6 +80,7 @@ export const ModelName = {
   FootballTeam: 'FootballTeam',
   FootballPlayer: 'FootballPlayer',
   FootballMatch: 'FootballMatch',
+  FootballChallenge: 'FootballChallenge',
   FootballMatchEvent: 'FootballMatchEvent',
   LB_MemoryCards: 'LB_MemoryCards',
   Profile: 'Profile'
@@ -532,6 +533,7 @@ export const FootballPlayerScalarFieldEnum = {
   position: 'position',
   personality: 'personality',
   price: 'price',
+  listed_by_team_id: 'listed_by_team_id',
   level: 'level',
   xp: 'xp',
   unspent_points: 'unspent_points',
@@ -568,6 +570,18 @@ export const FootballMatchScalarFieldEnum = {
 } as const
 
 export type FootballMatchScalarFieldEnum = (typeof FootballMatchScalarFieldEnum)[keyof typeof FootballMatchScalarFieldEnum]
+
+
+export const FootballChallengeScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  challenger_team_id: 'challenger_team_id',
+  opponent_team_id: 'opponent_team_id',
+  status: 'status',
+  match_id: 'match_id'
+} as const
+
+export type FootballChallengeScalarFieldEnum = (typeof FootballChallengeScalarFieldEnum)[keyof typeof FootballChallengeScalarFieldEnum]
 
 
 export const FootballMatchEventScalarFieldEnum = {

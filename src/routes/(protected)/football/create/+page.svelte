@@ -42,7 +42,7 @@
 <section class="w-full max-w-2xl mx-auto flex flex-col space-y-6">
     <div>
         <h1 class="text-3xl font-bold">Build Your Team</h1>
-        <p class="text-base-content/70">Name your club and create your first star player. We'll fill out the rest of your 10-player squad so you can kick off right away.</p>
+        <p class="text-base-content/70">Name your club and create your first star player. We'll fill out the rest of your 15-player squad so you can kick off right away.</p>
     </div>
 
     <form
