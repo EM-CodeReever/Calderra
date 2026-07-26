@@ -242,6 +242,9 @@ export type ProfileWhereInput = {
   auth_email?: Prisma.StringNullableFilter<"Profile"> | string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsListRelationFilter
   users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  ownedRooms?: Prisma.ChatRoomListRelationFilter
+  roomMembership?: Prisma.ChatRoomMemberListRelationFilter
+  chatMessages?: Prisma.ChatMessageListRelationFilter
 }
 
 export type ProfileOrderByWithRelationInput = {
@@ -255,6 +258,9 @@ export type ProfileOrderByWithRelationInput = {
   auth_email?: Prisma.SortOrderInput | Prisma.SortOrder
   LB_MemoryCards?: Prisma.LB_MemoryCardsOrderByRelationAggregateInput
   users?: Prisma.usersOrderByWithRelationInput
+  ownedRooms?: Prisma.ChatRoomOrderByRelationAggregateInput
+  roomMembership?: Prisma.ChatRoomMemberOrderByRelationAggregateInput
+  chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
 }
 
 export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +277,9 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   auth_email?: Prisma.StringNullableFilter<"Profile"> | string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsListRelationFilter
   users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
+  ownedRooms?: Prisma.ChatRoomListRelationFilter
+  roomMembership?: Prisma.ChatRoomMemberListRelationFilter
+  chatMessages?: Prisma.ChatMessageListRelationFilter
 }, "id">
 
 export type ProfileOrderByWithAggregationInput = {
@@ -313,6 +322,9 @@ export type ProfileCreateInput = {
   auth_email?: string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateInput = {
@@ -325,6 +337,9 @@ export type ProfileUncheckedCreateInput = {
   auth_user_id?: string | null
   auth_email?: string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUpdateInput = {
@@ -337,6 +352,9 @@ export type ProfileUpdateInput = {
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateInput = {
@@ -349,6 +367,9 @@ export type ProfileUncheckedUpdateInput = {
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateManyInput = {
@@ -391,6 +412,11 @@ export type ProfileListRelationFilter = {
 
 export type ProfileOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
+}
+
+export type ProfileNullableScalarRelationFilter = {
+  is?: Prisma.ProfileWhereInput | null
+  isNot?: Prisma.ProfileWhereInput | null
 }
 
 export type ProfileScalarRelationFilter = {
@@ -481,6 +507,50 @@ export type ProfileUncheckedUpdateManyWithoutUsersNestedInput = {
   deleteMany?: Prisma.ProfileScalarWhereInput | Prisma.ProfileScalarWhereInput[]
 }
 
+export type ProfileCreateNestedOneWithoutOwnedRoomsInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutOwnedRoomsInput, Prisma.ProfileUncheckedCreateWithoutOwnedRoomsInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutOwnedRoomsInput
+  connect?: Prisma.ProfileWhereUniqueInput
+}
+
+export type ProfileUpdateOneWithoutOwnedRoomsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutOwnedRoomsInput, Prisma.ProfileUncheckedCreateWithoutOwnedRoomsInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutOwnedRoomsInput
+  upsert?: Prisma.ProfileUpsertWithoutOwnedRoomsInput
+  disconnect?: Prisma.ProfileWhereInput | boolean
+  delete?: Prisma.ProfileWhereInput | boolean
+  connect?: Prisma.ProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutOwnedRoomsInput, Prisma.ProfileUpdateWithoutOwnedRoomsInput>, Prisma.ProfileUncheckedUpdateWithoutOwnedRoomsInput>
+}
+
+export type ProfileCreateNestedOneWithoutRoomMembershipInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutRoomMembershipInput, Prisma.ProfileUncheckedCreateWithoutRoomMembershipInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutRoomMembershipInput
+  connect?: Prisma.ProfileWhereUniqueInput
+}
+
+export type ProfileUpdateOneRequiredWithoutRoomMembershipNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutRoomMembershipInput, Prisma.ProfileUncheckedCreateWithoutRoomMembershipInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutRoomMembershipInput
+  upsert?: Prisma.ProfileUpsertWithoutRoomMembershipInput
+  connect?: Prisma.ProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutRoomMembershipInput, Prisma.ProfileUpdateWithoutRoomMembershipInput>, Prisma.ProfileUncheckedUpdateWithoutRoomMembershipInput>
+}
+
+export type ProfileCreateNestedOneWithoutChatMessagesInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutChatMessagesInput, Prisma.ProfileUncheckedCreateWithoutChatMessagesInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutChatMessagesInput
+  connect?: Prisma.ProfileWhereUniqueInput
+}
+
+export type ProfileUpdateOneRequiredWithoutChatMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutChatMessagesInput, Prisma.ProfileUncheckedCreateWithoutChatMessagesInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutChatMessagesInput
+  upsert?: Prisma.ProfileUpsertWithoutChatMessagesInput
+  connect?: Prisma.ProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutChatMessagesInput, Prisma.ProfileUpdateWithoutChatMessagesInput>, Prisma.ProfileUncheckedUpdateWithoutChatMessagesInput>
+}
+
 export type ProfileCreateNestedOneWithoutLB_MemoryCardsInput = {
   create?: Prisma.XOR<Prisma.ProfileCreateWithoutLB_MemoryCardsInput, Prisma.ProfileUncheckedCreateWithoutLB_MemoryCardsInput>
   connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutLB_MemoryCardsInput
@@ -504,6 +574,9 @@ export type ProfileCreateWithoutUsersInput = {
   id?: bigint | number
   auth_email?: string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutUsersInput = {
@@ -515,6 +588,9 @@ export type ProfileUncheckedCreateWithoutUsersInput = {
   id?: bigint | number
   auth_email?: string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutUsersInput = {
@@ -557,6 +633,222 @@ export type ProfileScalarWhereInput = {
   auth_email?: Prisma.StringNullableFilter<"Profile"> | string | null
 }
 
+export type ProfileCreateWithoutOwnedRoomsInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_email?: string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
+  users?: Prisma.usersCreateNestedOneWithoutProfileInput
+  roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutOwnedRoomsInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_user_id?: string | null
+  auth_email?: string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileCreateOrConnectWithoutOwnedRoomsInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutOwnedRoomsInput, Prisma.ProfileUncheckedCreateWithoutOwnedRoomsInput>
+}
+
+export type ProfileUpsertWithoutOwnedRoomsInput = {
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutOwnedRoomsInput, Prisma.ProfileUncheckedUpdateWithoutOwnedRoomsInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutOwnedRoomsInput, Prisma.ProfileUncheckedCreateWithoutOwnedRoomsInput>
+  where?: Prisma.ProfileWhereInput
+}
+
+export type ProfileUpdateToOneWithWhereWithoutOwnedRoomsInput = {
+  where?: Prisma.ProfileWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutOwnedRoomsInput, Prisma.ProfileUncheckedUpdateWithoutOwnedRoomsInput>
+}
+
+export type ProfileUpdateWithoutOwnedRoomsInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
+  users?: Prisma.usersUpdateOneWithoutProfileNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutOwnedRoomsInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileCreateWithoutRoomMembershipInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_email?: string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
+  users?: Prisma.usersCreateNestedOneWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutRoomMembershipInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_user_id?: string | null
+  auth_email?: string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileCreateOrConnectWithoutRoomMembershipInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutRoomMembershipInput, Prisma.ProfileUncheckedCreateWithoutRoomMembershipInput>
+}
+
+export type ProfileUpsertWithoutRoomMembershipInput = {
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutRoomMembershipInput, Prisma.ProfileUncheckedUpdateWithoutRoomMembershipInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutRoomMembershipInput, Prisma.ProfileUncheckedCreateWithoutRoomMembershipInput>
+  where?: Prisma.ProfileWhereInput
+}
+
+export type ProfileUpdateToOneWithWhereWithoutRoomMembershipInput = {
+  where?: Prisma.ProfileWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutRoomMembershipInput, Prisma.ProfileUncheckedUpdateWithoutRoomMembershipInput>
+}
+
+export type ProfileUpdateWithoutRoomMembershipInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
+  users?: Prisma.usersUpdateOneWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutRoomMembershipInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileCreateWithoutChatMessagesInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_email?: string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
+  users?: Prisma.usersCreateNestedOneWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutChatMessagesInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_user_id?: string | null
+  auth_email?: string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileCreateOrConnectWithoutChatMessagesInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutChatMessagesInput, Prisma.ProfileUncheckedCreateWithoutChatMessagesInput>
+}
+
+export type ProfileUpsertWithoutChatMessagesInput = {
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutChatMessagesInput, Prisma.ProfileUncheckedUpdateWithoutChatMessagesInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutChatMessagesInput, Prisma.ProfileUncheckedCreateWithoutChatMessagesInput>
+  where?: Prisma.ProfileWhereInput
+}
+
+export type ProfileUpdateToOneWithWhereWithoutChatMessagesInput = {
+  where?: Prisma.ProfileWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutChatMessagesInput, Prisma.ProfileUncheckedUpdateWithoutChatMessagesInput>
+}
+
+export type ProfileUpdateWithoutChatMessagesInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
+  users?: Prisma.usersUpdateOneWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutChatMessagesInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+}
+
 export type ProfileCreateWithoutLB_MemoryCardsInput = {
   username?: string | null
   first_name?: string | null
@@ -566,6 +858,9 @@ export type ProfileCreateWithoutLB_MemoryCardsInput = {
   id?: bigint | number
   auth_email?: string | null
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileUncheckedCreateWithoutLB_MemoryCardsInput = {
@@ -577,6 +872,9 @@ export type ProfileUncheckedCreateWithoutLB_MemoryCardsInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
 }
 
 export type ProfileCreateOrConnectWithoutLB_MemoryCardsInput = {
@@ -604,6 +902,9 @@ export type ProfileUpdateWithoutLB_MemoryCardsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutLB_MemoryCardsInput = {
@@ -615,6 +916,9 @@ export type ProfileUncheckedUpdateWithoutLB_MemoryCardsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateManyUsersInput = {
@@ -636,6 +940,9 @@ export type ProfileUpdateWithoutUsersInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutUsersInput = {
@@ -647,6 +954,9 @@ export type ProfileUncheckedUpdateWithoutUsersInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileUncheckedUpdateManyWithoutUsersInput = {
@@ -666,10 +976,16 @@ export type ProfileUncheckedUpdateManyWithoutUsersInput = {
 
 export type ProfileCountOutputType = {
   LB_MemoryCards: number
+  ownedRooms: number
+  roomMembership: number
+  chatMessages: number
 }
 
 export type ProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   LB_MemoryCards?: boolean | ProfileCountOutputTypeCountLB_MemoryCardsArgs
+  ownedRooms?: boolean | ProfileCountOutputTypeCountOwnedRoomsArgs
+  roomMembership?: boolean | ProfileCountOutputTypeCountRoomMembershipArgs
+  chatMessages?: boolean | ProfileCountOutputTypeCountChatMessagesArgs
 }
 
 /**
@@ -689,6 +1005,27 @@ export type ProfileCountOutputTypeCountLB_MemoryCardsArgs<ExtArgs extends runtim
   where?: Prisma.LB_MemoryCardsWhereInput
 }
 
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountOwnedRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatRoomWhereInput
+}
+
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountRoomMembershipArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatRoomMemberWhereInput
+}
+
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountChatMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ChatMessageWhereInput
+}
+
 
 export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   username?: boolean
@@ -701,6 +1038,9 @@ export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   auth_email?: boolean
   LB_MemoryCards?: boolean | Prisma.Profile$LB_MemoryCardsArgs<ExtArgs>
   users?: boolean | Prisma.Profile$usersArgs<ExtArgs>
+  ownedRooms?: boolean | Prisma.Profile$ownedRoomsArgs<ExtArgs>
+  roomMembership?: boolean | Prisma.Profile$roomMembershipArgs<ExtArgs>
+  chatMessages?: boolean | Prisma.Profile$chatMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
@@ -743,6 +1083,9 @@ export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type ProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   LB_MemoryCards?: boolean | Prisma.Profile$LB_MemoryCardsArgs<ExtArgs>
   users?: boolean | Prisma.Profile$usersArgs<ExtArgs>
+  ownedRooms?: boolean | Prisma.Profile$ownedRoomsArgs<ExtArgs>
+  roomMembership?: boolean | Prisma.Profile$roomMembershipArgs<ExtArgs>
+  chatMessages?: boolean | Prisma.Profile$chatMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -757,6 +1100,9 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     LB_MemoryCards: Prisma.$LB_MemoryCardsPayload<ExtArgs>[]
     users: Prisma.$usersPayload<ExtArgs> | null
+    ownedRooms: Prisma.$ChatRoomPayload<ExtArgs>[]
+    roomMembership: Prisma.$ChatRoomMemberPayload<ExtArgs>[]
+    chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     username: string | null
@@ -1163,6 +1509,9 @@ export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   LB_MemoryCards<T extends Prisma.Profile$LB_MemoryCardsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$LB_MemoryCardsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LB_MemoryCardsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   users<T extends Prisma.Profile$usersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$usersArgs<ExtArgs>>): Prisma.Prisma__usersClient<runtime.Types.Result.GetResult<Prisma.$usersPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  ownedRooms<T extends Prisma.Profile$ownedRoomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$ownedRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatRoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  roomMembership<T extends Prisma.Profile$roomMembershipArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$roomMembershipArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatRoomMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  chatMessages<T extends Prisma.Profile$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1641,6 +1990,78 @@ export type Profile$usersArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.usersInclude<ExtArgs> | null
   where?: Prisma.usersWhereInput
+}
+
+/**
+ * Profile.ownedRooms
+ */
+export type Profile$ownedRoomsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatRoom
+   */
+  select?: Prisma.ChatRoomSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatRoom
+   */
+  omit?: Prisma.ChatRoomOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatRoomInclude<ExtArgs> | null
+  where?: Prisma.ChatRoomWhereInput
+  orderBy?: Prisma.ChatRoomOrderByWithRelationInput | Prisma.ChatRoomOrderByWithRelationInput[]
+  cursor?: Prisma.ChatRoomWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatRoomScalarFieldEnum | Prisma.ChatRoomScalarFieldEnum[]
+}
+
+/**
+ * Profile.roomMembership
+ */
+export type Profile$roomMembershipArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatRoomMember
+   */
+  select?: Prisma.ChatRoomMemberSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatRoomMember
+   */
+  omit?: Prisma.ChatRoomMemberOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatRoomMemberInclude<ExtArgs> | null
+  where?: Prisma.ChatRoomMemberWhereInput
+  orderBy?: Prisma.ChatRoomMemberOrderByWithRelationInput | Prisma.ChatRoomMemberOrderByWithRelationInput[]
+  cursor?: Prisma.ChatRoomMemberWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatRoomMemberScalarFieldEnum | Prisma.ChatRoomMemberScalarFieldEnum[]
+}
+
+/**
+ * Profile.chatMessages
+ */
+export type Profile$chatMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ChatMessage
+   */
+  select?: Prisma.ChatMessageSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ChatMessage
+   */
+  omit?: Prisma.ChatMessageOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ChatMessageInclude<ExtArgs> | null
+  where?: Prisma.ChatMessageWhereInput
+  orderBy?: Prisma.ChatMessageOrderByWithRelationInput | Prisma.ChatMessageOrderByWithRelationInput[]
+  cursor?: Prisma.ChatMessageWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ChatMessageScalarFieldEnum | Prisma.ChatMessageScalarFieldEnum[]
 }
 
 /**

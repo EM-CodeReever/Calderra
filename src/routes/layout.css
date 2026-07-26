@@ -106,38 +106,6 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top;
-}
-
-.bumblebee-bg-top{
-    background-image: url('/bumblebee_bg_top.svg');
-    width:100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
-}
-
-.bumblebee-bg-below{
-    background-image: url('/bumblebee_bg_below.svg');
-    width:100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
-}   
-
-.retro-bg-top{
-    background-image: url('/retro_bg_top.svg');
-    width:100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: bottom;
-}
-
-.retro-bg-below{
-    background-image: url('/retro_bg_below.svg');
-    width:100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: top;
 }   
 
 .cyberpunk-bg-top{

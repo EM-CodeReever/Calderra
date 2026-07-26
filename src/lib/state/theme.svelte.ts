@@ -34,7 +34,7 @@ export const themeState = $state<Theme>({
 // Everything else falls back to a generic wave that recolors itself via the
 // active daisyUI theme's own CSS variables (see .wave-fallback-* in layout.css).
 const BESPOKE_WAVE_THEMES: Theme['current'][] = [
-    'abyss', 'aqua', 'emerald', 'cupcake', 'bumblebee', 'retro', 'cyberpunk', 'silk'
+    'abyss', 'emerald', 'cyberpunk', 'silk'
 ];
 
 export function isBespokeWaveTheme(): boolean {

@@ -1,10 +1,22 @@
 import type * as Party from "partykit/server";
 
+type ChatPayload = {
+  type: "message";
+  username: string;
+  avatar: string;
+  content: string;
+  sentAt: string;
+};
+
+type SystemPayload = {
+  type: "system";
+  content: string;
+};
+
 export default class Server implements Party.Server {
   constructor(readonly room: Party.Room) {}
 
   onConnect(conn: Party.Connection, ctx: Party.ConnectionContext) {
-    // A websocket just connected!
     console.log(
       `Connected:
   id: ${conn.id}
@@ -12,22 +24,24 @@ export default class Server implements Party.Server {
   url: ${new URL(ctx.request.url).pathname}`
     );
 
-    // let's send a message to the connection
-    if(this.room.id === "global") {
-        conn.send("Welcome to the global chat room!");
-    }
+    const welcome: SystemPayload = { type: "system", content: "Connected to the room." };
+    conn.send(JSON.stringify(welcome));
   }
 
   onMessage(message: string, sender: Party.Connection) {
-    // let's log the message
-    console.log(`connection ${sender.id} sent message: ${message}`);
-    // as well as broadcast it to all the other connections in the room...
-    sender.send(`You: ${message}`);
-    this.room.broadcast(
-      `${sender.id}: ${message}`,
-      // ...except for the connection it came from
-      [sender.id]
-    );
+    let payload: ChatPayload;
+    try {
+      payload = JSON.parse(message);
+    } catch {
+      return;
+    }
+    if (payload.type !== "message" || typeof payload.content !== "string" || !payload.content.trim()) {
+      return;
+    }
+
+    // relay to everyone else in the room; the sender already renders its own
+    // message optimistically, so it doesn't need an echo back.
+    this.room.broadcast(JSON.stringify(payload), [sender.id]);
   }
 }
 
