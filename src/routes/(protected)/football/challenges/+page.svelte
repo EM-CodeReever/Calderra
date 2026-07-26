@@ -2,6 +2,7 @@
     import type { PageData, ActionData } from './$types';
     import { enhance } from '$app/forms';
     import { Swords } from '@lucide/svelte';
+    import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
 
     let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -15,6 +16,8 @@
 
 {#if data.team}
 <section class="w-full max-w-2xl mx-auto flex flex-col space-y-6">
+    <BackToFootballHome />
+
     <div>
         <h1 class="text-3xl font-bold flex items-center gap-2"><Swords /> Challenges</h1>
         <p class="text-base-content/70">Challenge other managers to a match. Halftime tactics happen once both of you have made your move.</p>

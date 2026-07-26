@@ -2,7 +2,7 @@
     import type { PageData } from './$types';
     import { enhance } from '$app/forms';
     import { goto } from '$app/navigation';
-    import { Goal, Users, Trophy, Coins, ShieldPlus, Swords, Crown } from '@lucide/svelte';
+    import { Goal, Users, Trophy, Coins, ShieldPlus, Swords, Crown, BookOpen } from '@lucide/svelte';
 
     let { data }: { data: PageData } = $props();
 
@@ -36,6 +36,9 @@
             </button>
             <button class="btn btn-outline btn-sm" onclick={() => goto('/football/league')}>
                 <Crown size="16" /> League
+            </button>
+            <button class="btn btn-outline btn-sm" onclick={() => goto('/football/guide')}>
+                <BookOpen size="16" /> How to Play
             </button>
             {#if data.userProfile?.is_admin}
             <button class="btn btn-outline btn-sm" onclick={() => goto('/football/admin')}>

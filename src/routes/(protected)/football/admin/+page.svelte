@@ -2,6 +2,7 @@
     import type { PageData, ActionData } from './$types';
     import { enhance } from '$app/forms';
     import { ATTRIBUTES_BY_POSITION, ATTRIBUTE_MIN, ATTRIBUTE_MAX, PERSONALITIES, POSITIONS, type AttributeKey, type Position } from '$lib/football/types';
+    import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
 
     let { data, form }: { data: PageData; form: ActionData } = $props();
 
@@ -32,6 +33,8 @@
 </svelte:head>
 
 <section class="w-full max-w-2xl mx-auto flex flex-col space-y-6">
+    <BackToFootballHome />
+
     <div>
         <h1 class="text-3xl font-bold">Football Admin</h1>
         <p class="text-base-content/70">Create fictional free-agent players for the transfer market.</p>

@@ -1,6 +1,7 @@
 <script lang="ts">
     import { goto } from '$app/navigation';
     import { Trophy } from '@lucide/svelte';
+    import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
 </script>
 
 <svelte:head>
@@ -8,6 +9,8 @@
 </svelte:head>
 
 <section class="w-full max-w-2xl mx-auto flex flex-col space-y-6">
+    <BackToFootballHome />
+
     <div class="card bg-base-200 p-8 text-center space-y-4">
         <Trophy size="40" class="mx-auto text-primary" />
         <h1 class="text-2xl font-bold">League — Coming Soon</h1>

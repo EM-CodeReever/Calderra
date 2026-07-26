@@ -5,6 +5,7 @@
     import { goto, invalidateAll } from '$app/navigation';
     import { scale } from 'svelte/transition';
     import PitchVisualizer from '$components/football/PitchVisualizer.svelte';
+    import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
     import { computeSlots, toLite } from '$lib/football/lineup';
     import type { Lineup } from '$lib/football/types';
 
@@ -129,7 +130,7 @@
 
 <section class="w-full max-w-3xl mx-auto flex flex-col space-y-4">
     <div class="flex justify-between items-center">
-        <button class="btn btn-ghost btn-sm" onclick={() => goto('/football')}>&larr; Back</button>
+        <BackToFootballHome />
         <span class="text-sm text-base-content/60">
             {#if activeEvent}{activeEvent.minute}'{/if}
             {#if match.status !== 'COMPLETED' && !showHalftimePanel}(live){/if}

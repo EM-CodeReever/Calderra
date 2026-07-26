@@ -3,6 +3,7 @@
     import { enhance } from '$app/forms';
     import { ATTRIBUTES_BY_POSITION, POSITIONS, type AttributeKey, type Position } from '$lib/football/types';
     import { Coins } from '@lucide/svelte';
+    import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
 
     let { data, form }: { data: PageData; form: ActionData } = $props();
     let team = $derived(data.team);
@@ -33,6 +34,8 @@
 
 {#if team}
 <section class="w-full max-w-3xl mx-auto flex flex-col space-y-6">
+    <BackToFootballHome />
+
     <div class="flex items-center justify-between flex-wrap gap-3">
         <div>
             <h1 class="text-3xl font-bold">Transfer Market</h1>

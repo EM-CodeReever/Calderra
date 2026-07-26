@@ -43,6 +43,7 @@
     <div>
         <h1 class="text-3xl font-bold">Build Your Team</h1>
         <p class="text-base-content/70">Name your club and create your first star player. We'll fill out the rest of your 15-player squad so you can kick off right away.</p>
+        <a href="/football/guide" class="link link-primary text-sm">New here? Read the how-to-play guide →</a>
     </div>
 
     <form

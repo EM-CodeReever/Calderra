@@ -6,6 +6,7 @@
     import { xpToReachLevel, MAX_LEVEL } from '$lib/football/xp';
     import { estimateMarketValue, quickSellValue } from '$lib/football/market';
     import FormationBuilder from '$components/football/FormationBuilder.svelte';
+    import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
     import { Tag, Banknote, Trash2, Coins } from '@lucide/svelte';
 
     let { data, form }: { data: PageData; form: ActionData } = $props();
@@ -53,6 +54,8 @@
 
 {#if team}
 <section class="w-full flex flex-col space-y-6">
+    <BackToFootballHome />
+
     <div class="flex items-center justify-between flex-wrap gap-3">
         <h1 class="text-3xl font-bold">Squad & Formation</h1>
         <div class="badge badge-lg badge-primary gap-1"><Coins size="16" /> {team.budget} credits</div>
