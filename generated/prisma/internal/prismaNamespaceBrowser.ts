@@ -77,6 +77,10 @@ export const ModelName = {
   ChatRoom: 'ChatRoom',
   ChatRoomMember: 'ChatRoomMember',
   ChatMessage: 'ChatMessage',
+  FootballTeam: 'FootballTeam',
+  FootballPlayer: 'FootballPlayer',
+  FootballMatch: 'FootballMatch',
+  FootballMatchEvent: 'FootballMatchEvent',
   LB_MemoryCards: 'LB_MemoryCards',
   Profile: 'Profile'
 } as const
@@ -506,6 +510,81 @@ export const ChatMessageScalarFieldEnum = {
 export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
 
 
+export const FootballTeamScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  owner_id: 'owner_id',
+  name: 'name',
+  is_ai: 'is_ai',
+  default_formation: 'default_formation',
+  default_lineup: 'default_lineup',
+  budget: 'budget'
+} as const
+
+export type FootballTeamScalarFieldEnum = (typeof FootballTeamScalarFieldEnum)[keyof typeof FootballTeamScalarFieldEnum]
+
+
+export const FootballPlayerScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  team_id: 'team_id',
+  name: 'name',
+  position: 'position',
+  personality: 'personality',
+  price: 'price',
+  level: 'level',
+  xp: 'xp',
+  unspent_points: 'unspent_points',
+  finishing: 'finishing',
+  trickery: 'trickery',
+  timing: 'timing',
+  control: 'control',
+  passing: 'passing',
+  vision: 'vision',
+  tackling: 'tackling',
+  disruption: 'disruption',
+  positioning: 'positioning',
+  reflexes: 'reflexes',
+  handling: 'handling',
+  distribution: 'distribution'
+} as const
+
+export type FootballPlayerScalarFieldEnum = (typeof FootballPlayerScalarFieldEnum)[keyof typeof FootballPlayerScalarFieldEnum]
+
+
+export const FootballMatchScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  completed_at: 'completed_at',
+  home_team_id: 'home_team_id',
+  away_team_id: 'away_team_id',
+  status: 'status',
+  home_score: 'home_score',
+  away_score: 'away_score',
+  home_lineup: 'home_lineup',
+  away_lineup: 'away_lineup',
+  home_halftime_lineup: 'home_halftime_lineup',
+  away_halftime_lineup: 'away_halftime_lineup'
+} as const
+
+export type FootballMatchScalarFieldEnum = (typeof FootballMatchScalarFieldEnum)[keyof typeof FootballMatchScalarFieldEnum]
+
+
+export const FootballMatchEventScalarFieldEnum = {
+  id: 'id',
+  match_id: 'match_id',
+  sequence: 'sequence',
+  minute: 'minute',
+  half: 'half',
+  type: 'type',
+  description: 'description',
+  player_id: 'player_id',
+  position_data: 'position_data'
+} as const
+
+export type FootballMatchEventScalarFieldEnum = (typeof FootballMatchEventScalarFieldEnum)[keyof typeof FootballMatchEventScalarFieldEnum]
+
+
 export const LB_MemoryCardsScalarFieldEnum = {
   id: 'id',
   created_at: 'created_at',
@@ -530,7 +609,8 @@ export const ProfileScalarFieldEnum = {
   avatar: 'avatar',
   id: 'id',
   auth_user_id: 'auth_user_id',
-  auth_email: 'auth_email'
+  auth_email: 'auth_email',
+  is_admin: 'is_admin'
 } as const
 
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]

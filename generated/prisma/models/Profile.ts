@@ -43,6 +43,7 @@ export type ProfileMinAggregateOutputType = {
   id: bigint | null
   auth_user_id: string | null
   auth_email: string | null
+  is_admin: boolean | null
 }
 
 export type ProfileMaxAggregateOutputType = {
@@ -54,6 +55,7 @@ export type ProfileMaxAggregateOutputType = {
   id: bigint | null
   auth_user_id: string | null
   auth_email: string | null
+  is_admin: boolean | null
 }
 
 export type ProfileCountAggregateOutputType = {
@@ -65,6 +67,7 @@ export type ProfileCountAggregateOutputType = {
   id: number
   auth_user_id: number
   auth_email: number
+  is_admin: number
   _all: number
 }
 
@@ -86,6 +89,7 @@ export type ProfileMinAggregateInputType = {
   id?: true
   auth_user_id?: true
   auth_email?: true
+  is_admin?: true
 }
 
 export type ProfileMaxAggregateInputType = {
@@ -97,6 +101,7 @@ export type ProfileMaxAggregateInputType = {
   id?: true
   auth_user_id?: true
   auth_email?: true
+  is_admin?: true
 }
 
 export type ProfileCountAggregateInputType = {
@@ -108,6 +113,7 @@ export type ProfileCountAggregateInputType = {
   id?: true
   auth_user_id?: true
   auth_email?: true
+  is_admin?: true
   _all?: true
 }
 
@@ -206,6 +212,7 @@ export type ProfileGroupByOutputType = {
   id: bigint
   auth_user_id: string | null
   auth_email: string | null
+  is_admin: boolean
   _count: ProfileCountAggregateOutputType | null
   _avg: ProfileAvgAggregateOutputType | null
   _sum: ProfileSumAggregateOutputType | null
@@ -240,11 +247,13 @@ export type ProfileWhereInput = {
   id?: Prisma.BigIntFilter<"Profile"> | bigint | number
   auth_user_id?: Prisma.UuidNullableFilter<"Profile"> | string | null
   auth_email?: Prisma.StringNullableFilter<"Profile"> | string | null
+  is_admin?: Prisma.BoolFilter<"Profile"> | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsListRelationFilter
   users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
   ownedRooms?: Prisma.ChatRoomListRelationFilter
   roomMembership?: Prisma.ChatRoomMemberListRelationFilter
   chatMessages?: Prisma.ChatMessageListRelationFilter
+  footballTeams?: Prisma.FootballTeamListRelationFilter
 }
 
 export type ProfileOrderByWithRelationInput = {
@@ -256,11 +265,13 @@ export type ProfileOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   auth_user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   auth_email?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_admin?: Prisma.SortOrder
   LB_MemoryCards?: Prisma.LB_MemoryCardsOrderByRelationAggregateInput
   users?: Prisma.usersOrderByWithRelationInput
   ownedRooms?: Prisma.ChatRoomOrderByRelationAggregateInput
   roomMembership?: Prisma.ChatRoomMemberOrderByRelationAggregateInput
   chatMessages?: Prisma.ChatMessageOrderByRelationAggregateInput
+  footballTeams?: Prisma.FootballTeamOrderByRelationAggregateInput
 }
 
 export type ProfileWhereUniqueInput = Prisma.AtLeast<{
@@ -275,11 +286,13 @@ export type ProfileWhereUniqueInput = Prisma.AtLeast<{
   avatar?: Prisma.StringNullableFilter<"Profile"> | string | null
   auth_user_id?: Prisma.UuidNullableFilter<"Profile"> | string | null
   auth_email?: Prisma.StringNullableFilter<"Profile"> | string | null
+  is_admin?: Prisma.BoolFilter<"Profile"> | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsListRelationFilter
   users?: Prisma.XOR<Prisma.UsersNullableScalarRelationFilter, Prisma.usersWhereInput> | null
   ownedRooms?: Prisma.ChatRoomListRelationFilter
   roomMembership?: Prisma.ChatRoomMemberListRelationFilter
   chatMessages?: Prisma.ChatMessageListRelationFilter
+  footballTeams?: Prisma.FootballTeamListRelationFilter
 }, "id">
 
 export type ProfileOrderByWithAggregationInput = {
@@ -291,6 +304,7 @@ export type ProfileOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   auth_user_id?: Prisma.SortOrderInput | Prisma.SortOrder
   auth_email?: Prisma.SortOrderInput | Prisma.SortOrder
+  is_admin?: Prisma.SortOrder
   _count?: Prisma.ProfileCountOrderByAggregateInput
   _avg?: Prisma.ProfileAvgOrderByAggregateInput
   _max?: Prisma.ProfileMaxOrderByAggregateInput
@@ -310,6 +324,7 @@ export type ProfileScalarWhereWithAggregatesInput = {
   id?: Prisma.BigIntWithAggregatesFilter<"Profile"> | bigint | number
   auth_user_id?: Prisma.UuidNullableWithAggregatesFilter<"Profile"> | string | null
   auth_email?: Prisma.StringNullableWithAggregatesFilter<"Profile"> | string | null
+  is_admin?: Prisma.BoolWithAggregatesFilter<"Profile"> | boolean
 }
 
 export type ProfileCreateInput = {
@@ -320,11 +335,13 @@ export type ProfileCreateInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUncheckedCreateInput = {
@@ -336,10 +353,12 @@ export type ProfileUncheckedCreateInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUpdateInput = {
@@ -350,11 +369,13 @@ export type ProfileUpdateInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateInput = {
@@ -366,10 +387,12 @@ export type ProfileUncheckedUpdateInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileCreateManyInput = {
@@ -381,6 +404,7 @@ export type ProfileCreateManyInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  is_admin?: boolean
 }
 
 export type ProfileUpdateManyMutationInput = {
@@ -391,6 +415,7 @@ export type ProfileUpdateManyMutationInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProfileUncheckedUpdateManyInput = {
@@ -402,6 +427,7 @@ export type ProfileUncheckedUpdateManyInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 export type ProfileListRelationFilter = {
@@ -433,6 +459,7 @@ export type ProfileCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   auth_user_id?: Prisma.SortOrder
   auth_email?: Prisma.SortOrder
+  is_admin?: Prisma.SortOrder
 }
 
 export type ProfileAvgOrderByAggregateInput = {
@@ -448,6 +475,7 @@ export type ProfileMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   auth_user_id?: Prisma.SortOrder
   auth_email?: Prisma.SortOrder
+  is_admin?: Prisma.SortOrder
 }
 
 export type ProfileMinOrderByAggregateInput = {
@@ -459,6 +487,7 @@ export type ProfileMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   auth_user_id?: Prisma.SortOrder
   auth_email?: Prisma.SortOrder
+  is_admin?: Prisma.SortOrder
 }
 
 export type ProfileSumOrderByAggregateInput = {
@@ -551,6 +580,22 @@ export type ProfileUpdateOneRequiredWithoutChatMessagesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutChatMessagesInput, Prisma.ProfileUpdateWithoutChatMessagesInput>, Prisma.ProfileUncheckedUpdateWithoutChatMessagesInput>
 }
 
+export type ProfileCreateNestedOneWithoutFootballTeamsInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutFootballTeamsInput, Prisma.ProfileUncheckedCreateWithoutFootballTeamsInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutFootballTeamsInput
+  connect?: Prisma.ProfileWhereUniqueInput
+}
+
+export type ProfileUpdateOneWithoutFootballTeamsNestedInput = {
+  create?: Prisma.XOR<Prisma.ProfileCreateWithoutFootballTeamsInput, Prisma.ProfileUncheckedCreateWithoutFootballTeamsInput>
+  connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutFootballTeamsInput
+  upsert?: Prisma.ProfileUpsertWithoutFootballTeamsInput
+  disconnect?: Prisma.ProfileWhereInput | boolean
+  delete?: Prisma.ProfileWhereInput | boolean
+  connect?: Prisma.ProfileWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ProfileUpdateToOneWithWhereWithoutFootballTeamsInput, Prisma.ProfileUpdateWithoutFootballTeamsInput>, Prisma.ProfileUncheckedUpdateWithoutFootballTeamsInput>
+}
+
 export type ProfileCreateNestedOneWithoutLB_MemoryCardsInput = {
   create?: Prisma.XOR<Prisma.ProfileCreateWithoutLB_MemoryCardsInput, Prisma.ProfileUncheckedCreateWithoutLB_MemoryCardsInput>
   connectOrCreate?: Prisma.ProfileCreateOrConnectWithoutLB_MemoryCardsInput
@@ -573,10 +618,12 @@ export type ProfileCreateWithoutUsersInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUncheckedCreateWithoutUsersInput = {
@@ -587,10 +634,12 @@ export type ProfileUncheckedCreateWithoutUsersInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileCreateOrConnectWithoutUsersInput = {
@@ -631,6 +680,7 @@ export type ProfileScalarWhereInput = {
   id?: Prisma.BigIntFilter<"Profile"> | bigint | number
   auth_user_id?: Prisma.UuidNullableFilter<"Profile"> | string | null
   auth_email?: Prisma.StringNullableFilter<"Profile"> | string | null
+  is_admin?: Prisma.BoolFilter<"Profile"> | boolean
 }
 
 export type ProfileCreateWithoutOwnedRoomsInput = {
@@ -641,10 +691,12 @@ export type ProfileCreateWithoutOwnedRoomsInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
   roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUncheckedCreateWithoutOwnedRoomsInput = {
@@ -656,9 +708,11 @@ export type ProfileUncheckedCreateWithoutOwnedRoomsInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileCreateOrConnectWithoutOwnedRoomsInput = {
@@ -685,10 +739,12 @@ export type ProfileUpdateWithoutOwnedRoomsInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
   roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutOwnedRoomsInput = {
@@ -700,9 +756,11 @@ export type ProfileUncheckedUpdateWithoutOwnedRoomsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileCreateWithoutRoomMembershipInput = {
@@ -713,10 +771,12 @@ export type ProfileCreateWithoutRoomMembershipInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUncheckedCreateWithoutRoomMembershipInput = {
@@ -728,9 +788,11 @@ export type ProfileUncheckedCreateWithoutRoomMembershipInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileCreateOrConnectWithoutRoomMembershipInput = {
@@ -757,10 +819,12 @@ export type ProfileUpdateWithoutRoomMembershipInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutRoomMembershipInput = {
@@ -772,9 +836,11 @@ export type ProfileUncheckedUpdateWithoutRoomMembershipInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileCreateWithoutChatMessagesInput = {
@@ -785,10 +851,12 @@ export type ProfileCreateWithoutChatMessagesInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUncheckedCreateWithoutChatMessagesInput = {
@@ -800,9 +868,11 @@ export type ProfileUncheckedCreateWithoutChatMessagesInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  is_admin?: boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileCreateOrConnectWithoutChatMessagesInput = {
@@ -829,10 +899,12 @@ export type ProfileUpdateWithoutChatMessagesInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutChatMessagesInput = {
@@ -844,9 +916,91 @@ export type ProfileUncheckedUpdateWithoutChatMessagesInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUncheckedUpdateManyWithoutOwnerNestedInput
+}
+
+export type ProfileCreateWithoutFootballTeamsInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_email?: string | null
+  is_admin?: boolean
+  LB_MemoryCards?: Prisma.LB_MemoryCardsCreateNestedManyWithoutProfileInput
+  users?: Prisma.usersCreateNestedOneWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileUncheckedCreateWithoutFootballTeamsInput = {
+  username?: string | null
+  first_name?: string | null
+  last_name?: string | null
+  created_at?: Date | string | null
+  avatar?: string | null
+  id?: bigint | number
+  auth_user_id?: string | null
+  auth_email?: string | null
+  is_admin?: boolean
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedCreateNestedManyWithoutProfileInput
+  ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
+  chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+}
+
+export type ProfileCreateOrConnectWithoutFootballTeamsInput = {
+  where: Prisma.ProfileWhereUniqueInput
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutFootballTeamsInput, Prisma.ProfileUncheckedCreateWithoutFootballTeamsInput>
+}
+
+export type ProfileUpsertWithoutFootballTeamsInput = {
+  update: Prisma.XOR<Prisma.ProfileUpdateWithoutFootballTeamsInput, Prisma.ProfileUncheckedUpdateWithoutFootballTeamsInput>
+  create: Prisma.XOR<Prisma.ProfileCreateWithoutFootballTeamsInput, Prisma.ProfileUncheckedCreateWithoutFootballTeamsInput>
+  where?: Prisma.ProfileWhereInput
+}
+
+export type ProfileUpdateToOneWithWhereWithoutFootballTeamsInput = {
+  where?: Prisma.ProfileWhereInput
+  data: Prisma.XOR<Prisma.ProfileUpdateWithoutFootballTeamsInput, Prisma.ProfileUncheckedUpdateWithoutFootballTeamsInput>
+}
+
+export type ProfileUpdateWithoutFootballTeamsInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
+  users?: Prisma.usersUpdateOneWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+}
+
+export type ProfileUncheckedUpdateWithoutFootballTeamsInput = {
+  username?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  first_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  last_name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  created_at?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
+  auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
+  ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
+  roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
+  chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
 }
 
 export type ProfileCreateWithoutLB_MemoryCardsInput = {
@@ -857,10 +1011,12 @@ export type ProfileCreateWithoutLB_MemoryCardsInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
   users?: Prisma.usersCreateNestedOneWithoutProfileInput
   ownedRooms?: Prisma.ChatRoomCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileUncheckedCreateWithoutLB_MemoryCardsInput = {
@@ -872,9 +1028,11 @@ export type ProfileUncheckedCreateWithoutLB_MemoryCardsInput = {
   id?: bigint | number
   auth_user_id?: string | null
   auth_email?: string | null
+  is_admin?: boolean
   ownedRooms?: Prisma.ChatRoomUncheckedCreateNestedManyWithoutOwnerInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedCreateNestedManyWithoutProfileInput
   chatMessages?: Prisma.ChatMessageUncheckedCreateNestedManyWithoutProfileInput
+  footballTeams?: Prisma.FootballTeamUncheckedCreateNestedManyWithoutOwnerInput
 }
 
 export type ProfileCreateOrConnectWithoutLB_MemoryCardsInput = {
@@ -901,10 +1059,12 @@ export type ProfileUpdateWithoutLB_MemoryCardsInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   users?: Prisma.usersUpdateOneWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutLB_MemoryCardsInput = {
@@ -916,9 +1076,11 @@ export type ProfileUncheckedUpdateWithoutLB_MemoryCardsInput = {
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_user_id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileCreateManyUsersInput = {
@@ -929,6 +1091,7 @@ export type ProfileCreateManyUsersInput = {
   avatar?: string | null
   id?: bigint | number
   auth_email?: string | null
+  is_admin?: boolean
 }
 
 export type ProfileUpdateWithoutUsersInput = {
@@ -939,10 +1102,12 @@ export type ProfileUpdateWithoutUsersInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUpdateManyWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateWithoutUsersInput = {
@@ -953,10 +1118,12 @@ export type ProfileUncheckedUpdateWithoutUsersInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
   LB_MemoryCards?: Prisma.LB_MemoryCardsUncheckedUpdateManyWithoutProfileNestedInput
   ownedRooms?: Prisma.ChatRoomUncheckedUpdateManyWithoutOwnerNestedInput
   roomMembership?: Prisma.ChatRoomMemberUncheckedUpdateManyWithoutProfileNestedInput
   chatMessages?: Prisma.ChatMessageUncheckedUpdateManyWithoutProfileNestedInput
+  footballTeams?: Prisma.FootballTeamUncheckedUpdateManyWithoutOwnerNestedInput
 }
 
 export type ProfileUncheckedUpdateManyWithoutUsersInput = {
@@ -967,6 +1134,7 @@ export type ProfileUncheckedUpdateManyWithoutUsersInput = {
   avatar?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   id?: Prisma.BigIntFieldUpdateOperationsInput | bigint | number
   auth_email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  is_admin?: Prisma.BoolFieldUpdateOperationsInput | boolean
 }
 
 
@@ -979,6 +1147,7 @@ export type ProfileCountOutputType = {
   ownedRooms: number
   roomMembership: number
   chatMessages: number
+  footballTeams: number
 }
 
 export type ProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -986,6 +1155,7 @@ export type ProfileCountOutputTypeSelect<ExtArgs extends runtime.Types.Extension
   ownedRooms?: boolean | ProfileCountOutputTypeCountOwnedRoomsArgs
   roomMembership?: boolean | ProfileCountOutputTypeCountRoomMembershipArgs
   chatMessages?: boolean | ProfileCountOutputTypeCountChatMessagesArgs
+  footballTeams?: boolean | ProfileCountOutputTypeCountFootballTeamsArgs
 }
 
 /**
@@ -1026,6 +1196,13 @@ export type ProfileCountOutputTypeCountChatMessagesArgs<ExtArgs extends runtime.
   where?: Prisma.ChatMessageWhereInput
 }
 
+/**
+ * ProfileCountOutputType without action
+ */
+export type ProfileCountOutputTypeCountFootballTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FootballTeamWhereInput
+}
+
 
 export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   username?: boolean
@@ -1036,11 +1213,13 @@ export type ProfileSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   auth_user_id?: boolean
   auth_email?: boolean
+  is_admin?: boolean
   LB_MemoryCards?: boolean | Prisma.Profile$LB_MemoryCardsArgs<ExtArgs>
   users?: boolean | Prisma.Profile$usersArgs<ExtArgs>
   ownedRooms?: boolean | Prisma.Profile$ownedRoomsArgs<ExtArgs>
   roomMembership?: boolean | Prisma.Profile$roomMembershipArgs<ExtArgs>
   chatMessages?: boolean | Prisma.Profile$chatMessagesArgs<ExtArgs>
+  footballTeams?: boolean | Prisma.Profile$footballTeamsArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
@@ -1053,6 +1232,7 @@ export type ProfileSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   auth_user_id?: boolean
   auth_email?: boolean
+  is_admin?: boolean
   users?: boolean | Prisma.Profile$usersArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
@@ -1065,6 +1245,7 @@ export type ProfileSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   id?: boolean
   auth_user_id?: boolean
   auth_email?: boolean
+  is_admin?: boolean
   users?: boolean | Prisma.Profile$usersArgs<ExtArgs>
 }, ExtArgs["result"]["profile"]>
 
@@ -1077,15 +1258,17 @@ export type ProfileSelectScalar = {
   id?: boolean
   auth_user_id?: boolean
   auth_email?: boolean
+  is_admin?: boolean
 }
 
-export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"username" | "first_name" | "last_name" | "created_at" | "avatar" | "id" | "auth_user_id" | "auth_email", ExtArgs["result"]["profile"]>
+export type ProfileOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"username" | "first_name" | "last_name" | "created_at" | "avatar" | "id" | "auth_user_id" | "auth_email" | "is_admin", ExtArgs["result"]["profile"]>
 export type ProfileInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   LB_MemoryCards?: boolean | Prisma.Profile$LB_MemoryCardsArgs<ExtArgs>
   users?: boolean | Prisma.Profile$usersArgs<ExtArgs>
   ownedRooms?: boolean | Prisma.Profile$ownedRoomsArgs<ExtArgs>
   roomMembership?: boolean | Prisma.Profile$roomMembershipArgs<ExtArgs>
   chatMessages?: boolean | Prisma.Profile$chatMessagesArgs<ExtArgs>
+  footballTeams?: boolean | Prisma.Profile$footballTeamsArgs<ExtArgs>
   _count?: boolean | Prisma.ProfileCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ProfileIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1103,6 +1286,7 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     ownedRooms: Prisma.$ChatRoomPayload<ExtArgs>[]
     roomMembership: Prisma.$ChatRoomMemberPayload<ExtArgs>[]
     chatMessages: Prisma.$ChatMessagePayload<ExtArgs>[]
+    footballTeams: Prisma.$FootballTeamPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     username: string | null
@@ -1113,6 +1297,7 @@ export type $ProfilePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     id: bigint
     auth_user_id: string | null
     auth_email: string | null
+    is_admin: boolean
   }, ExtArgs["result"]["profile"]>
   composites: {}
 }
@@ -1512,6 +1697,7 @@ export interface Prisma__ProfileClient<T, Null = never, ExtArgs extends runtime.
   ownedRooms<T extends Prisma.Profile$ownedRoomsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$ownedRoomsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatRoomPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   roomMembership<T extends Prisma.Profile$roomMembershipArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$roomMembershipArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatRoomMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   chatMessages<T extends Prisma.Profile$chatMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$chatMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ChatMessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  footballTeams<T extends Prisma.Profile$footballTeamsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Profile$footballTeamsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FootballTeamPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1549,6 +1735,7 @@ export interface ProfileFieldRefs {
   readonly id: Prisma.FieldRef<"Profile", 'BigInt'>
   readonly auth_user_id: Prisma.FieldRef<"Profile", 'String'>
   readonly auth_email: Prisma.FieldRef<"Profile", 'String'>
+  readonly is_admin: Prisma.FieldRef<"Profile", 'Boolean'>
 }
     
 
@@ -2062,6 +2249,30 @@ export type Profile$chatMessagesArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.ChatMessageScalarFieldEnum | Prisma.ChatMessageScalarFieldEnum[]
+}
+
+/**
+ * Profile.footballTeams
+ */
+export type Profile$footballTeamsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FootballTeam
+   */
+  select?: Prisma.FootballTeamSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FootballTeam
+   */
+  omit?: Prisma.FootballTeamOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FootballTeamInclude<ExtArgs> | null
+  where?: Prisma.FootballTeamWhereInput
+  orderBy?: Prisma.FootballTeamOrderByWithRelationInput | Prisma.FootballTeamOrderByWithRelationInput[]
+  cursor?: Prisma.FootballTeamWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FootballTeamScalarFieldEnum | Prisma.FootballTeamScalarFieldEnum[]
 }
 
 /**

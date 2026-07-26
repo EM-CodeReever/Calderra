@@ -2,7 +2,7 @@
     import type { PageProps } from './$types';
     import { onMount } from 'svelte';
     import { Toaster } from 'svelte-5-french-toast';
-    import { DiamondPercent, MessageSquareMore, Sticker } from '@lucide/svelte';
+    import { DiamondPercent, Goal, MessageSquareMore, Sticker } from '@lucide/svelte';
     import DadJokeBox from '$components/DadJokeBox.svelte';
     import CompleteProfileModal from '$components/CompleteProfileModal.svelte';
     import AnnouncementsCard from '$components/AnnouncementsCard.svelte';
@@ -34,7 +34,7 @@
 
     <AnnouncementsCard />
 
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <GameShortcutCard title="Memory Cards" description="Flip, match, beat the clock." href="/memory-card">
             <Sticker/>
         </GameShortcutCard>
@@ -43,6 +43,9 @@
         </GameShortcutCard>
         <GameShortcutCard title="Skaros Rock" description="Hang out in the chat room." href="/chat-room">
             <MessageSquareMore/>
+        </GameShortcutCard>
+        <GameShortcutCard title="Football" description="Build a squad and manage matchday tactics." href="/football">
+            <Goal/>
         </GameShortcutCard>
     </div>
 

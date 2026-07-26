@@ -532,6 +532,87 @@ model ChatMessage {
   @@schema("public")
 }
 
+model FootballTeam {
+  id                BigInt   @id @default(autoincrement())
+  created_at        DateTime @default(now()) @db.Timestamptz(6)
+  owner_id          BigInt?
+  owner             Profile? @relation(fields: [owner_id], references: [id], onDelete: Cascade)
+  name              String
+  is_ai             Boolean  @default(false)
+  default_formation String   @default("2-2-2")
+  default_lineup    Json?
+  budget            Int      @default(1000)
+  players           FootballPlayer[]
+  homeMatches       FootballMatch[] @relation("FootballHomeTeam")
+  awayMatches       FootballMatch[] @relation("FootballAwayTeam")
+
+  @@schema("public")
+}
+
+model FootballPlayer {
+  id             BigInt       @id @default(autoincrement())
+  created_at     DateTime     @default(now()) @db.Timestamptz(6)
+  team_id        BigInt?
+  team           FootballTeam? @relation(fields: [team_id], references: [id], onDelete: Cascade)
+  name           String
+  position       String // GK | DEF | MID | FWD
+  personality    String // FOCUSED | INCONSISTENT | RASH | OVERCONFIDENT | CLUTCH | LEADER
+  price          Int? // set when this is an unsigned free agent on the transfer market
+  level          Int          @default(1)
+  xp             Int          @default(0)
+  unspent_points Int          @default(0)
+  finishing      Int          @default(0)
+  trickery       Int          @default(0)
+  timing         Int          @default(0)
+  control        Int          @default(0)
+  passing        Int          @default(0)
+  vision         Int          @default(0)
+  tackling       Int          @default(0)
+  disruption     Int          @default(0)
+  positioning    Int          @default(0)
+  reflexes       Int          @default(0)
+  handling       Int          @default(0)
+  distribution   Int          @default(0)
+
+  @@schema("public")
+}
+
+model FootballMatch {
+  id                   BigInt               @id @default(autoincrement())
+  created_at           DateTime             @default(now()) @db.Timestamptz(6)
+  completed_at         DateTime?            @db.Timestamptz(6)
+  home_team_id         BigInt
+  home_team            FootballTeam         @relation("FootballHomeTeam", fields: [home_team_id], references: [id], onDelete: Cascade)
+  away_team_id         BigInt
+  away_team            FootballTeam         @relation("FootballAwayTeam", fields: [away_team_id], references: [id], onDelete: Cascade)
+  status               String               @default("FIRST_HALF_PENDING")
+  home_score           Int                  @default(0)
+  away_score           Int                  @default(0)
+  home_lineup          Json
+  away_lineup          Json
+  home_halftime_lineup Json?
+  away_halftime_lineup Json?
+  events               FootballMatchEvent[]
+
+  @@schema("public")
+}
+
+model FootballMatchEvent {
+  id            BigInt        @id @default(autoincrement())
+  match_id      BigInt
+  match         FootballMatch @relation(fields: [match_id], references: [id], onDelete: Cascade)
+  sequence      Int
+  minute        Int
+  half          Int
+  type          String
+  description   String
+  player_id     BigInt?
+  position_data Json?
+
+  @@index([match_id, sequence])
+  @@schema("public")
+}
+
 /// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
 /// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
 model LB_MemoryCards {
@@ -560,11 +641,13 @@ model Profile {
   id             BigInt           @id(map: "User_pkey") @default(autoincrement())
   auth_user_id   String?          @db.Uuid
   auth_email     String?          @db.VarChar
+  is_admin       Boolean          @default(false)
   LB_MemoryCards LB_MemoryCards[]
   users          users?           @relation(fields: [auth_user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
   ownedRooms     ChatRoom[]       @relation("RoomOwner")
   roomMembership ChatRoomMember[]
   chatMessages   ChatMessage[]
+  footballTeams  FootballTeam[]
 
   @@schema("public")
 }

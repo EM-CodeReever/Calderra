@@ -410,6 +410,10 @@ export const ModelName = {
   ChatRoom: 'ChatRoom',
   ChatRoomMember: 'ChatRoomMember',
   ChatMessage: 'ChatMessage',
+  FootballTeam: 'FootballTeam',
+  FootballPlayer: 'FootballPlayer',
+  FootballMatch: 'FootballMatch',
+  FootballMatchEvent: 'FootballMatchEvent',
   LB_MemoryCards: 'LB_MemoryCards',
   Profile: 'Profile'
 } as const
@@ -427,7 +431,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "audit_log_entries" | "custom_oauth_providers" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "oauth_authorizations" | "oauth_client_states" | "oauth_clients" | "oauth_consents" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "webauthn_challenges" | "webauthn_credentials" | "chatRoom" | "chatRoomMember" | "chatMessage" | "lB_MemoryCards" | "profile"
+    modelProps: "audit_log_entries" | "custom_oauth_providers" | "flow_state" | "identities" | "instances" | "mfa_amr_claims" | "mfa_challenges" | "mfa_factors" | "oauth_authorizations" | "oauth_client_states" | "oauth_clients" | "oauth_consents" | "one_time_tokens" | "refresh_tokens" | "saml_providers" | "saml_relay_states" | "schema_migrations" | "sessions" | "sso_domains" | "sso_providers" | "users" | "webauthn_challenges" | "webauthn_credentials" | "chatRoom" | "chatRoomMember" | "chatMessage" | "footballTeam" | "footballPlayer" | "footballMatch" | "footballMatchEvent" | "lB_MemoryCards" | "profile"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -2355,6 +2359,302 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FootballTeam: {
+      payload: Prisma.$FootballTeamPayload<ExtArgs>
+      fields: Prisma.FootballTeamFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FootballTeamFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FootballTeamFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>
+        }
+        findFirst: {
+          args: Prisma.FootballTeamFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FootballTeamFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>
+        }
+        findMany: {
+          args: Prisma.FootballTeamFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>[]
+        }
+        create: {
+          args: Prisma.FootballTeamCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>
+        }
+        createMany: {
+          args: Prisma.FootballTeamCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FootballTeamCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>[]
+        }
+        delete: {
+          args: Prisma.FootballTeamDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>
+        }
+        update: {
+          args: Prisma.FootballTeamUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>
+        }
+        deleteMany: {
+          args: Prisma.FootballTeamDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FootballTeamUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FootballTeamUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>[]
+        }
+        upsert: {
+          args: Prisma.FootballTeamUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballTeamPayload>
+        }
+        aggregate: {
+          args: Prisma.FootballTeamAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFootballTeam>
+        }
+        groupBy: {
+          args: Prisma.FootballTeamGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballTeamGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FootballTeamCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballTeamCountAggregateOutputType> | number
+        }
+      }
+    }
+    FootballPlayer: {
+      payload: Prisma.$FootballPlayerPayload<ExtArgs>
+      fields: Prisma.FootballPlayerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FootballPlayerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FootballPlayerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>
+        }
+        findFirst: {
+          args: Prisma.FootballPlayerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FootballPlayerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>
+        }
+        findMany: {
+          args: Prisma.FootballPlayerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>[]
+        }
+        create: {
+          args: Prisma.FootballPlayerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>
+        }
+        createMany: {
+          args: Prisma.FootballPlayerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FootballPlayerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>[]
+        }
+        delete: {
+          args: Prisma.FootballPlayerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>
+        }
+        update: {
+          args: Prisma.FootballPlayerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>
+        }
+        deleteMany: {
+          args: Prisma.FootballPlayerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FootballPlayerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FootballPlayerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>[]
+        }
+        upsert: {
+          args: Prisma.FootballPlayerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballPlayerPayload>
+        }
+        aggregate: {
+          args: Prisma.FootballPlayerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFootballPlayer>
+        }
+        groupBy: {
+          args: Prisma.FootballPlayerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballPlayerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FootballPlayerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballPlayerCountAggregateOutputType> | number
+        }
+      }
+    }
+    FootballMatch: {
+      payload: Prisma.$FootballMatchPayload<ExtArgs>
+      fields: Prisma.FootballMatchFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FootballMatchFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FootballMatchFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>
+        }
+        findFirst: {
+          args: Prisma.FootballMatchFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FootballMatchFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>
+        }
+        findMany: {
+          args: Prisma.FootballMatchFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>[]
+        }
+        create: {
+          args: Prisma.FootballMatchCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>
+        }
+        createMany: {
+          args: Prisma.FootballMatchCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FootballMatchCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>[]
+        }
+        delete: {
+          args: Prisma.FootballMatchDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>
+        }
+        update: {
+          args: Prisma.FootballMatchUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>
+        }
+        deleteMany: {
+          args: Prisma.FootballMatchDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FootballMatchUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FootballMatchUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>[]
+        }
+        upsert: {
+          args: Prisma.FootballMatchUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchPayload>
+        }
+        aggregate: {
+          args: Prisma.FootballMatchAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFootballMatch>
+        }
+        groupBy: {
+          args: Prisma.FootballMatchGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballMatchGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FootballMatchCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballMatchCountAggregateOutputType> | number
+        }
+      }
+    }
+    FootballMatchEvent: {
+      payload: Prisma.$FootballMatchEventPayload<ExtArgs>
+      fields: Prisma.FootballMatchEventFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FootballMatchEventFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FootballMatchEventFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>
+        }
+        findFirst: {
+          args: Prisma.FootballMatchEventFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FootballMatchEventFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>
+        }
+        findMany: {
+          args: Prisma.FootballMatchEventFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>[]
+        }
+        create: {
+          args: Prisma.FootballMatchEventCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>
+        }
+        createMany: {
+          args: Prisma.FootballMatchEventCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FootballMatchEventCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>[]
+        }
+        delete: {
+          args: Prisma.FootballMatchEventDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>
+        }
+        update: {
+          args: Prisma.FootballMatchEventUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>
+        }
+        deleteMany: {
+          args: Prisma.FootballMatchEventDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FootballMatchEventUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FootballMatchEventUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>[]
+        }
+        upsert: {
+          args: Prisma.FootballMatchEventUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FootballMatchEventPayload>
+        }
+        aggregate: {
+          args: Prisma.FootballMatchEventAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFootballMatchEvent>
+        }
+        groupBy: {
+          args: Prisma.FootballMatchEventGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballMatchEventGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FootballMatchEventCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FootballMatchEventCountAggregateOutputType> | number
+        }
+      }
+    }
     LB_MemoryCards: {
       payload: Prisma.$LB_MemoryCardsPayload<ExtArgs>
       fields: Prisma.LB_MemoryCardsFieldRefs
@@ -2951,6 +3251,81 @@ export const ChatMessageScalarFieldEnum = {
 export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
 
 
+export const FootballTeamScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  owner_id: 'owner_id',
+  name: 'name',
+  is_ai: 'is_ai',
+  default_formation: 'default_formation',
+  default_lineup: 'default_lineup',
+  budget: 'budget'
+} as const
+
+export type FootballTeamScalarFieldEnum = (typeof FootballTeamScalarFieldEnum)[keyof typeof FootballTeamScalarFieldEnum]
+
+
+export const FootballPlayerScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  team_id: 'team_id',
+  name: 'name',
+  position: 'position',
+  personality: 'personality',
+  price: 'price',
+  level: 'level',
+  xp: 'xp',
+  unspent_points: 'unspent_points',
+  finishing: 'finishing',
+  trickery: 'trickery',
+  timing: 'timing',
+  control: 'control',
+  passing: 'passing',
+  vision: 'vision',
+  tackling: 'tackling',
+  disruption: 'disruption',
+  positioning: 'positioning',
+  reflexes: 'reflexes',
+  handling: 'handling',
+  distribution: 'distribution'
+} as const
+
+export type FootballPlayerScalarFieldEnum = (typeof FootballPlayerScalarFieldEnum)[keyof typeof FootballPlayerScalarFieldEnum]
+
+
+export const FootballMatchScalarFieldEnum = {
+  id: 'id',
+  created_at: 'created_at',
+  completed_at: 'completed_at',
+  home_team_id: 'home_team_id',
+  away_team_id: 'away_team_id',
+  status: 'status',
+  home_score: 'home_score',
+  away_score: 'away_score',
+  home_lineup: 'home_lineup',
+  away_lineup: 'away_lineup',
+  home_halftime_lineup: 'home_halftime_lineup',
+  away_halftime_lineup: 'away_halftime_lineup'
+} as const
+
+export type FootballMatchScalarFieldEnum = (typeof FootballMatchScalarFieldEnum)[keyof typeof FootballMatchScalarFieldEnum]
+
+
+export const FootballMatchEventScalarFieldEnum = {
+  id: 'id',
+  match_id: 'match_id',
+  sequence: 'sequence',
+  minute: 'minute',
+  half: 'half',
+  type: 'type',
+  description: 'description',
+  player_id: 'player_id',
+  position_data: 'position_data'
+} as const
+
+export type FootballMatchEventScalarFieldEnum = (typeof FootballMatchEventScalarFieldEnum)[keyof typeof FootballMatchEventScalarFieldEnum]
+
+
 export const LB_MemoryCardsScalarFieldEnum = {
   id: 'id',
   created_at: 'created_at',
@@ -2975,7 +3350,8 @@ export const ProfileScalarFieldEnum = {
   avatar: 'avatar',
   id: 'id',
   auth_user_id: 'auth_user_id',
-  auth_email: 'auth_email'
+  auth_email: 'auth_email',
+  is_admin: 'is_admin'
 } as const
 
 export type ProfileScalarFieldEnum = (typeof ProfileScalarFieldEnum)[keyof typeof ProfileScalarFieldEnum]
@@ -3401,6 +3777,10 @@ export type GlobalOmitConfig = {
   chatRoom?: Prisma.ChatRoomOmit
   chatRoomMember?: Prisma.ChatRoomMemberOmit
   chatMessage?: Prisma.ChatMessageOmit
+  footballTeam?: Prisma.FootballTeamOmit
+  footballPlayer?: Prisma.FootballPlayerOmit
+  footballMatch?: Prisma.FootballMatchOmit
+  footballMatchEvent?: Prisma.FootballMatchEventOmit
   lB_MemoryCards?: Prisma.LB_MemoryCardsOmit
   profile?: Prisma.ProfileOmit
 }

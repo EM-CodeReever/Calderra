@@ -173,6 +173,26 @@ export type ChatRoomMember = Prisma.ChatRoomMemberModel
  */
 export type ChatMessage = Prisma.ChatMessageModel
 /**
+ * Model FootballTeam
+ * 
+ */
+export type FootballTeam = Prisma.FootballTeamModel
+/**
+ * Model FootballPlayer
+ * 
+ */
+export type FootballPlayer = Prisma.FootballPlayerModel
+/**
+ * Model FootballMatch
+ * 
+ */
+export type FootballMatch = Prisma.FootballMatchModel
+/**
+ * Model FootballMatchEvent
+ * 
+ */
+export type FootballMatchEvent = Prisma.FootballMatchEventModel
+/**
  * Model LB_MemoryCards
  * This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
  * This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.

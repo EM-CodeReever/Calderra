@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { DiamondPercent, House, ListOrdered, Menu, MessageSquareMore, Sticker, X } from "@lucide/svelte";
+  import { DiamondPercent, Goal, House, ListOrdered, Menu, MessageSquareMore, Sticker, X } from "@lucide/svelte";
 
   import SideNavItem from "./SideNavItem.svelte";
   import Project from "./svg/Project.svelte";
@@ -45,6 +45,9 @@
         </SideNavItem>
         <SideNavItem title="Skaros Rock" isActive={(currentPath === staticPath + "/chat-room")} linkTo="/chat-room" expanded={sidebarState.expanded}>
           <MessageSquareMore/>
+        </SideNavItem>
+        <SideNavItem title="Football" isActive={(currentPath === staticPath + "/football")} linkTo="/football" expanded={sidebarState.expanded}>
+          <Goal/>
         </SideNavItem>
         <SideNavItem title="Leaderboard" isActive={(currentPath === staticPath + "/leaderboard")} linkTo="/leaderboard" expanded={sidebarState.expanded}>
           <ListOrdered/>
