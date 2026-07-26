@@ -17,6 +17,8 @@
     const error_sound = new Sound(S_error);
     const pop_match_sound = new Sound(S_pop_match);
     import { cubicIn } from 'svelte/easing';
+    import { lordIconTheme } from '$lib/actions/lordIconTheme';
+    import { themeState } from '$lib/state/theme.svelte';
     let { data }: PageProps = $props();
     // svelte-ignore state_referenced_locally
     let session_access_token = $state("") 
@@ -194,7 +196,7 @@
                     trigger="loop"
                     stroke="bold"
                     state="loop-cycle"
-                    colors="primary:#ffffff,secondary:#ffffff"
+                    use:lordIconTheme={themeState.current}
                     style="width:50px;height:50px"
                     class="absolute right-[calc(50%-25px)] bottom-[calc(50%-25px)]">
                 </lord-icon>
@@ -289,7 +291,7 @@
                 trigger="in"
                 stroke="regular"
                 state="pinch"
-                colors="primary:#ffffff,secondary:#ffffff"
+                use:lordIconTheme={themeState.current}
                 style="width:250px;height:250px">
             </lord-icon>
             <h1 class="text-3xl font-bold text-center">Memory Cards</h1>

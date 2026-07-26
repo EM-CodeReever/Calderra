@@ -1,5 +1,6 @@
 <script>
     import { goto } from "$app/navigation";
+  import { isBespokeWaveTheme } from "$lib/state/theme.svelte";
     import { AppWindow, Menu, House, CircleQuestionMark, ClipboardPen} from "@lucide/svelte";
     let { children } = $props();
   </script>
@@ -22,7 +23,7 @@
             </li>
         </ul>
         <div class="hidden lg:flex items-center">
-            <button class="btn btn-primary" onclick={()=>{goto('dashboard')}}>
+            <button class="btn {isBespokeWaveTheme() ? 'btn-primary' : 'btn-neutral'}" onclick={()=>{goto('dashboard')}}>
                 <AppWindow size="20" />
                 Open Application</button>
         </div>

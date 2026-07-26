@@ -88,7 +88,7 @@
         in:fade={{ duration: 800, easing: cubicOut, delay: 500 }}
       >
         <button
-          class="btn btn-base-100 btn-lg  rounded-lg"
+          class="btn btn-ghost btn-lg"
           onclick={() => {
             goto("register");
           }}>Create an account
@@ -96,7 +96,7 @@
           </button
         >
         <button
-          class="btn btn-lg {isBespokeWaveTheme() ? 'btn-primary' : 'btn-accent'} rounded-lg"
+          class="btn btn-lg {isBespokeWaveTheme() ? 'btn-primary' : 'btn-neutral'}"
           onclick={() => {
             goto("login");
           }}>
@@ -112,7 +112,7 @@
 <section
   use:inview={options}
   oninview_change={handleSectionOneInviewChange}
-  class="w-full flex flex-col space-y-5 justify-center items-center {showcaseBgClass()} {isBespokeWaveTheme() ? 'text-primary-content' : 'text-primary-content'} relative isolate"
+  class="w-full flex flex-col space-y-5 justify-center items-center {showcaseBgClass()} {isBespokeWaveTheme() ? 'text-secondary-content' : 'text-primary-content'} relative isolate"
   style="height: 30rem;"
 >
   {#if sectionOneINVIEW}
@@ -144,7 +144,7 @@
                     </div>
                     <p class="text-2xl font-bold">{project.title}</p>
                     <p class="text-sm">{project.description}</p>
-                    <button class="btn {isBespokeWaveTheme() ? 'btn-primary' : 'btn-accent'} rounded-lg" onclick={() => goto(project.href)}>
+                    <button class="btn btn-outline rounded-lg" onclick={() => goto(project.href)}>
                         Check it out
                     </button>
                 </div>
