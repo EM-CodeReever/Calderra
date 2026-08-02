@@ -47,6 +47,10 @@ export const load: PageServerLoad = async ({ params, parent }) => {
             awayStamina: match.away_stamina as Record<string, number> | null,
             homeForm: match.home_form as Record<string, number> | null,
             awayForm: match.away_form as Record<string, number> | null,
+            homeStaminaH1: match.home_stamina_h1 as Record<string, number> | null,
+            awayStaminaH1: match.away_stamina_h1 as Record<string, number> | null,
+            homeFormH1: match.home_form_h1 as Record<string, number> | null,
+            awayFormH1: match.away_form_h1 as Record<string, number> | null,
             homePlayers: match.home_team.players,
             awayPlayers: match.away_team.players,
             events: match.events.map((e) => ({

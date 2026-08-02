@@ -112,6 +112,41 @@
     });
     onDestroy(() => clearTimeout(goalFlashTimer));
 
+    let showCardFlash = $state(false);
+    let cardFlashPlayer = $state('');
+    let cardFlashType = $state<'YELLOW' | 'RED'>('YELLOW');
+    let cardFlashTimer: ReturnType<typeof setTimeout> | undefined;
+    let lastCardSequence = -1;
+    let lastCardMatchId = '';
+
+    $effect(() => {
+        const evt = activeEvent;
+        if (match.id !== lastCardMatchId) {
+            lastCardMatchId = match.id;
+            lastCardSequence = -1;
+        }
+        if (evt && (evt.type === 'CARD_YELLOW' || evt.type === 'CARD_RED') && evt.sequence !== lastCardSequence) {
+            lastCardSequence = evt.sequence;
+            const booked = [...homeRoster, ...awayRoster].find((p) => p.id === evt.playerId);
+            cardFlashPlayer = booked?.name ?? '';
+            cardFlashType = evt.type === 'CARD_RED' ? 'RED' : 'YELLOW';
+            showCardFlash = true;
+            clearTimeout(cardFlashTimer);
+            cardFlashTimer = setTimeout(() => { showCardFlash = false; }, 1800);
+        }
+    });
+    onDestroy(() => clearTimeout(cardFlashTimer));
+
+    // Cards persist on the pitch for the rest of the match once shown.
+    let cardedById = $derived.by(() => {
+        const map: Record<string, 'YELLOW' | 'RED'> = {};
+        for (const e of visibleEvents) {
+            if (e.type === 'CARD_YELLOW' && e.playerId && map[e.playerId] !== 'RED') map[e.playerId] = 'YELLOW';
+            if (e.type === 'CARD_RED' && e.playerId) map[e.playerId] = 'RED';
+        }
+        return map;
+    });
+
     let homeScore = $derived(visibleEvents.filter((e) => e.type === 'SHOT_GOAL' && homeRoster.some((p) => p.id === e.playerId)).length);
     let awayScore = $derived(visibleEvents.filter((e) => e.type === 'SHOT_GOAL' && awayRoster.some((p) => p.id === e.playerId)).length);
 
@@ -143,15 +178,34 @@
 
     let selectedPlayerIsHome = $derived(homeRoster.some((p) => p.id === selectedPlayerId));
 
+    // Stamina/form snapshots are only captured once per half (at its end), so we interpolate
+    // stamina from 100% down to that end value based on how far through the half's events
+    // playback currently is — otherwise everyone would appear to "start" already tired.
+    let currentHalfNumber = $derived(activeEvent?.half ?? 1);
+    let currentHalfEventsList = $derived(match.events.filter((e) => e.half === currentHalfNumber));
+    let currentHalfProgress = $derived.by(() => {
+        if (!activeEvent) return 0;
+        const idx = currentHalfEventsList.findIndex((e) => e.sequence === activeEvent.sequence);
+        if (idx === -1) return 0;
+        if (currentHalfEventsList.length <= 1) return 1;
+        return idx / (currentHalfEventsList.length - 1);
+    });
+
     let selectedPlayerStamina = $derived.by(() => {
         if (!selectedPlayerId) return null;
-        const staminaMap = selectedPlayerIsHome ? match.homeStamina : match.awayStamina;
-        return staminaMap?.[selectedPlayerId] ?? null;
+        const staminaMap = currentHalfNumber === 1
+            ? (selectedPlayerIsHome ? match.homeStaminaH1 : match.awayStaminaH1)
+            : (selectedPlayerIsHome ? match.homeStamina : match.awayStamina);
+        const endValue = staminaMap?.[selectedPlayerId];
+        if (endValue === undefined || endValue === null) return null;
+        return 100 - (100 - endValue) * currentHalfProgress;
     });
 
     let selectedPlayerForm = $derived.by(() => {
         if (!selectedPlayerId) return null;
-        const formMap = selectedPlayerIsHome ? match.homeForm : match.awayForm;
+        const formMap = currentHalfNumber === 1
+            ? (selectedPlayerIsHome ? match.homeFormH1 : match.awayFormH1)
+            : (selectedPlayerIsHome ? match.homeForm : match.awayForm);
         return formMap?.[selectedPlayerId] ?? null;
     });
 
@@ -197,12 +251,22 @@
             activePlayerId={activeEvent?.playerId ?? null}
             activePosition={activeEvent?.positionData as any}
             onPlayerClick={(id) => selectedPlayerId = id}
+            {cardedById}
         />
         {#if showGoalFlash}
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-50" transition:scale={{ duration: 250, start: 0.5 }}>
             <div class="bg-warning text-warning-content rounded-2xl px-8 py-4 text-center shadow-2xl">
                 <p class="text-3xl font-black tracking-wide">⚽ GOAL!</p>
                 <p class="text-lg font-semibold">{goalFlashScorer}</p>
+            </div>
+        </div>
+        {/if}
+        {#if showCardFlash}
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-50" transition:scale={{ duration: 250, start: 0.5 }}>
+            <div class="{cardFlashType === 'RED' ? 'bg-error text-error-content' : 'bg-warning text-warning-content'} rounded-2xl px-8 py-4 text-center shadow-2xl">
+                <div class="mx-auto mb-1 w-5 h-7 rounded-xs {cardFlashType === 'RED' ? 'bg-error-content/90' : 'bg-warning-content/90'}"></div>
+                <p class="text-xl font-black tracking-wide">{cardFlashType === 'RED' ? 'RED CARD' : 'YELLOW CARD'}</p>
+                <p class="text-lg font-semibold">{cardFlashPlayer}</p>
             </div>
         </div>
         {/if}

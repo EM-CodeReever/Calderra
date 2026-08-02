@@ -7,12 +7,14 @@
         activePlayerId = null,
         activePosition = null,
         onPlayerClick = null,
+        cardedById = {},
     }: {
         homeSlots: Slot[];
         awaySlots: Slot[];
         activePlayerId?: string | null;
         activePosition?: { x: number; y: number } | null;
         onPlayerClick?: ((id: string) => void) | null;
+        cardedById?: Record<string, 'YELLOW' | 'RED'>;
     } = $props();
 
     let allSlots = $derived([...homeSlots, ...awaySlots]);
@@ -47,6 +49,7 @@
     {#each allSlots as slot (slot.id)}
     {@const isActive = slot.id === activePlayerId}
     {@const pos = isActive && activePosition ? activePosition : slot}
+    {@const card = cardedById[slot.id]}
     <button
         type="button"
         class="absolute flex items-center gap-0.5 transition-all duration-700 ease-out {slot.team === 'AWAY' ? 'flex-col-reverse' : 'flex-col'} {onPlayerClick ? 'cursor-pointer' : 'cursor-default'}"
@@ -54,8 +57,13 @@
         onclick={() => onPlayerClick?.(slot.id)}
         disabled={!onPlayerClick}
     >
-        <div class="rounded-full flex items-center justify-center text-[10px] font-bold border-2 {slot.team === 'HOME' ? 'bg-primary text-primary-content border-primary-content/40' : 'bg-secondary text-secondary-content border-secondary-content/40'} {isActive ? 'w-9 h-9 ring-2 ring-warning' : 'w-7 h-7'}">
-            {initials(slot.name)}
+        <div class="relative">
+            <div class="rounded-full flex items-center justify-center text-[10px] font-bold border-2 {slot.team === 'HOME' ? 'bg-primary text-primary-content border-primary-content/40' : 'bg-secondary text-secondary-content border-secondary-content/40'} {isActive ? 'w-9 h-9 ring-2 ring-warning' : 'w-7 h-7'} {card === 'RED' ? 'opacity-40' : ''}">
+                {initials(slot.name)}
+            </div>
+            {#if card}
+            <span class="absolute -top-0.5 -right-0.5 w-2 h-2.5 rounded-xs border border-black/40 {card === 'RED' ? 'bg-error' : 'bg-warning'}"></span>
+            {/if}
         </div>
         <span class="text-[9px] text-white drop-shadow max-w-10.5 truncate text-center">{shortName(slot.name)}</span>
     </button>

@@ -61,7 +61,7 @@ export type MatchStatus = 'FIRST_HALF_PENDING' | 'AWAITING_HALFTIME' | 'COMPLETE
 export type MatchEventType =
     | 'KICKOFF' | 'BUILDUP' | 'RUN_SUCCESS' | 'RUN_FAIL'
     | 'DRIBBLE_SUCCESS' | 'DRIBBLE_FAIL' | 'SHOT_GOAL' | 'SHOT_SAVED'
-    | 'SHOT_BLOCKED' | 'SHOT_OFF' | 'CARD_YELLOW' | 'CARD_RED'
+    | 'SHOT_BLOCKED' | 'SHOT_OFF' | 'CARD_YELLOW' | 'CARD_RED' | 'OFFSIDE'
     | 'SUB' | 'HALFTIME' | 'FULLTIME';
 
 export type PitchPoint = { x: number; y: number };

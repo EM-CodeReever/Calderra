@@ -75,6 +75,14 @@ export function offTargetLine(rng: () => number, player: string): string {
     ]);
 }
 
+export function offsideLine(rng: () => number, player: string): string {
+    return pick(rng, [
+        `${player} times the run wrong and is flagged offside!`,
+        `The linesman's flag is up — ${player} strayed too early.`,
+        `${player} beats the defense to it, but the flag cuts the run short. Offside.`,
+    ]);
+}
+
 export function yellowCardLine(rng: () => number, player: string, victim: string): string {
     return pick(rng, [
         `${player} is booked for a rash challenge on ${victim}.`,

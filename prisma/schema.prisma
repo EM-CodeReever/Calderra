@@ -601,6 +601,10 @@ model FootballMatch {
   away_stamina         Json?
   home_form            Json? // Record<playerId, 0-100> — this half's form roll
   away_form            Json?
+  home_stamina_h1      Json? // frozen end-of-first-half snapshot, so half 1 stays accurate to view after full time
+  away_stamina_h1      Json?
+  home_form_h1         Json?
+  away_form_h1         Json?
   events               FootballMatchEvent[]
   challenges           FootballChallenge[]
 

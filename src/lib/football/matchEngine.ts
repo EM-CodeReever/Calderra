@@ -137,27 +137,35 @@ function attributeScore(
     return Math.max(1, player[attr] * mult);
 }
 
+/** Passive drain applied to every starter each phase, regardless of involvement — general
+ *  running and positioning. Players actually involved in a phase's action lose extra stamina
+ *  on top of this via applyActionDrain. */
 function depleteStamina(state: TeamMatchState, rng: () => number) {
     for (const id of activeStarters(state)) {
         const player = state.roster.get(id);
         const isGk = player?.position === 'GK';
-        const drain = isGk ? rng() * 1 : rng() * 3 + 1;
+        const drain = isGk ? rng() * 0.5 : rng() * 1.5 + 0.5;
         state.stamina[id] = Math.max(0, (state.stamina[id] ?? 100) - drain);
     }
+}
+
+/** Extra stamina cost for a player directly involved in a phase's action (sprinting,
+ *  tackling, diving) — on top of the passive per-phase drain everyone gets. */
+function applyActionDrain(state: TeamMatchState, playerId: string, amount: number) {
+    state.stamina[playerId] = Math.max(0, (state.stamina[playerId] ?? 100) - amount);
 }
 
 function cardCheck(
     rng: () => number,
     state: TeamMatchState,
     defenderId: string,
-    attackerId: string,
+    attackerName: string,
     minute: number,
     half: 1 | 2,
     sequence: number,
 ): MatchEventRecord | null {
     const defender = state.roster.get(defenderId);
-    const attacker = state.roster.get(attackerId);
-    if (!defender || !attacker) return null;
+    if (!defender) return null;
     const isRash = defender.personality === 'RASH';
     const yellowChance = 0.06 * (isRash ? 2 : 1);
     const redChance = 0.007 * (isRash ? 2 : 1);
@@ -170,7 +178,7 @@ function cardCheck(
             minute,
             half,
             type: 'CARD_RED',
-            description: lines.redCardLine(rng, defender.name, attacker.name),
+            description: lines.redCardLine(rng, defender.name, attackerName),
             playerId: defenderId,
             team: null,
             positionData: null,
@@ -185,7 +193,7 @@ function cardCheck(
                 minute,
                 half,
                 type: 'CARD_RED',
-                description: `Second yellow! ${defender.name} is sent off after another foul on ${attacker.name}.`,
+                description: `Second yellow! ${defender.name} is sent off after another foul on ${attackerName}.`,
                 playerId: defenderId,
                 team: null,
                 positionData: null,
@@ -196,7 +204,7 @@ function cardCheck(
             minute,
             half,
             type: 'CARD_YELLOW',
-            description: lines.yellowCardLine(rng, defender.name, attacker.name),
+            description: lines.yellowCardLine(rng, defender.name, attackerName),
             playerId: defenderId,
             team: null,
             positionData: null,
@@ -356,6 +364,11 @@ function resolveAttack(
     const defender = defenders.roster.get(defenderId)!;
     const midService = midfieldServiceBonus(attackers, minute, scoreDiff);
 
+    // The attacker and their marker are directly engaged in this phase's action — they tire
+    // faster than teammates who weren't involved this time.
+    applyActionDrain(attackers, attackerId, rng() * 2 + 1);
+    applyActionDrain(defenders, defenderId, rng() * 1.5 + 1);
+
     // 1. Run / timing
     const runScore = attributeScore(attackers, attackerId, 'timing', minute, scoreDiff) + midService;
     const coverScore = attributeScore(defenders, defenderId, 'positioning', minute, scoreDiff);
@@ -384,6 +397,23 @@ function resolveAttack(
         positionData: { x: pitchX(attackingTeam, 65), y: 20 + rng() * 60 },
     });
 
+    // 1b. Offside — did the attacker time that run onside? Sharper defensive positioning
+    // relative to the attacker's own timing raises the risk of being caught out.
+    const offsideChance = clamp(0.12 * (coverScore / runScore), 0.03, 0.22);
+    if (rng() < offsideChance) {
+        events.push({
+            sequence: sequence++,
+            minute,
+            half,
+            type: 'OFFSIDE',
+            description: lines.offsideLine(rng, attacker.name),
+            playerId: attackerId,
+            team: attackingTeam,
+            positionData: { x: pitchX(attackingTeam, 68), y: 20 + rng() * 60 },
+        });
+        return { events, goal: false };
+    }
+
     // 2. Dribble / trickery vs tackling
     const trickScore = attributeScore(attackers, attackerId, 'trickery', minute, scoreDiff);
     const tackleScore = attributeScore(defenders, defenderId, 'tackling', minute, scoreDiff);
@@ -399,7 +429,7 @@ function resolveAttack(
             team: attackingTeam,
             positionData: { x: pitchX(attackingTeam, 75), y: 20 + rng() * 60 },
         });
-        const card = cardCheck(rng, defenders, defenderId, attackerId, minute, half, sequence);
+        const card = cardCheck(rng, defenders, defenderId, attacker.name, minute, half, sequence);
         if (card) {
             events.push(card);
             sequence++;
@@ -422,6 +452,7 @@ function resolveAttack(
     if (blockerPool.length > 0 && rng() < 0.18) {
         const blockerId = weightedPick(rng, blockerPool);
         const blocker = defenders.roster.get(blockerId)!;
+        applyActionDrain(defenders, blockerId, rng() * 1 + 0.5);
         events.push({
             sequence: sequence++,
             minute,
@@ -456,6 +487,7 @@ function resolveAttack(
     const finishScore = attributeScore(attackers, attackerId, 'finishing', minute, scoreDiff);
     const gkScore = gk ? attributeScore(defenders, gkId, 'reflexes', minute, scoreDiff) : 8;
     const goalChance = clamp(finishScore / (finishScore + gkScore), 0.2, 0.85);
+    if (gk) applyActionDrain(defenders, gkId, rng() * 1.5 + 0.5);
     if (rng() < goalChance) {
         events.push({
             sequence: sequence++,

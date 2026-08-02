@@ -42,6 +42,10 @@ export async function kickoffMatch(homeTeamId: bigint, awayTeamId: bigint): Prom
             away_stamina: awayState.stamina as any,
             home_form: homeState.formRoll as any,
             away_form: awayState.formRoll as any,
+            home_stamina_h1: homeState.stamina as any,
+            away_stamina_h1: awayState.stamina as any,
+            home_form_h1: homeState.formRoll as any,
+            away_form_h1: awayState.formRoll as any,
             events: {
                 create: half1.events.map((e) => ({
                     sequence: e.sequence,
