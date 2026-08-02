@@ -5,6 +5,7 @@
     import { goto, invalidateAll } from '$app/navigation';
     import { scale } from 'svelte/transition';
     import PitchVisualizer from '$components/football/PitchVisualizer.svelte';
+    import PlayerStatModal from '$components/football/PlayerStatModal.svelte';
     import BackToFootballHome from '$components/football/BackToFootballHome.svelte';
     import { computeSlots, toLite } from '$lib/football/lineup';
     import type { Lineup } from '$lib/football/types';
@@ -16,8 +17,6 @@
     let awayLineup = $derived(match.awayLineup as unknown as Lineup);
     let homeRoster = $derived(match.homePlayers.map(toLite));
     let awayRoster = $derived(match.awayPlayers.map(toLite));
-    let homeSlots = $derived(computeSlots(homeLineup, homeRoster, 'HOME'));
-    let awaySlots = $derived(computeSlots(awayLineup, awayRoster, 'AWAY'));
 
     let half1Events = $derived(match.events.filter((e) => e.half === 1));
 
@@ -79,6 +78,17 @@
     let visibleEvents = $derived(match.events.slice(0, visibleCount));
     let activeEvent = $derived(visibleEvents[visibleEvents.length - 1] ?? null);
 
+    // Once we're watching second-half events, reflect any halftime substitutions on the pitch
+    // instead of the pre-match starting lineup.
+    let effectiveHomeLineup = $derived(
+        activeEvent?.half === 2 && match.homeHalftimeLineup ? (match.homeHalftimeLineup as unknown as Lineup) : homeLineup
+    );
+    let effectiveAwayLineup = $derived(
+        activeEvent?.half === 2 && match.awayHalftimeLineup ? (match.awayHalftimeLineup as unknown as Lineup) : awayLineup
+    );
+    let homeSlots = $derived(computeSlots(effectiveHomeLineup, homeRoster, 'HOME'));
+    let awaySlots = $derived(computeSlots(effectiveAwayLineup, awayRoster, 'AWAY'));
+
     let showGoalFlash = $state(false);
     let goalFlashScorer = $state('');
     let goalFlashTimer: ReturnType<typeof setTimeout> | undefined;
@@ -122,6 +132,39 @@
         }
         return () => clearInterval(pollTimer);
     });
+
+    let selectedPlayerId = $state<string | null>(null);
+
+    let selectedPlayer = $derived.by(() => {
+        if (!selectedPlayerId) return null;
+        const p = [...homeRoster, ...awayRoster].find((p) => p.id === selectedPlayerId);
+        return p ? { id: p.id, name: p.name, position: p.position, personality: p.personality } : null;
+    });
+
+    let selectedPlayerIsHome = $derived(homeRoster.some((p) => p.id === selectedPlayerId));
+
+    let selectedPlayerStamina = $derived.by(() => {
+        if (!selectedPlayerId) return null;
+        const staminaMap = selectedPlayerIsHome ? match.homeStamina : match.awayStamina;
+        return staminaMap?.[selectedPlayerId] ?? null;
+    });
+
+    let selectedPlayerForm = $derived.by(() => {
+        if (!selectedPlayerId) return null;
+        const formMap = selectedPlayerIsHome ? match.homeForm : match.awayForm;
+        return formMap?.[selectedPlayerId] ?? null;
+    });
+
+    let canSubstituteSelected = $derived(
+        showHalftimePanel && match.status === 'AWAITING_HALFTIME' && !viewerAlreadySubmitted &&
+        !!selectedPlayerId && selectedPlayerIsHome === data.viewerIsHome &&
+        starterIds.has(selectedPlayerId) && selectedPlayerId !== myLineup.GK
+    );
+
+    function handleSubstitute() {
+        if (selectedPlayerId) subOut = selectedPlayerId;
+        selectedPlayerId = null;
+    }
 </script>
 
 <svelte:head>
@@ -153,6 +196,7 @@
             {awaySlots}
             activePlayerId={activeEvent?.playerId ?? null}
             activePosition={activeEvent?.positionData as any}
+            onPlayerClick={(id) => selectedPlayerId = id}
         />
         {#if showGoalFlash}
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-50" transition:scale={{ duration: 250, start: 0.5 }}>
@@ -232,4 +276,13 @@
             </ul>
         </div>
     </details>
+
+    <PlayerStatModal
+        player={selectedPlayer}
+        stamina={selectedPlayerStamina}
+        form={selectedPlayerForm}
+        canSubstitute={canSubstituteSelected}
+        onClose={() => selectedPlayerId = null}
+        onSubstitute={handleSubstitute}
+    />
 </section>

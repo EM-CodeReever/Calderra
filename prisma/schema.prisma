@@ -597,6 +597,10 @@ model FootballMatch {
   away_lineup          Json
   home_halftime_lineup Json?
   away_halftime_lineup Json?
+  home_stamina         Json? // Record<playerId, 0-100> — snapshot as of the most recently simulated half
+  away_stamina         Json?
+  home_form            Json? // Record<playerId, 0-100> — this half's form roll
+  away_form            Json?
   events               FootballMatchEvent[]
   challenges           FootballChallenge[]
 

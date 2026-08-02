@@ -43,6 +43,10 @@ export const load: PageServerLoad = async ({ params, parent }) => {
             awayLineup: match.away_lineup,
             homeHalftimeLineup: match.home_halftime_lineup,
             awayHalftimeLineup: match.away_halftime_lineup,
+            homeStamina: match.home_stamina as Record<string, number> | null,
+            awayStamina: match.away_stamina as Record<string, number> | null,
+            homeForm: match.home_form as Record<string, number> | null,
+            awayForm: match.away_form as Record<string, number> | null,
             homePlayers: match.home_team.players,
             awayPlayers: match.away_team.players,
             events: match.events.map((e) => ({
@@ -144,6 +148,10 @@ export const actions: Actions = {
                 home_score: finalHomeScore,
                 away_score: finalAwayScore,
                 completed_at: new Date(),
+                home_stamina: homeState.stamina as any,
+                away_stamina: awayState.stamina as any,
+                home_form: homeState.formRoll as any,
+                away_form: awayState.formRoll as any,
                 ...(viewerIsHome ? { home_halftime_lineup: newLineup as any } : { away_halftime_lineup: newLineup as any }),
             },
         });

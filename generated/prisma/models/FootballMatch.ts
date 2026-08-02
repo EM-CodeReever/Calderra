@@ -77,6 +77,10 @@ export type FootballMatchCountAggregateOutputType = {
   away_lineup: number
   home_halftime_lineup: number
   away_halftime_lineup: number
+  home_stamina: number
+  away_stamina: number
+  home_form: number
+  away_form: number
   _all: number
 }
 
@@ -132,6 +136,10 @@ export type FootballMatchCountAggregateInputType = {
   away_lineup?: true
   home_halftime_lineup?: true
   away_halftime_lineup?: true
+  home_stamina?: true
+  away_stamina?: true
+  home_form?: true
+  away_form?: true
   _all?: true
 }
 
@@ -234,6 +242,10 @@ export type FootballMatchGroupByOutputType = {
   away_lineup: runtime.JsonValue
   home_halftime_lineup: runtime.JsonValue | null
   away_halftime_lineup: runtime.JsonValue | null
+  home_stamina: runtime.JsonValue | null
+  away_stamina: runtime.JsonValue | null
+  home_form: runtime.JsonValue | null
+  away_form: runtime.JsonValue | null
   _count: FootballMatchCountAggregateOutputType | null
   _avg: FootballMatchAvgAggregateOutputType | null
   _sum: FootballMatchSumAggregateOutputType | null
@@ -272,6 +284,10 @@ export type FootballMatchWhereInput = {
   away_lineup?: Prisma.JsonFilter<"FootballMatch">
   home_halftime_lineup?: Prisma.JsonNullableFilter<"FootballMatch">
   away_halftime_lineup?: Prisma.JsonNullableFilter<"FootballMatch">
+  home_stamina?: Prisma.JsonNullableFilter<"FootballMatch">
+  away_stamina?: Prisma.JsonNullableFilter<"FootballMatch">
+  home_form?: Prisma.JsonNullableFilter<"FootballMatch">
+  away_form?: Prisma.JsonNullableFilter<"FootballMatch">
   home_team?: Prisma.XOR<Prisma.FootballTeamScalarRelationFilter, Prisma.FootballTeamWhereInput>
   away_team?: Prisma.XOR<Prisma.FootballTeamScalarRelationFilter, Prisma.FootballTeamWhereInput>
   events?: Prisma.FootballMatchEventListRelationFilter
@@ -291,6 +307,10 @@ export type FootballMatchOrderByWithRelationInput = {
   away_lineup?: Prisma.SortOrder
   home_halftime_lineup?: Prisma.SortOrderInput | Prisma.SortOrder
   away_halftime_lineup?: Prisma.SortOrderInput | Prisma.SortOrder
+  home_stamina?: Prisma.SortOrderInput | Prisma.SortOrder
+  away_stamina?: Prisma.SortOrderInput | Prisma.SortOrder
+  home_form?: Prisma.SortOrderInput | Prisma.SortOrder
+  away_form?: Prisma.SortOrderInput | Prisma.SortOrder
   home_team?: Prisma.FootballTeamOrderByWithRelationInput
   away_team?: Prisma.FootballTeamOrderByWithRelationInput
   events?: Prisma.FootballMatchEventOrderByRelationAggregateInput
@@ -313,6 +333,10 @@ export type FootballMatchWhereUniqueInput = Prisma.AtLeast<{
   away_lineup?: Prisma.JsonFilter<"FootballMatch">
   home_halftime_lineup?: Prisma.JsonNullableFilter<"FootballMatch">
   away_halftime_lineup?: Prisma.JsonNullableFilter<"FootballMatch">
+  home_stamina?: Prisma.JsonNullableFilter<"FootballMatch">
+  away_stamina?: Prisma.JsonNullableFilter<"FootballMatch">
+  home_form?: Prisma.JsonNullableFilter<"FootballMatch">
+  away_form?: Prisma.JsonNullableFilter<"FootballMatch">
   home_team?: Prisma.XOR<Prisma.FootballTeamScalarRelationFilter, Prisma.FootballTeamWhereInput>
   away_team?: Prisma.XOR<Prisma.FootballTeamScalarRelationFilter, Prisma.FootballTeamWhereInput>
   events?: Prisma.FootballMatchEventListRelationFilter
@@ -332,6 +356,10 @@ export type FootballMatchOrderByWithAggregationInput = {
   away_lineup?: Prisma.SortOrder
   home_halftime_lineup?: Prisma.SortOrderInput | Prisma.SortOrder
   away_halftime_lineup?: Prisma.SortOrderInput | Prisma.SortOrder
+  home_stamina?: Prisma.SortOrderInput | Prisma.SortOrder
+  away_stamina?: Prisma.SortOrderInput | Prisma.SortOrder
+  home_form?: Prisma.SortOrderInput | Prisma.SortOrder
+  away_form?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FootballMatchCountOrderByAggregateInput
   _avg?: Prisma.FootballMatchAvgOrderByAggregateInput
   _max?: Prisma.FootballMatchMaxOrderByAggregateInput
@@ -355,6 +383,10 @@ export type FootballMatchScalarWhereWithAggregatesInput = {
   away_lineup?: Prisma.JsonWithAggregatesFilter<"FootballMatch">
   home_halftime_lineup?: Prisma.JsonNullableWithAggregatesFilter<"FootballMatch">
   away_halftime_lineup?: Prisma.JsonNullableWithAggregatesFilter<"FootballMatch">
+  home_stamina?: Prisma.JsonNullableWithAggregatesFilter<"FootballMatch">
+  away_stamina?: Prisma.JsonNullableWithAggregatesFilter<"FootballMatch">
+  home_form?: Prisma.JsonNullableWithAggregatesFilter<"FootballMatch">
+  away_form?: Prisma.JsonNullableWithAggregatesFilter<"FootballMatch">
 }
 
 export type FootballMatchCreateInput = {
@@ -368,6 +400,10 @@ export type FootballMatchCreateInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team: Prisma.FootballTeamCreateNestedOneWithoutHomeMatchesInput
   away_team: Prisma.FootballTeamCreateNestedOneWithoutAwayMatchesInput
   events?: Prisma.FootballMatchEventCreateNestedManyWithoutMatchInput
@@ -387,6 +423,10 @@ export type FootballMatchUncheckedCreateInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedCreateNestedManyWithoutMatchInput
   challenges?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutMatchInput
 }
@@ -402,6 +442,10 @@ export type FootballMatchUpdateInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team?: Prisma.FootballTeamUpdateOneRequiredWithoutHomeMatchesNestedInput
   away_team?: Prisma.FootballTeamUpdateOneRequiredWithoutAwayMatchesNestedInput
   events?: Prisma.FootballMatchEventUpdateManyWithoutMatchNestedInput
@@ -421,6 +465,10 @@ export type FootballMatchUncheckedUpdateInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedUpdateManyWithoutMatchNestedInput
   challenges?: Prisma.FootballChallengeUncheckedUpdateManyWithoutMatchNestedInput
 }
@@ -438,6 +486,10 @@ export type FootballMatchCreateManyInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type FootballMatchUpdateManyMutationInput = {
@@ -451,6 +503,10 @@ export type FootballMatchUpdateManyMutationInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type FootballMatchUncheckedUpdateManyInput = {
@@ -466,6 +522,10 @@ export type FootballMatchUncheckedUpdateManyInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type FootballMatchListRelationFilter = {
@@ -491,6 +551,10 @@ export type FootballMatchCountOrderByAggregateInput = {
   away_lineup?: Prisma.SortOrder
   home_halftime_lineup?: Prisma.SortOrder
   away_halftime_lineup?: Prisma.SortOrder
+  home_stamina?: Prisma.SortOrder
+  away_stamina?: Prisma.SortOrder
+  home_form?: Prisma.SortOrder
+  away_form?: Prisma.SortOrder
 }
 
 export type FootballMatchAvgOrderByAggregateInput = {
@@ -666,6 +730,10 @@ export type FootballMatchCreateWithoutHome_teamInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_team: Prisma.FootballTeamCreateNestedOneWithoutAwayMatchesInput
   events?: Prisma.FootballMatchEventCreateNestedManyWithoutMatchInput
   challenges?: Prisma.FootballChallengeCreateNestedManyWithoutMatchInput
@@ -683,6 +751,10 @@ export type FootballMatchUncheckedCreateWithoutHome_teamInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedCreateNestedManyWithoutMatchInput
   challenges?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutMatchInput
 }
@@ -708,6 +780,10 @@ export type FootballMatchCreateWithoutAway_teamInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team: Prisma.FootballTeamCreateNestedOneWithoutHomeMatchesInput
   events?: Prisma.FootballMatchEventCreateNestedManyWithoutMatchInput
   challenges?: Prisma.FootballChallengeCreateNestedManyWithoutMatchInput
@@ -725,6 +801,10 @@ export type FootballMatchUncheckedCreateWithoutAway_teamInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedCreateNestedManyWithoutMatchInput
   challenges?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutMatchInput
 }
@@ -771,6 +851,10 @@ export type FootballMatchScalarWhereInput = {
   away_lineup?: Prisma.JsonFilter<"FootballMatch">
   home_halftime_lineup?: Prisma.JsonNullableFilter<"FootballMatch">
   away_halftime_lineup?: Prisma.JsonNullableFilter<"FootballMatch">
+  home_stamina?: Prisma.JsonNullableFilter<"FootballMatch">
+  away_stamina?: Prisma.JsonNullableFilter<"FootballMatch">
+  home_form?: Prisma.JsonNullableFilter<"FootballMatch">
+  away_form?: Prisma.JsonNullableFilter<"FootballMatch">
 }
 
 export type FootballMatchUpsertWithWhereUniqueWithoutAway_teamInput = {
@@ -800,6 +884,10 @@ export type FootballMatchCreateWithoutChallengesInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team: Prisma.FootballTeamCreateNestedOneWithoutHomeMatchesInput
   away_team: Prisma.FootballTeamCreateNestedOneWithoutAwayMatchesInput
   events?: Prisma.FootballMatchEventCreateNestedManyWithoutMatchInput
@@ -818,6 +906,10 @@ export type FootballMatchUncheckedCreateWithoutChallengesInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -848,6 +940,10 @@ export type FootballMatchUpdateWithoutChallengesInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team?: Prisma.FootballTeamUpdateOneRequiredWithoutHomeMatchesNestedInput
   away_team?: Prisma.FootballTeamUpdateOneRequiredWithoutAwayMatchesNestedInput
   events?: Prisma.FootballMatchEventUpdateManyWithoutMatchNestedInput
@@ -866,6 +962,10 @@ export type FootballMatchUncheckedUpdateWithoutChallengesInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -880,6 +980,10 @@ export type FootballMatchCreateWithoutEventsInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team: Prisma.FootballTeamCreateNestedOneWithoutHomeMatchesInput
   away_team: Prisma.FootballTeamCreateNestedOneWithoutAwayMatchesInput
   challenges?: Prisma.FootballChallengeCreateNestedManyWithoutMatchInput
@@ -898,6 +1002,10 @@ export type FootballMatchUncheckedCreateWithoutEventsInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   challenges?: Prisma.FootballChallengeUncheckedCreateNestedManyWithoutMatchInput
 }
 
@@ -928,6 +1036,10 @@ export type FootballMatchUpdateWithoutEventsInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team?: Prisma.FootballTeamUpdateOneRequiredWithoutHomeMatchesNestedInput
   away_team?: Prisma.FootballTeamUpdateOneRequiredWithoutAwayMatchesNestedInput
   challenges?: Prisma.FootballChallengeUpdateManyWithoutMatchNestedInput
@@ -946,6 +1058,10 @@ export type FootballMatchUncheckedUpdateWithoutEventsInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   challenges?: Prisma.FootballChallengeUncheckedUpdateManyWithoutMatchNestedInput
 }
 
@@ -961,6 +1077,10 @@ export type FootballMatchCreateManyHome_teamInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type FootballMatchCreateManyAway_teamInput = {
@@ -975,6 +1095,10 @@ export type FootballMatchCreateManyAway_teamInput = {
   away_lineup: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type FootballMatchUpdateWithoutHome_teamInput = {
@@ -988,6 +1112,10 @@ export type FootballMatchUpdateWithoutHome_teamInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_team?: Prisma.FootballTeamUpdateOneRequiredWithoutAwayMatchesNestedInput
   events?: Prisma.FootballMatchEventUpdateManyWithoutMatchNestedInput
   challenges?: Prisma.FootballChallengeUpdateManyWithoutMatchNestedInput
@@ -1005,6 +1133,10 @@ export type FootballMatchUncheckedUpdateWithoutHome_teamInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedUpdateManyWithoutMatchNestedInput
   challenges?: Prisma.FootballChallengeUncheckedUpdateManyWithoutMatchNestedInput
 }
@@ -1021,6 +1153,10 @@ export type FootballMatchUncheckedUpdateManyWithoutHome_teamInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 export type FootballMatchUpdateWithoutAway_teamInput = {
@@ -1034,6 +1170,10 @@ export type FootballMatchUpdateWithoutAway_teamInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   home_team?: Prisma.FootballTeamUpdateOneRequiredWithoutHomeMatchesNestedInput
   events?: Prisma.FootballMatchEventUpdateManyWithoutMatchNestedInput
   challenges?: Prisma.FootballChallengeUpdateManyWithoutMatchNestedInput
@@ -1051,6 +1191,10 @@ export type FootballMatchUncheckedUpdateWithoutAway_teamInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   events?: Prisma.FootballMatchEventUncheckedUpdateManyWithoutMatchNestedInput
   challenges?: Prisma.FootballChallengeUncheckedUpdateManyWithoutMatchNestedInput
 }
@@ -1067,6 +1211,10 @@ export type FootballMatchUncheckedUpdateManyWithoutAway_teamInput = {
   away_lineup?: Prisma.JsonNullValueInput | runtime.InputJsonValue
   home_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   away_halftime_lineup?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_stamina?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  home_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  away_form?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
 }
 
 
@@ -1122,6 +1270,10 @@ export type FootballMatchSelect<ExtArgs extends runtime.Types.Extensions.Interna
   away_lineup?: boolean
   home_halftime_lineup?: boolean
   away_halftime_lineup?: boolean
+  home_stamina?: boolean
+  away_stamina?: boolean
+  home_form?: boolean
+  away_form?: boolean
   home_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
   away_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
   events?: boolean | Prisma.FootballMatch$eventsArgs<ExtArgs>
@@ -1142,6 +1294,10 @@ export type FootballMatchSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   away_lineup?: boolean
   home_halftime_lineup?: boolean
   away_halftime_lineup?: boolean
+  home_stamina?: boolean
+  away_stamina?: boolean
+  home_form?: boolean
+  away_form?: boolean
   home_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
   away_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["footballMatch"]>
@@ -1159,6 +1315,10 @@ export type FootballMatchSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   away_lineup?: boolean
   home_halftime_lineup?: boolean
   away_halftime_lineup?: boolean
+  home_stamina?: boolean
+  away_stamina?: boolean
+  home_form?: boolean
+  away_form?: boolean
   home_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
   away_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["footballMatch"]>
@@ -1176,9 +1336,13 @@ export type FootballMatchSelectScalar = {
   away_lineup?: boolean
   home_halftime_lineup?: boolean
   away_halftime_lineup?: boolean
+  home_stamina?: boolean
+  away_stamina?: boolean
+  home_form?: boolean
+  away_form?: boolean
 }
 
-export type FootballMatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "completed_at" | "home_team_id" | "away_team_id" | "status" | "home_score" | "away_score" | "home_lineup" | "away_lineup" | "home_halftime_lineup" | "away_halftime_lineup", ExtArgs["result"]["footballMatch"]>
+export type FootballMatchOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "created_at" | "completed_at" | "home_team_id" | "away_team_id" | "status" | "home_score" | "away_score" | "home_lineup" | "away_lineup" | "home_halftime_lineup" | "away_halftime_lineup" | "home_stamina" | "away_stamina" | "home_form" | "away_form", ExtArgs["result"]["footballMatch"]>
 export type FootballMatchInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   home_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
   away_team?: boolean | Prisma.FootballTeamDefaultArgs<ExtArgs>
@@ -1216,6 +1380,10 @@ export type $FootballMatchPayload<ExtArgs extends runtime.Types.Extensions.Inter
     away_lineup: runtime.JsonValue
     home_halftime_lineup: runtime.JsonValue | null
     away_halftime_lineup: runtime.JsonValue | null
+    home_stamina: runtime.JsonValue | null
+    away_stamina: runtime.JsonValue | null
+    home_form: runtime.JsonValue | null
+    away_form: runtime.JsonValue | null
   }, ExtArgs["result"]["footballMatch"]>
   composites: {}
 }
@@ -1655,6 +1823,10 @@ export interface FootballMatchFieldRefs {
   readonly away_lineup: Prisma.FieldRef<"FootballMatch", 'Json'>
   readonly home_halftime_lineup: Prisma.FieldRef<"FootballMatch", 'Json'>
   readonly away_halftime_lineup: Prisma.FieldRef<"FootballMatch", 'Json'>
+  readonly home_stamina: Prisma.FieldRef<"FootballMatch", 'Json'>
+  readonly away_stamina: Prisma.FieldRef<"FootballMatch", 'Json'>
+  readonly home_form: Prisma.FieldRef<"FootballMatch", 'Json'>
+  readonly away_form: Prisma.FieldRef<"FootballMatch", 'Json'>
 }
     
 

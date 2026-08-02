@@ -6,11 +6,13 @@
         awaySlots,
         activePlayerId = null,
         activePosition = null,
+        onPlayerClick = null,
     }: {
         homeSlots: Slot[];
         awaySlots: Slot[];
         activePlayerId?: string | null;
         activePosition?: { x: number; y: number } | null;
+        onPlayerClick?: ((id: string) => void) | null;
     } = $props();
 
     let allSlots = $derived([...homeSlots, ...awaySlots]);
@@ -45,15 +47,18 @@
     {#each allSlots as slot (slot.id)}
     {@const isActive = slot.id === activePlayerId}
     {@const pos = isActive && activePosition ? activePosition : slot}
-    <div
-        class="absolute flex items-center gap-0.5 transition-all duration-700 ease-out {slot.team === 'AWAY' ? 'flex-col-reverse' : 'flex-col'}"
+    <button
+        type="button"
+        class="absolute flex items-center gap-0.5 transition-all duration-700 ease-out {slot.team === 'AWAY' ? 'flex-col-reverse' : 'flex-col'} {onPlayerClick ? 'cursor-pointer' : 'cursor-default'}"
         style="left: {pos.x}%; top: {pos.y}%; transform: translate(-50%, -50%); z-index: {isActive ? 20 : 10};"
+        onclick={() => onPlayerClick?.(slot.id)}
+        disabled={!onPlayerClick}
     >
         <div class="rounded-full flex items-center justify-center text-[10px] font-bold border-2 {slot.team === 'HOME' ? 'bg-primary text-primary-content border-primary-content/40' : 'bg-secondary text-secondary-content border-secondary-content/40'} {isActive ? 'w-9 h-9 ring-2 ring-warning' : 'w-7 h-7'}">
             {initials(slot.name)}
         </div>
         <span class="text-[9px] text-white drop-shadow max-w-10.5 truncate text-center">{shortName(slot.name)}</span>
-    </div>
+    </button>
     {/each}
 
     <div

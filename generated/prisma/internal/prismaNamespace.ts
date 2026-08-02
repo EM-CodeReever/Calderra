@@ -3381,7 +3381,11 @@ export const FootballMatchScalarFieldEnum = {
   home_lineup: 'home_lineup',
   away_lineup: 'away_lineup',
   home_halftime_lineup: 'home_halftime_lineup',
-  away_halftime_lineup: 'away_halftime_lineup'
+  away_halftime_lineup: 'away_halftime_lineup',
+  home_stamina: 'home_stamina',
+  away_stamina: 'away_stamina',
+  home_form: 'home_form',
+  away_form: 'away_form'
 } as const
 
 export type FootballMatchScalarFieldEnum = (typeof FootballMatchScalarFieldEnum)[keyof typeof FootballMatchScalarFieldEnum]
